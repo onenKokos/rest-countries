@@ -1,0 +1,3 @@
+# A template for running webpack with react.
+
+Still needs some work. Dockerfiles etc, etc...
