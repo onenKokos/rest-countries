@@ -1,7 +1,7 @@
 {
-  "name": "react-project-setup",
+  "name": "rest-countries",
   "version": "0.1.0",
-  "description": "A project with everything you need to get your react app going.",
+  "description": "A challenge based on frontend mentor.",
   "main": "resources/js/index.js",
   "author": "Lukas Riha",
   "scripts": {
@@ -26,6 +26,7 @@
     "fix:sass": "stylelint ./resources/sass/ --fix"
   },
   "dependencies": {
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0"
@@ -70,5 +71,6 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.1.3"
-  }
+  },
+  "proxy": "localhost:8080"
 }

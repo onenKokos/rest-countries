@@ -1,2 +1,16 @@
 @use 'sass:string';
 @use './variables';
+@use './typography';
+@use './molecules';
+@use './atoms';
+
+/* stylelint-disable */
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+/* stylelint-enable */

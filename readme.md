@@ -1,3 +1,3 @@
-# A template for running webpack with react.
+# An example project based on frontend mentor.
 
-Still needs some work. Dockerfiles etc, etc...
+Still in progress, readme.md will be upgraded once the project is finished.

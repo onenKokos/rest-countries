@@ -1,0 +1,51 @@
+@import '../variables';
+
+.SearchBar {
+  padding: 15px 0;
+  position: relative;
+
+  &__Input {
+    border-radius: 6px;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 15px 20px 15px 60px;
+    box-sizing: border-box;
+    color: $dark_gray;
+    font-family: $font_light;
+    font-size: $small;
+  }
+
+  &__Input::placeholder {
+    color: $dark_gray;
+    font-family: $font_light;
+    font-size: $small;
+  }
+
+  &__Caret-container {
+    width: 24px;
+    position: absolute;
+    top: calc(50% - 12px);
+    right: 26px;
+    cursor: pointer;
+  }
+
+  &__Caret {
+    opacity: 0.23;
+    width: 15px;
+    transition: 0.3s ease-out;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__Icon {
+    width: 16px;
+    position: absolute;
+    top: calc(50% - 8px);
+    left: 20px;
+    z-index: 0;
+    opacity: 0.23;
+  }
+}

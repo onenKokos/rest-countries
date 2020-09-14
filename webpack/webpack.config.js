@@ -130,7 +130,7 @@ module.exports = (mode, options) => ({
             },
           },
           {
-            loader: 'webpack-image-loader',
+            loader: 'image-webpack-loader',
             options: {
               disable: mode === 'development',
             },

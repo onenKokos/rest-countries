@@ -1,0 +1,14 @@
+@import '../variables';
+
+.ThemeToggler {
+  display: flex;
+  align-items: center;
+  font-size: $tiny;
+  color: $very_dark_blue--alt;
+  font-family: $font_semibold;
+
+  &__Icon {
+    width: 16px;
+    margin-right: 8px;
+  }
+}

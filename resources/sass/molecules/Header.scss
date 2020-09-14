@@ -1,0 +1,16 @@
+@import '../variables';
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 15px;
+  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);
+  position: relative;
+
+  &__Title {
+    font-size: $small;
+    color: $very_dark_blue;
+    font-weight: 800;
+    font-family: $font-bold;
+  }
+}
