@@ -1,16 +1,29 @@
 @import '../variables';
 
 .Header {
-  display: flex;
-  justify-content: space-between;
   padding: 30px 15px;
-  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);
+  box-shadow: $subtle_shadow;
   position: relative;
+
+  &__Inner {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+      max-width: 1440px;
+    }
+  }
 
   &__Title {
     font-size: $small;
     color: $very_dark_blue;
     font-weight: 800;
     font-family: $font-bold;
+
+    @media screen and (min-width: 992px) {
+      font-size: $large;
+    }
   }
 }

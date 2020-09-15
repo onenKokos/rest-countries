@@ -6,6 +6,11 @@
   font-size: $tiny;
   color: $very_dark_blue--alt;
   font-family: $font_semibold;
+  cursor: pointer;
+
+  @media screen and (min-width: 992px) {
+    font-size: $medium;
+  }
 
   &__Icon {
     width: 16px;

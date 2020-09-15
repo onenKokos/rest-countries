@@ -7,6 +7,9 @@ $lg: 1440px;
 // FONT SIZES
 $tiny: 14px;
 $small: 16px;
+$medium: 18px;
+$large: 20px;
+$huge: 24px;
 
 // COLORS
 $dark_blue: hsl(209, 23, 22);
@@ -20,5 +23,8 @@ $white: hsl(0, 0, 100);
 $font_light: 'Nunito-light', sans-serif;
 $font_semibold: 'Nunito-SemiBold', sans-serif;
 $font_bold: 'Nunito-Bold', sans-serif;
+
+// OTHERS
+$subtle_shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);
 
 /* stylelint-enable */

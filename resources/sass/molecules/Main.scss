@@ -3,4 +3,13 @@
 .Main {
   background-color: $very_light_gray;
   padding: 0 15px;
+
+  &__Container {
+    width: 100%;
+    margin: 0 auto;
+
+    @media screen and (min-width: 768px) {
+      max-width: 1440px;
+    }
+  }
 }

@@ -6,8 +6,10 @@ const Header = (props) => {
   const { title } = props;
   return (
     <header className="Header">
-      <div className="Header__Title">{title}</div>
-      <ThemeToggler />
+      <div className="Header__Inner">
+        <div className="Header__Title">{title}</div>
+        <ThemeToggler />
+      </div>
     </header>
   );
 };

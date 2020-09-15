@@ -9,16 +9,18 @@ const SearchBar = (props) => {
 
   return (
     <div className="SearchBar">
-      <input
-        type="text"
-        name="searchBar"
-        id="searchBar"
-        placeholder={placeholder}
-        className="SearchBar__Input"
-      />
-      <img src={Search} alt="Search icon" className="SearchBar__Icon" />
-      <div className="SearchBar__Caret-container">
-        <img src={Caret} alt="Caret" className="SearchBar__Caret" />
+      <div className="SearchBar__Inner">
+        <input
+          type="text"
+          name="searchBar"
+          id="searchBar"
+          placeholder={placeholder}
+          className="SearchBar__Input"
+        />
+        <img src={Search} alt="Search icon" className="SearchBar__Icon" />
+        <div className="SearchBar__Caret-container">
+          <img src={Caret} alt="Caret" className="SearchBar__Caret" />
+        </div>
       </div>
     </div>
   );

@@ -3,6 +3,16 @@
 .SearchBar {
   padding: 15px 0;
   position: relative;
+  box-sizing: border-box;
+  width: 100%;
+
+  @media screen and (min-width: 992px) {
+    width: 50%;
+  }
+
+  &__Inner {
+    box-shadow: $subtle_shadow;
+  }
 
   &__Input {
     border-radius: 6px;
