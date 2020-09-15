@@ -2,32 +2,89 @@
 
 .Dropdown {
   width: 100%;
+  margin-bottom: 20px;
 
   @media screen and (min-width: 992px) {
     width: 50%;
-  }
-
-  &__Container {
-    width: 100%;
   }
 
   &__Selection {
     width: 100%;
     border: none;
     outline: none;
-    padding: 15px;
+    padding: 15px 20px 15px 60px;
     font-family: $font_light;
     color: $dark_gray;
     font-size: $small;
     border-radius: 6px;
-    position: relative;
     box-shadow: $subtle_shadow;
     box-sizing: border-box;
+
+    &:focus,
+    &:active {
+      border: none;
+      outline: none;
+    }
   }
 
   &__Selection::placeholder {
     color: $dark_gray;
     font-family: $font_light;
     font-size: $small;
+  }
+
+  &__Option {
+    font-family: $font_light;
+    cursor: pointer;
+    color: $dark_gray;
+    font-size: $small;
+    transition: 0.3s ease-out;
+    padding: 8px 20px 8px 60px;
+
+    &:hover {
+      background-color: darken($white, 5);
+    }
+
+    @media screen and (min-width: 992px) {
+      font-size: $medium;
+    }
+  }
+
+  &__Options-container {
+    display: none;
+    opacity: 0;
+    transition: 0.3s ease-out;
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-radius: 6px;
+    top: 64px;
+    background-color: $white;
+  }
+
+  &__Caret {
+    position: absolute;
+    width: 14px;
+    right: 37px;
+    top: calc(50% - 11px);
+    opacity: 0.23;
+    transition: 0.3s ease-out;
+    transform: rotate(180deg);
+  }
+
+  &__Container {
+    width: 100%;
+    position: relative;
+    &--is-Active {
+      .Dropdown__Caret {
+        transform: rotate(0);
+      }
+
+      .Dropdown__Options-container {
+        display: block;
+        opacity: 1;
+        box-shadow: $subtle_shadow;
+      }
+    }
   }
 }

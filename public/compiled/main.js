@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "e3d96b7172b9f5bc1e1f";
+/******/ 	var hotCurrentHash = "e9950afd566588456851";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1047,6 +1047,146 @@ ansiHTML.reset()
 
 /***/ }),
 
+/***/ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js":
+/*!*********************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js ***!
+  \*********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _arrayLikeToArray; });
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js":
+/*!*******************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js ***!
+  \*******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _arrayWithHoles; });
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js":
+/*!*************************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js ***!
+  \*************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _iterableToArrayLimit; });
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/nonIterableRest.js":
+/*!********************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/nonIterableRest.js ***!
+  \********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _nonIterableRest; });
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray.js":
+/*!******************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray.js ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _slicedToArray; });
+/* harmony import */ var _arrayWithHoles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrayWithHoles */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js");
+/* harmony import */ var _iterableToArrayLimit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./iterableToArrayLimit */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js");
+/* harmony import */ var _unsupportedIterableToArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./unsupportedIterableToArray */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js");
+/* harmony import */ var _nonIterableRest__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./nonIterableRest */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/nonIterableRest.js");
+
+
+
+
+function _slicedToArray(arr, i) {
+  return Object(_arrayWithHoles__WEBPACK_IMPORTED_MODULE_0__["default"])(arr) || Object(_iterableToArrayLimit__WEBPACK_IMPORTED_MODULE_1__["default"])(arr, i) || Object(_unsupportedIterableToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(arr, i) || Object(_nonIterableRest__WEBPACK_IMPORTED_MODULE_3__["default"])();
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js":
+/*!*******************************************************************************************************************!*\
+  !*** ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js ***!
+  \*******************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _unsupportedIterableToArray; });
+/* harmony import */ var _arrayLikeToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./arrayLikeToArray */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js");
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return Object(_arrayLikeToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(n);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Object(_arrayLikeToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(o, minLen);
+}
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./resources/sass/index.scss":
 /*!********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??ref--4-1!./node_modules/postcss-loader/src??ref--4-2!./node_modules/sass-loader/dist/cjs.js??ref--4-3!./resources/sass/index.scss ***!
@@ -1077,7 +1217,7 @@ var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_g
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_assets_fonts_NunitoSans_SemiBold_ttf__WEBPACK_IMPORTED_MODULE_3___default.a);
 var ___CSS_LOADER_URL_REPLACEMENT_2___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_assets_fonts_NunitoSans_ExtraBold_ttf__WEBPACK_IMPORTED_MODULE_4___default.a);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "/* stylelint-disable */\n/* stylelint-enable */\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Light;\n  font-weight: 300;\n  font-style: normal;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-SemiBold;\n  font-weight: 600;\n  font-style: normal;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Bold;\n  font-weight: 800;\n  font-style: normal;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") format(\"truetype\");\n}\n/* stylelint-disable */\n/* stylelint-enable */\n.Header {\n  padding: 30px 15px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  position: relative;\n}\n.Header__Inner {\n  display: flex;\n  justify-content: space-between;\n  margin: 0 auto;\n  width: 100%;\n}\n@media screen and (min-width: 768px) {\n  .Header__Inner {\n    max-width: 1440px;\n  }\n}\n.Header__Title {\n  font-size: 16px;\n  color: #202c37;\n  font-weight: 800;\n  font-family: \"Nunito-Bold\", sans-serif;\n}\n@media screen and (min-width: 992px) {\n  .Header__Title {\n    font-size: 20px;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Main {\n  background-color: #fafafa;\n  padding: 0 15px;\n}\n.Main__Container {\n  width: 100%;\n  margin: 0 auto;\n}\n@media screen and (min-width: 768px) {\n  .Main__Container {\n    max-width: 1440px;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.ThemeToggler {\n  display: flex;\n  align-items: center;\n  font-size: 14px;\n  color: #111517;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  cursor: pointer;\n}\n@media screen and (min-width: 992px) {\n  .ThemeToggler {\n    font-size: 18px;\n  }\n}\n.ThemeToggler__Icon {\n  width: 16px;\n  margin-right: 8px;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.SearchBar {\n  padding: 15px 0;\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n}\n@media screen and (min-width: 992px) {\n  .SearchBar {\n    width: 50%;\n  }\n}\n.SearchBar__Inner {\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n.SearchBar__Input {\n  border-radius: 6px;\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px 20px 15px 60px;\n  box-sizing: border-box;\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar__Input::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar__Caret-container {\n  width: 24px;\n  position: absolute;\n  top: calc(50% - 12px);\n  right: 26px;\n  cursor: pointer;\n}\n.SearchBar__Caret {\n  opacity: 0.23;\n  width: 15px;\n  transition: 0.3s ease-out;\n}\n.SearchBar__Caret:hover {\n  opacity: 1;\n}\n.SearchBar__Icon {\n  width: 16px;\n  position: absolute;\n  top: calc(50% - 8px);\n  left: 20px;\n  z-index: 0;\n  opacity: 0.23;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Dropdown {\n  width: 100%;\n}\n@media screen and (min-width: 992px) {\n  .Dropdown {\n    width: 50%;\n  }\n}\n.Dropdown__Container {\n  width: 100%;\n}\n.Dropdown__Selection {\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px;\n  font-family: \"Nunito-light\", sans-serif;\n  color: #858585;\n  font-size: 16px;\n  border-radius: 6px;\n  position: relative;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  box-sizing: border-box;\n}\n.Dropdown__Selection::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n\n/* stylelint-disable */\nbody {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-size: 16px;\n}\n\n/* stylelint-enable */", "",{"version":3,"sources":["/home/lukas/Projects/rest-countries/resources/sass/_variables.scss","/home/lukas/Projects/rest-countries/resources/sass/_typography.scss","webpack://resources/sass/index.scss","/home/lukas/Projects/rest-countries/resources/sass/molecules/Header.scss","/home/lukas/Projects/rest-countries/resources/sass/molecules/Main.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/ThemeToggler.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/SearchBar.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/Dropdown.scss","/home/lukas/Projects/rest-countries/resources/sass/index.scss"],"names":[],"mappings":"AAAA,sBAAA;AA6BA,qBAAA;AC7BA;EACE,kBAAA;EACA,yBAAA;EACA,gBAAA;EACA,kBAAA;EACA,+DAAA;ACGF;ADAA;EACE,kBAAA;EACA,4BAAA;EACA,gBAAA;EACA,kBAAA;EACA,+DAAA;ACEF;ADCA;EACE,kBAAA;EACA,wBAAA;EACA,gBAAA;EACA,kBAAA;EACA,+DAAA;ACCF;AFtBA,sBAAA;AA6BA,qBAAA;AG3BA;EACE,kBAAA;EACA,8CHuBc;EGtBd,kBAAA;ADwBF;ACtBE;EACE,aAAA;EACA,8BAAA;EACA,cAAA;EACA,WAAA;ADwBJ;ACtBI;EANF;IAOI,iBAAA;EDyBJ;AACF;ACtBE;EACE,eHXI;EGYJ,cHLa;EGMb,gBAAA;EACA,sCHEQ;AEsBZ;ACtBI;EANF;IAOI,eHfE;EEwCN;AACF;;AFnDA,sBAAA;AA6BA,qBAAA;AI3BA;EACE,yBJegB;EIdhB,eAAA;AFsDF;AEpDE;EACE,WAAA;EACA,cAAA;AFsDJ;AEpDI;EAJF;IAKI,iBAAA;EFuDJ;AACF;;AFnEA,sBAAA;AA6BA,qBAAA;AK3BA;EACE,aAAA;EACA,mBAAA;EACA,eLEK;EKDL,cLUoB;EKTpB,0CLgBc;EKfd,eAAA;AHsEF;AGpEE;EARF;IASI,eLFK;EEyEP;AACF;AGrEE;EACE,WAAA;EACA,iBAAA;AHuEJ;;AFvFA,sBAAA;AA6BA,qBAAA;AM3BA;EACE,eAAA;EACA,kBAAA;EACA,sBAAA;EACA,WAAA;AJ0FF;AIxFE;EANF;IAOI,UAAA;EJ2FF;AACF;AIzFE;EACE,8CNcY;AE6EhB;AIxFE;EACE,kBAAA;EACA,WAAA;EACA,YAAA;EACA,aAAA;EACA,4BAAA;EACA,sBAAA;EACA,cNNQ;EMOR,uCNFS;EMGT,eNjBI;AE2GR;AIvFE;EACE,cNZQ;EMaR,uCNRS;EMST,eNvBI;AEgHR;AItFE;EACE,WAAA;EACA,kBAAA;EACA,qBAAA;EACA,WAAA;EACA,eAAA;AJwFJ;AIrFE;EACE,aAAA;EACA,WAAA;EACA,yBAAA;AJuFJ;AIrFI;EACE,UAAA;AJuFN;AInFE;EACE,WAAA;EACA,kBAAA;EACA,oBAAA;EACA,UAAA;EACA,UAAA;EACA,aAAA;AJqFJ;;AF/IA,sBAAA;AA6BA,qBAAA;AO3BA;EACE,WAAA;ALkJF;AKhJE;EAHF;IAII,UAAA;ELmJF;AACF;AKjJE;EACE,WAAA;ALmJJ;AKhJE;EACE,WAAA;EACA,YAAA;EACA,aAAA;EACA,aAAA;EACA,uCPIS;EOHT,cPFQ;EOGR,ePZI;EOaJ,kBAAA;EACA,kBAAA;EACA,8CPIY;EOHZ,sBAAA;ALkJJ;AK/IE;EACE,cPXQ;EOYR,uCPPS;EOQT,ePtBI;AEuKR;;AMzKA,sBAAA;AAEA;EACE,SAAA;EACA,UAAA;EACA,sBAAA;EACA,eAAA;AN2KF;;AMxKA,qBAAA","sourcesContent":["/* stylelint-disable */\n\n// BREAKPOINTS\n$xs: 375px;\n$lg: 1440px;\n\n// FONT SIZES\n$tiny: 14px;\n$small: 16px;\n$medium: 18px;\n$large: 20px;\n$huge: 24px;\n\n// COLORS\n$dark_blue: hsl(209, 23, 22);\n$very_dark_blue: hsl(207, 26, 17);\n$very_dark_blue--alt: hsl(200, 15, 8);\n$dark_gray: hsl(0, 0, 52);\n$very_light_gray: hsl(0, 0, 98);\n$white: hsl(0, 0, 100);\n\n// FONTS\n$font_light: 'Nunito-light', sans-serif;\n$font_semibold: 'Nunito-SemiBold', sans-serif;\n$font_bold: 'Nunito-Bold', sans-serif;\n\n// OTHERS\n$subtle_shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n\n/* stylelint-enable */\n","@font-face {\n  font-display: swap;\n  font-family: Nunito-Light;\n  font-weight: 300;\n  font-style: normal;\n  src: url('../assets/fonts/NunitoSans-Light.ttf') format('truetype');\n}\n\n@font-face {\n  font-display: swap;\n  font-family: Nunito-SemiBold;\n  font-weight: 600;\n  font-style: normal;\n  src: url('../assets/fonts/NunitoSans-SemiBold.ttf') format('truetype');\n}\n\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Bold;\n  font-weight: 800;\n  font-style: normal;\n  src: url('../assets/fonts/NunitoSans-ExtraBold.ttf') format('truetype');\n}\n","/* stylelint-disable */\n/* stylelint-enable */\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Light;\n  font-weight: 300;\n  font-style: normal;\n  src: url(\"../assets/fonts/NunitoSans-Light.ttf\") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-SemiBold;\n  font-weight: 600;\n  font-style: normal;\n  src: url(\"../assets/fonts/NunitoSans-SemiBold.ttf\") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Bold;\n  font-weight: 800;\n  font-style: normal;\n  src: url(\"../assets/fonts/NunitoSans-ExtraBold.ttf\") format(\"truetype\");\n}\n/* stylelint-disable */\n/* stylelint-enable */\n.Header {\n  padding: 30px 15px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  position: relative;\n}\n.Header__Inner {\n  display: flex;\n  justify-content: space-between;\n  margin: 0 auto;\n  width: 100%;\n}\n@media screen and (min-width: 768px) {\n  .Header__Inner {\n    max-width: 1440px;\n  }\n}\n.Header__Title {\n  font-size: 16px;\n  color: #202c37;\n  font-weight: 800;\n  font-family: \"Nunito-Bold\", sans-serif;\n}\n@media screen and (min-width: 992px) {\n  .Header__Title {\n    font-size: 20px;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Main {\n  background-color: #fafafa;\n  padding: 0 15px;\n}\n.Main__Container {\n  width: 100%;\n  margin: 0 auto;\n}\n@media screen and (min-width: 768px) {\n  .Main__Container {\n    max-width: 1440px;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.ThemeToggler {\n  display: flex;\n  align-items: center;\n  font-size: 14px;\n  color: #111517;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  cursor: pointer;\n}\n@media screen and (min-width: 992px) {\n  .ThemeToggler {\n    font-size: 18px;\n  }\n}\n.ThemeToggler__Icon {\n  width: 16px;\n  margin-right: 8px;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.SearchBar {\n  padding: 15px 0;\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n}\n@media screen and (min-width: 992px) {\n  .SearchBar {\n    width: 50%;\n  }\n}\n.SearchBar__Inner {\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n.SearchBar__Input {\n  border-radius: 6px;\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px 20px 15px 60px;\n  box-sizing: border-box;\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar__Input::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar__Caret-container {\n  width: 24px;\n  position: absolute;\n  top: calc(50% - 12px);\n  right: 26px;\n  cursor: pointer;\n}\n.SearchBar__Caret {\n  opacity: 0.23;\n  width: 15px;\n  transition: 0.3s ease-out;\n}\n.SearchBar__Caret:hover {\n  opacity: 1;\n}\n.SearchBar__Icon {\n  width: 16px;\n  position: absolute;\n  top: calc(50% - 8px);\n  left: 20px;\n  z-index: 0;\n  opacity: 0.23;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Dropdown {\n  width: 100%;\n}\n@media screen and (min-width: 992px) {\n  .Dropdown {\n    width: 50%;\n  }\n}\n.Dropdown__Container {\n  width: 100%;\n}\n.Dropdown__Selection {\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px;\n  font-family: \"Nunito-light\", sans-serif;\n  color: #858585;\n  font-size: 16px;\n  border-radius: 6px;\n  position: relative;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  box-sizing: border-box;\n}\n.Dropdown__Selection::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n\n/* stylelint-disable */\nbody {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-size: 16px;\n}\n\n/* stylelint-enable */","@import '../variables';\n\n.Header {\n  padding: 30px 15px;\n  box-shadow: $subtle_shadow;\n  position: relative;\n\n  &__Inner {\n    display: flex;\n    justify-content: space-between;\n    margin: 0 auto;\n    width: 100%;\n\n    @media screen and (min-width: 768px) {\n      max-width: 1440px;\n    }\n  }\n\n  &__Title {\n    font-size: $small;\n    color: $very_dark_blue;\n    font-weight: 800;\n    font-family: $font-bold;\n\n    @media screen and (min-width: 992px) {\n      font-size: $large;\n    }\n  }\n}\n","@import '../variables';\n\n.Main {\n  background-color: $very_light_gray;\n  padding: 0 15px;\n\n  &__Container {\n    width: 100%;\n    margin: 0 auto;\n\n    @media screen and (min-width: 768px) {\n      max-width: 1440px;\n    }\n  }\n}\n","@import '../variables';\n\n.ThemeToggler {\n  display: flex;\n  align-items: center;\n  font-size: $tiny;\n  color: $very_dark_blue--alt;\n  font-family: $font_semibold;\n  cursor: pointer;\n\n  @media screen and (min-width: 992px) {\n    font-size: $medium;\n  }\n\n  &__Icon {\n    width: 16px;\n    margin-right: 8px;\n  }\n}\n","@import '../variables';\n\n.SearchBar {\n  padding: 15px 0;\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media screen and (min-width: 992px) {\n    width: 50%;\n  }\n\n  &__Inner {\n    box-shadow: $subtle_shadow;\n  }\n\n  &__Input {\n    border-radius: 6px;\n    width: 100%;\n    border: none;\n    outline: none;\n    padding: 15px 20px 15px 60px;\n    box-sizing: border-box;\n    color: $dark_gray;\n    font-family: $font_light;\n    font-size: $small;\n  }\n\n  &__Input::placeholder {\n    color: $dark_gray;\n    font-family: $font_light;\n    font-size: $small;\n  }\n\n  &__Caret-container {\n    width: 24px;\n    position: absolute;\n    top: calc(50% - 12px);\n    right: 26px;\n    cursor: pointer;\n  }\n\n  &__Caret {\n    opacity: 0.23;\n    width: 15px;\n    transition: 0.3s ease-out;\n\n    &:hover {\n      opacity: 1;\n    }\n  }\n\n  &__Icon {\n    width: 16px;\n    position: absolute;\n    top: calc(50% - 8px);\n    left: 20px;\n    z-index: 0;\n    opacity: 0.23;\n  }\n}\n","@import '../variables';\n\n.Dropdown {\n  width: 100%;\n\n  @media screen and (min-width: 992px) {\n    width: 50%;\n  }\n\n  &__Container {\n    width: 100%;\n  }\n\n  &__Selection {\n    width: 100%;\n    border: none;\n    outline: none;\n    padding: 15px;\n    font-family: $font_light;\n    color: $dark_gray;\n    font-size: $small;\n    border-radius: 6px;\n    position: relative;\n    box-shadow: $subtle_shadow;\n    box-sizing: border-box;\n  }\n\n  &__Selection::placeholder {\n    color: $dark_gray;\n    font-family: $font_light;\n    font-size: $small;\n  }\n}\n","@use 'sass:string';\n@use './variables';\n@use './typography';\n@use './molecules';\n@use './atoms';\n\n/* stylelint-disable */\n\nbody {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-size: 16px;\n}\n\n/* stylelint-enable */\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "/* stylelint-disable */\n/* stylelint-enable */\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Light;\n  font-weight: 300;\n  font-style: normal;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-SemiBold;\n  font-weight: 600;\n  font-style: normal;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Bold;\n  font-weight: 800;\n  font-style: normal;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") format(\"truetype\");\n}\n/* stylelint-disable */\n/* stylelint-enable */\n.Header {\n  padding: 30px 15px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  position: relative;\n}\n.Header__Inner {\n  display: flex;\n  justify-content: space-between;\n  margin: 0 auto;\n  width: 100%;\n}\n@media screen and (min-width: 768px) {\n  .Header__Inner {\n    max-width: 1440px;\n  }\n}\n.Header__Title {\n  font-size: 16px;\n  color: #202c37;\n  font-weight: 800;\n  font-family: \"Nunito-Bold\", sans-serif;\n}\n@media screen and (min-width: 992px) {\n  .Header__Title {\n    font-size: 20px;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Main {\n  background-color: #fafafa;\n  padding: 0 15px;\n  min-height: calc(100vh - 87px);\n}\n.Main__Container {\n  width: 100%;\n  margin: 0 auto;\n}\n@media screen and (min-width: 768px) {\n  .Main__Container {\n    max-width: 1440px;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.ThemeToggler {\n  display: flex;\n  align-items: center;\n  font-size: 14px;\n  color: #111517;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  cursor: pointer;\n}\n@media screen and (min-width: 992px) {\n  .ThemeToggler {\n    font-size: 18px;\n  }\n}\n.ThemeToggler__Icon {\n  width: 16px;\n  margin-right: 8px;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.SearchBar {\n  padding: 15px 0;\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n}\n@media screen and (min-width: 992px) {\n  .SearchBar {\n    width: 50%;\n  }\n}\n.SearchBar__Inner {\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n.SearchBar__Input {\n  border-radius: 6px;\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px 20px 15px 60px;\n  box-sizing: border-box;\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar__Input::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar__Icon {\n  width: 16px;\n  position: absolute;\n  top: calc(50% - 8px);\n  left: 20px;\n  z-index: 0;\n  opacity: 0.23;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Dropdown {\n  width: 100%;\n  margin-bottom: 20px;\n}\n@media screen and (min-width: 992px) {\n  .Dropdown {\n    width: 50%;\n  }\n}\n.Dropdown__Selection {\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px 20px 15px 60px;\n  font-family: \"Nunito-light\", sans-serif;\n  color: #858585;\n  font-size: 16px;\n  border-radius: 6px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  box-sizing: border-box;\n}\n.Dropdown__Selection:focus, .Dropdown__Selection:active {\n  border: none;\n  outline: none;\n}\n.Dropdown__Selection::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.Dropdown__Option {\n  font-family: \"Nunito-light\", sans-serif;\n  cursor: pointer;\n  color: #858585;\n  font-size: 16px;\n  transition: 0.3s ease-out;\n  padding: 8px 20px 8px 60px;\n}\n.Dropdown__Option:hover {\n  background-color: #f2f2f2;\n}\n@media screen and (min-width: 992px) {\n  .Dropdown__Option {\n    font-size: 18px;\n  }\n}\n.Dropdown__Options-container {\n  display: none;\n  opacity: 0;\n  transition: 0.3s ease-out;\n  position: absolute;\n  left: 0;\n  right: 0;\n  border-radius: 6px;\n  top: 64px;\n  background-color: white;\n}\n.Dropdown__Caret {\n  position: absolute;\n  width: 14px;\n  right: 37px;\n  top: calc(50% - 11px);\n  opacity: 0.23;\n  transition: 0.3s ease-out;\n  transform: rotate(180deg);\n}\n.Dropdown__Container {\n  width: 100%;\n  position: relative;\n}\n.Dropdown__Container--is-Active .Dropdown__Caret {\n  transform: rotate(0);\n}\n.Dropdown__Container--is-Active .Dropdown__Options-container {\n  display: block;\n  opacity: 1;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n\n/* stylelint-disable */\nbody {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-size: 16px;\n}\n\n/* stylelint-enable */", "",{"version":3,"sources":["/home/lukas/Projects/rest-countries/resources/sass/_variables.scss","/home/lukas/Projects/rest-countries/resources/sass/_typography.scss","webpack://resources/sass/index.scss","/home/lukas/Projects/rest-countries/resources/sass/molecules/Header.scss","/home/lukas/Projects/rest-countries/resources/sass/molecules/Main.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/ThemeToggler.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/SearchBar.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/Dropdown.scss","/home/lukas/Projects/rest-countries/resources/sass/index.scss"],"names":[],"mappings":"AAAA,sBAAA;AA6BA,qBAAA;AC7BA;EACE,kBAAA;EACA,yBAAA;EACA,gBAAA;EACA,kBAAA;EACA,+DAAA;ACGF;ADAA;EACE,kBAAA;EACA,4BAAA;EACA,gBAAA;EACA,kBAAA;EACA,+DAAA;ACEF;ADCA;EACE,kBAAA;EACA,wBAAA;EACA,gBAAA;EACA,kBAAA;EACA,+DAAA;ACCF;AFtBA,sBAAA;AA6BA,qBAAA;AG3BA;EACE,kBAAA;EACA,8CHuBc;EGtBd,kBAAA;ADwBF;ACtBE;EACE,aAAA;EACA,8BAAA;EACA,cAAA;EACA,WAAA;ADwBJ;ACtBI;EANF;IAOI,iBAAA;EDyBJ;AACF;ACtBE;EACE,eHXI;EGYJ,cHLa;EGMb,gBAAA;EACA,sCHEQ;AEsBZ;ACtBI;EANF;IAOI,eHfE;EEwCN;AACF;;AFnDA,sBAAA;AA6BA,qBAAA;AI3BA;EACE,yBJegB;EIdhB,eAAA;EACA,8BAAA;AFsDF;AEpDE;EACE,WAAA;EACA,cAAA;AFsDJ;AEpDI;EAJF;IAKI,iBAAA;EFuDJ;AACF;;AFpEA,sBAAA;AA6BA,qBAAA;AK3BA;EACE,aAAA;EACA,mBAAA;EACA,eLEK;EKDL,cLUoB;EKTpB,0CLgBc;EKfd,eAAA;AHuEF;AGrEE;EARF;IASI,eLFK;EE0EP;AACF;AGtEE;EACE,WAAA;EACA,iBAAA;AHwEJ;;AFxFA,sBAAA;AA6BA,qBAAA;AM3BA;EACE,eAAA;EACA,kBAAA;EACA,sBAAA;EACA,WAAA;AJ2FF;AIzFE;EANF;IAOI,UAAA;EJ4FF;AACF;AI1FE;EACE,8CNcY;AE8EhB;AIzFE;EACE,kBAAA;EACA,WAAA;EACA,YAAA;EACA,aAAA;EACA,4BAAA;EACA,sBAAA;EACA,cNNQ;EMOR,uCNFS;EMGT,eNjBI;AE4GR;AIxFE;EACE,cNZQ;EMaR,uCNRS;EMST,eNvBI;AEiHR;AIvFE;EACE,WAAA;EACA,kBAAA;EACA,oBAAA;EACA,UAAA;EACA,UAAA;EACA,aAAA;AJyFJ;;AFjIA,sBAAA;AA6BA,qBAAA;AO3BA;EACE,WAAA;EACA,mBAAA;ALoIF;AKlIE;EAJF;IAKI,UAAA;ELqIF;AACF;AKnIE;EACE,WAAA;EACA,YAAA;EACA,aAAA;EACA,4BAAA;EACA,uCPOS;EONT,cPCQ;EOAR,ePTI;EOUJ,kBAAA;EACA,8CPQY;EOPZ,sBAAA;ALqIJ;AKnII;EAEE,YAAA;EACA,aAAA;ALoIN;AKhIE;EACE,cPbQ;EOcR,uCPTS;EOUT,ePxBI;AE0JR;AK/HE;EACE,uCPdS;EOeT,eAAA;EACA,cPrBQ;EOsBR,eP/BI;EOgCJ,yBAAA;EACA,0BAAA;ALiIJ;AK/HI;EACE,yBAAA;ALiIN;AK9HI;EAZF;IAaI,ePvCG;EEwKP;AACF;AK9HE;EACE,aAAA;EACA,UAAA;EACA,yBAAA;EACA,kBAAA;EACA,OAAA;EACA,QAAA;EACA,kBAAA;EACA,SAAA;EACA,uBP1CI;AE0KR;AK7HE;EACE,kBAAA;EACA,WAAA;EACA,WAAA;EACA,qBAAA;EACA,aAAA;EACA,yBAAA;EACA,yBAAA;AL+HJ;AK5HE;EACE,WAAA;EACA,kBAAA;AL8HJ;AK5HM;EACE,oBAAA;AL8HR;AK3HM;EACE,cAAA;EACA,UAAA;EACA,8CP1DQ;AEuLhB;;AM5MA,sBAAA;AAEA;EACE,SAAA;EACA,UAAA;EACA,sBAAA;EACA,eAAA;AN8MF;;AM3MA,qBAAA","sourcesContent":["/* stylelint-disable */\n\n// BREAKPOINTS\n$xs: 375px;\n$lg: 1440px;\n\n// FONT SIZES\n$tiny: 14px;\n$small: 16px;\n$medium: 18px;\n$large: 20px;\n$huge: 24px;\n\n// COLORS\n$dark_blue: hsl(209, 23, 22);\n$very_dark_blue: hsl(207, 26, 17);\n$very_dark_blue--alt: hsl(200, 15, 8);\n$dark_gray: hsl(0, 0, 52);\n$very_light_gray: hsl(0, 0, 98);\n$white: hsl(0, 0, 100);\n\n// FONTS\n$font_light: 'Nunito-light', sans-serif;\n$font_semibold: 'Nunito-SemiBold', sans-serif;\n$font_bold: 'Nunito-Bold', sans-serif;\n\n// OTHERS\n$subtle_shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n\n/* stylelint-enable */\n","@font-face {\n  font-display: swap;\n  font-family: Nunito-Light;\n  font-weight: 300;\n  font-style: normal;\n  src: url('../assets/fonts/NunitoSans-Light.ttf') format('truetype');\n}\n\n@font-face {\n  font-display: swap;\n  font-family: Nunito-SemiBold;\n  font-weight: 600;\n  font-style: normal;\n  src: url('../assets/fonts/NunitoSans-SemiBold.ttf') format('truetype');\n}\n\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Bold;\n  font-weight: 800;\n  font-style: normal;\n  src: url('../assets/fonts/NunitoSans-ExtraBold.ttf') format('truetype');\n}\n","/* stylelint-disable */\n/* stylelint-enable */\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Light;\n  font-weight: 300;\n  font-style: normal;\n  src: url(\"../assets/fonts/NunitoSans-Light.ttf\") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-SemiBold;\n  font-weight: 600;\n  font-style: normal;\n  src: url(\"../assets/fonts/NunitoSans-SemiBold.ttf\") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Bold;\n  font-weight: 800;\n  font-style: normal;\n  src: url(\"../assets/fonts/NunitoSans-ExtraBold.ttf\") format(\"truetype\");\n}\n/* stylelint-disable */\n/* stylelint-enable */\n.Header {\n  padding: 30px 15px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  position: relative;\n}\n.Header__Inner {\n  display: flex;\n  justify-content: space-between;\n  margin: 0 auto;\n  width: 100%;\n}\n@media screen and (min-width: 768px) {\n  .Header__Inner {\n    max-width: 1440px;\n  }\n}\n.Header__Title {\n  font-size: 16px;\n  color: #202c37;\n  font-weight: 800;\n  font-family: \"Nunito-Bold\", sans-serif;\n}\n@media screen and (min-width: 992px) {\n  .Header__Title {\n    font-size: 20px;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Main {\n  background-color: #fafafa;\n  padding: 0 15px;\n  min-height: calc(100vh - 87px);\n}\n.Main__Container {\n  width: 100%;\n  margin: 0 auto;\n}\n@media screen and (min-width: 768px) {\n  .Main__Container {\n    max-width: 1440px;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.ThemeToggler {\n  display: flex;\n  align-items: center;\n  font-size: 14px;\n  color: #111517;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  cursor: pointer;\n}\n@media screen and (min-width: 992px) {\n  .ThemeToggler {\n    font-size: 18px;\n  }\n}\n.ThemeToggler__Icon {\n  width: 16px;\n  margin-right: 8px;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.SearchBar {\n  padding: 15px 0;\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n}\n@media screen and (min-width: 992px) {\n  .SearchBar {\n    width: 50%;\n  }\n}\n.SearchBar__Inner {\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n.SearchBar__Input {\n  border-radius: 6px;\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px 20px 15px 60px;\n  box-sizing: border-box;\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar__Input::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar__Icon {\n  width: 16px;\n  position: absolute;\n  top: calc(50% - 8px);\n  left: 20px;\n  z-index: 0;\n  opacity: 0.23;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Dropdown {\n  width: 100%;\n  margin-bottom: 20px;\n}\n@media screen and (min-width: 992px) {\n  .Dropdown {\n    width: 50%;\n  }\n}\n.Dropdown__Selection {\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px 20px 15px 60px;\n  font-family: \"Nunito-light\", sans-serif;\n  color: #858585;\n  font-size: 16px;\n  border-radius: 6px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  box-sizing: border-box;\n}\n.Dropdown__Selection:focus, .Dropdown__Selection:active {\n  border: none;\n  outline: none;\n}\n.Dropdown__Selection::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.Dropdown__Option {\n  font-family: \"Nunito-light\", sans-serif;\n  cursor: pointer;\n  color: #858585;\n  font-size: 16px;\n  transition: 0.3s ease-out;\n  padding: 8px 20px 8px 60px;\n}\n.Dropdown__Option:hover {\n  background-color: #f2f2f2;\n}\n@media screen and (min-width: 992px) {\n  .Dropdown__Option {\n    font-size: 18px;\n  }\n}\n.Dropdown__Options-container {\n  display: none;\n  opacity: 0;\n  transition: 0.3s ease-out;\n  position: absolute;\n  left: 0;\n  right: 0;\n  border-radius: 6px;\n  top: 64px;\n  background-color: white;\n}\n.Dropdown__Caret {\n  position: absolute;\n  width: 14px;\n  right: 37px;\n  top: calc(50% - 11px);\n  opacity: 0.23;\n  transition: 0.3s ease-out;\n  transform: rotate(180deg);\n}\n.Dropdown__Container {\n  width: 100%;\n  position: relative;\n}\n.Dropdown__Container--is-Active .Dropdown__Caret {\n  transform: rotate(0);\n}\n.Dropdown__Container--is-Active .Dropdown__Options-container {\n  display: block;\n  opacity: 1;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n\n/* stylelint-disable */\nbody {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-size: 16px;\n}\n\n/* stylelint-enable */","@import '../variables';\n\n.Header {\n  padding: 30px 15px;\n  box-shadow: $subtle_shadow;\n  position: relative;\n\n  &__Inner {\n    display: flex;\n    justify-content: space-between;\n    margin: 0 auto;\n    width: 100%;\n\n    @media screen and (min-width: 768px) {\n      max-width: 1440px;\n    }\n  }\n\n  &__Title {\n    font-size: $small;\n    color: $very_dark_blue;\n    font-weight: 800;\n    font-family: $font-bold;\n\n    @media screen and (min-width: 992px) {\n      font-size: $large;\n    }\n  }\n}\n","@import '../variables';\n\n.Main {\n  background-color: $very_light_gray;\n  padding: 0 15px;\n  min-height: calc(100vh - 87px);\n\n  &__Container {\n    width: 100%;\n    margin: 0 auto;\n\n    @media screen and (min-width: 768px) {\n      max-width: 1440px;\n    }\n  }\n}\n","@import '../variables';\n\n.ThemeToggler {\n  display: flex;\n  align-items: center;\n  font-size: $tiny;\n  color: $very_dark_blue--alt;\n  font-family: $font_semibold;\n  cursor: pointer;\n\n  @media screen and (min-width: 992px) {\n    font-size: $medium;\n  }\n\n  &__Icon {\n    width: 16px;\n    margin-right: 8px;\n  }\n}\n","@import '../variables';\n\n.SearchBar {\n  padding: 15px 0;\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media screen and (min-width: 992px) {\n    width: 50%;\n  }\n\n  &__Inner {\n    box-shadow: $subtle_shadow;\n  }\n\n  &__Input {\n    border-radius: 6px;\n    width: 100%;\n    border: none;\n    outline: none;\n    padding: 15px 20px 15px 60px;\n    box-sizing: border-box;\n    color: $dark_gray;\n    font-family: $font_light;\n    font-size: $small;\n  }\n\n  &__Input::placeholder {\n    color: $dark_gray;\n    font-family: $font_light;\n    font-size: $small;\n  }\n\n  &__Icon {\n    width: 16px;\n    position: absolute;\n    top: calc(50% - 8px);\n    left: 20px;\n    z-index: 0;\n    opacity: 0.23;\n  }\n}\n","@import '../variables';\n\n.Dropdown {\n  width: 100%;\n  margin-bottom: 20px;\n\n  @media screen and (min-width: 992px) {\n    width: 50%;\n  }\n\n  &__Selection {\n    width: 100%;\n    border: none;\n    outline: none;\n    padding: 15px 20px 15px 60px;\n    font-family: $font_light;\n    color: $dark_gray;\n    font-size: $small;\n    border-radius: 6px;\n    box-shadow: $subtle_shadow;\n    box-sizing: border-box;\n\n    &:focus,\n    &:active {\n      border: none;\n      outline: none;\n    }\n  }\n\n  &__Selection::placeholder {\n    color: $dark_gray;\n    font-family: $font_light;\n    font-size: $small;\n  }\n\n  &__Option {\n    font-family: $font_light;\n    cursor: pointer;\n    color: $dark_gray;\n    font-size: $small;\n    transition: 0.3s ease-out;\n    padding: 8px 20px 8px 60px;\n\n    &:hover {\n      background-color: darken($white, 5);\n    }\n\n    @media screen and (min-width: 992px) {\n      font-size: $medium;\n    }\n  }\n\n  &__Options-container {\n    display: none;\n    opacity: 0;\n    transition: 0.3s ease-out;\n    position: absolute;\n    left: 0;\n    right: 0;\n    border-radius: 6px;\n    top: 64px;\n    background-color: $white;\n  }\n\n  &__Caret {\n    position: absolute;\n    width: 14px;\n    right: 37px;\n    top: calc(50% - 11px);\n    opacity: 0.23;\n    transition: 0.3s ease-out;\n    transform: rotate(180deg);\n  }\n\n  &__Container {\n    width: 100%;\n    position: relative;\n    &--is-Active {\n      .Dropdown__Caret {\n        transform: rotate(0);\n      }\n\n      .Dropdown__Options-container {\n        display: block;\n        opacity: 1;\n        box-shadow: $subtle_shadow;\n      }\n    }\n  }\n}\n","@use 'sass:string';\n@use './variables';\n@use './typography';\n@use './molecules';\n@use './atoms';\n\n/* stylelint-disable */\n\nbody {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-size: 16px;\n}\n\n/* stylelint-enable */\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -40676,12 +40816,18 @@ function App() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _assets_icons_caret_solid_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/icons/caret-solid.svg */ "./resources/assets/icons/caret-solid.svg");
+/* harmony import */ var _assets_icons_caret_solid_svg__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_assets_icons_caret_solid_svg__WEBPACK_IMPORTED_MODULE_3__);
+
+
 var _this = undefined,
     _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/Dropdown.jsx";
+
 
 
 
@@ -40689,49 +40835,101 @@ var _this = undefined,
 var Dropdown = function Dropdown(props) {
   var placeholder = props.placeholder,
       options = props.options;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
+      _useState2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
+      isActive = _useState2[0],
+      setIsActive = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
+      _useState4 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
+      currentRegion = _useState4[0],
+      setCurrentRegion = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(options),
+      _useState6 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
+      possibleRegions = _useState6[0],
+      setPossibleRegions = _useState6[1];
+
+  var handleChange = function handleChange(e) {
+    setPossibleRegions(options.filter(function (option) {
+      return option.includes(e.target.value);
+    }));
+    setCurrentRegion(e.target.value);
+  };
+
+  var handleClick = function handleClick(e) {
+    setCurrentRegion(e.target.innerHTML);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "Dropdown",
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8,
+      lineNumber: 25,
       columnNumber: 5
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "Dropdown__Container",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "Dropdown__Container ".concat(isActive ? 'Dropdown__Container--is-Active' : ''),
+    tabIndex: 0,
+    onClick: function onClick() {
+      return setIsActive(!isActive);
+    },
+    role: "button",
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 9,
+      lineNumber: 26,
       columnNumber: 7
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
     type: "text",
     className: "Dropdown__Selection",
     id: "selected",
     name: "selected",
     placeholder: placeholder,
+    onChange: function onChange(e) {
+      return handleChange(e);
+    },
+    value: currentRegion !== '' ? currentRegion : '',
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 10,
+      lineNumber: 34,
       columnNumber: 9
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+    src: _assets_icons_caret_solid_svg__WEBPACK_IMPORTED_MODULE_3___default.a,
+    alt: "Caret",
+    className: "Dropdown__Caret",
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 43,
+      columnNumber: 9
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "Dropdown__Options-container",
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17,
+      lineNumber: 44,
       columnNumber: 9
     }
-  }, options.length > 0 && options.map(function (option) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, possibleRegions.length > 0 && possibleRegions.map(function (option) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "Dropdown__Option",
+      key: "k__".concat(option),
+      onClick: function onClick(e) {
+        return handleClick(e);
+      },
+      tabIndex: isActive ? 0 : -1,
+      role: "button",
       __self: _this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 20,
+        lineNumber: 47,
         columnNumber: 15
       }
     }, option);
@@ -40739,12 +40937,12 @@ var Dropdown = function Dropdown(props) {
 };
 
 Dropdown.propTypes = {
-  placeholder: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  options: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string)
+  placeholder: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  options: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string)
 };
 Dropdown.defaultProps = {
   placeholder: 'Filter by Region',
-  options: ['Hello', 'World']
+  options: ['Africa', 'America', 'Asia', 'Europe', 'Oceania']
 };
 /* harmony default export */ __webpack_exports__["default"] = (Dropdown);
 
@@ -40765,11 +40963,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _assets_icons_search_solid_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/icons/search-solid.svg */ "./resources/assets/icons/search-solid.svg");
 /* harmony import */ var _assets_icons_search_solid_svg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_icons_search_solid_svg__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _assets_icons_caret_solid_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/icons/caret-solid.svg */ "./resources/assets/icons/caret-solid.svg");
-/* harmony import */ var _assets_icons_caret_solid_svg__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_assets_icons_caret_solid_svg__WEBPACK_IMPORTED_MODULE_3__);
 var _this = undefined,
     _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/SearchBar.jsx";
-
 
 
 
@@ -40782,7 +40977,7 @@ var SearchBar = function SearchBar(props) {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 11,
+      lineNumber: 10,
       columnNumber: 5
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -40790,7 +40985,7 @@ var SearchBar = function SearchBar(props) {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 12,
+      lineNumber: 11,
       columnNumber: 7
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -40802,7 +40997,7 @@ var SearchBar = function SearchBar(props) {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 13,
+      lineNumber: 12,
       columnNumber: 9
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -40812,28 +41007,10 @@ var SearchBar = function SearchBar(props) {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20,
+      lineNumber: 19,
       columnNumber: 9
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "SearchBar__Caret-container",
-    __self: _this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 21,
-      columnNumber: 9
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: _assets_icons_caret_solid_svg__WEBPACK_IMPORTED_MODULE_3___default.a,
-    alt: "Caret",
-    className: "SearchBar__Caret",
-    __self: _this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 22,
-      columnNumber: 11
-    }
-  }))));
+  })));
 };
 
 SearchBar.propTypes = {

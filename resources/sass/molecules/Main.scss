@@ -3,6 +3,7 @@
 .Main {
   background-color: $very_light_gray;
   padding: 0 15px;
+  min-height: calc(100vh - 87px);
 
   &__Container {
     width: 100%;
