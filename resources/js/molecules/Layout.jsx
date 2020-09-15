@@ -7,15 +7,18 @@ const Layout = (props) => {
   const { children } = props;
 
   return (
-    <>
+    <div className="Layout">
       <Header />
       <Body>{children}</Body>
-    </>
+    </div>
   );
 };
 
 Layout.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+  ]),
 };
 
 Layout.defaultProps = {

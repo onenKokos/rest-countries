@@ -1,15 +1,24 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Layout from './molecules/Layout';
-import SearchBar from './atoms/SearchBar';
-import Dropdown from './atoms/Dropdown';
+import Homepage from './routes/Homepage';
+import ErrorPage from './routes/ErrorPage';
 
-function App() {
+const App = () => {
   return (
-    <Layout>
-      <SearchBar />
-      <Dropdown />
-    </Layout>
+    <Router>
+      <Layout>
+        <Switch>
+          <Route exact path="/">
+            <Homepage />
+          </Route>
+          <Route path="*">
+            <ErrorPage />
+          </Route>
+        </Switch>
+      </Layout>
+    </Router>
   );
-}
+};
 
 export default App;
