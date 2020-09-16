@@ -59,4 +59,10 @@
       color: $white;
     }
   }
+
+  .SearchBar__Icon {
+    color: $white;
+    opacity: 1;
+    transition: 0.3s ease-in-out;
+  }
 }

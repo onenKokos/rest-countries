@@ -40,7 +40,7 @@ const Dropdown = (props) => {
           onChange={(e) => handleChange(e)}
           value={currentRegion !== '' ? currentRegion : ''}
         />
-        <img src={Caret} alt="Caret" className="Dropdown__Caret" />
+        <Caret className="Dropdown__Caret" alt="Caret" />
         <div className="Dropdown__Options-container">
           {possibleRegions.length > 0 &&
             possibleRegions.map((option) => (

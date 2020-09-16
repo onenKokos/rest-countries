@@ -16,7 +16,8 @@ const SearchBar = (props) => {
           placeholder={placeholder}
           className="SearchBar__Input"
         />
-        <img src={Search} alt="Search icon" className="SearchBar__Icon" />
+        {/* <img src={Search} alt="Search icon" className="SearchBar__Icon" /> */}
+        <Search className="SearchBar__Icon" />
       </div>
     </div>
   );

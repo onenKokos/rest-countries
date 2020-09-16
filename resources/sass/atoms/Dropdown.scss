@@ -72,6 +72,7 @@
     opacity: 0.23;
     transition: 0.3s ease-out;
     transform: rotate(180deg);
+    cursor: pointer;
   }
 
   &__Container {
@@ -108,5 +109,11 @@
 
   .Dropdown__Options-container {
     background-color: $very_dark_blue;
+  }
+
+  .Dropdown__Caret {
+    color: $white;
+    opacity: 1;
+    transition: 0.3s ease-in-out;
   }
 }
