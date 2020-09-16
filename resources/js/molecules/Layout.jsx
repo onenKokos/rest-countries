@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Header from './Header';
 import Body from './Body';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 const Layout = (props) => {
   const { children } = props;
+  const [theme] = useContext(ThemeContext);
+
+  console.log(theme);
 
   return (
-    <div className="Layout">
+    <div
+      className={`Layout ${
+        theme === 'THEME_LIGHT' ? 'Layout--light' : 'Layout--dark'
+      }`}
+    >
       <Header />
       <Body>{children}</Body>
     </div>

@@ -4,6 +4,7 @@
   padding: 30px 15px;
   box-shadow: $subtle_shadow;
   position: relative;
+  transition: 0.3s ease-in-out;
 
   &__Inner {
     display: flex;
@@ -36,5 +37,16 @@
       }
     }
   }
-  /* stylelint-enable */
 }
+
+.Layout--dark {
+  .Header {
+    background-color: $very_dark_blue;
+    transition: 0.3s ease-in-out;
+    &__Title a {
+      color: $white;
+    }
+  }
+}
+
+/* stylelint-enable */

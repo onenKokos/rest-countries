@@ -8,6 +8,12 @@
   font-family: $font_semibold;
   cursor: pointer;
 
+  &:focus,
+  &:active {
+    outline: none;
+    border: none;
+  }
+
   @media screen and (min-width: 992px) {
     font-size: $medium;
   }
@@ -15,5 +21,11 @@
   &__Icon {
     width: 16px;
     margin-right: 8px;
+  }
+}
+
+.Layout--dark {
+  .ThemeToggler {
+    color: $white;
   }
 }

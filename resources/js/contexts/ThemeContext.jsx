@@ -11,7 +11,7 @@ export const ThemeProvider = (props) => {
   const [theme, setTheme] = useState(themes.THEME_LIGHT);
 
   return (
-    <ThemeContext.Provider value={[theme, setTheme, themes]}>
+    <ThemeContext.Provider value={[theme, setTheme]}>
       {props.children}
     </ThemeContext.Provider>
   );

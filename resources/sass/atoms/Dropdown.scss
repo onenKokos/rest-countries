@@ -90,3 +90,23 @@
     }
   }
 }
+
+.Layout--dark {
+  .Dropdown__Selection {
+    background-color: $very_dark_blue;
+    color: $white;
+    transition: 0.3s ease-in-out;
+
+    &::placeholder {
+      color: $white;
+    }
+  }
+
+  .Dropdown__Option {
+    color: $white;
+  }
+
+  .Dropdown__Options-container {
+    background-color: $very_dark_blue;
+  }
+}

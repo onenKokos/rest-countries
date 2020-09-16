@@ -11,8 +11,6 @@ import { ThemeProvider } from '@Contexts/ThemeContext';
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  console.log(isLoaded);
-
   useEffect(() => {
     setIsLoaded(true);
   }, [isLoaded]);

@@ -4,6 +4,7 @@
   background-color: $very_light_gray;
   padding: 0 15px;
   min-height: calc(100vh - 87px);
+  transition: 0.3s ease-in-out;
 
   &__Container {
     width: 100%;
@@ -16,5 +17,11 @@
     @media screen and (min-width: 1140px) {
       max-width: 1140px;
     }
+  }
+}
+
+.Layout--dark {
+  .Main {
+    background-color: $very_dark_blue--alt;
   }
 }
