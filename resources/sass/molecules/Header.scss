@@ -10,8 +10,13 @@
     justify-content: space-between;
     margin: 0 auto;
     width: 100%;
+
     @media screen and (min-width: 768px) {
-      max-width: 1440px;
+      width: 80%;
+    }
+
+    @media scren and (min-width: 1140px) {
+      max-width: 1140px;
     }
   }
 
