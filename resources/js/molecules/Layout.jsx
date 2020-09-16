@@ -15,14 +15,11 @@ const Layout = (props) => {
 };
 
 Layout.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
-  ]),
+  children: PropTypes.node,
 };
 
 Layout.defaultProps = {
-  children: [],
+  children: null,
 };
 
 export default Layout;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Search from '../../assets/icons/search-solid.svg';
+import Search from '@Assets/icons/search-solid.svg';
 
 const SearchBar = (props) => {
   const { placeholder } = props;

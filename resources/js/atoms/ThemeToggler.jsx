@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { ThemeContext } from '@Contexts/ThemeContext';
 
-import Moon from '../../assets/icons/moon-regular.svg';
-import MoonSolid from '../../assets/icons/moon-solid.svg';
+import Moon from '@Assets/icons/moon-regular.svg';
+import MoonSolid from '@Assets/icons/moon-solid.svg';
 
 const ThemeToggler = (props) => {
   const { title, alt, isActive } = props;
+  const [theme, setTheme] = useContext(ThemeContext);
+
+  const handleClick = () => {
+    setTheme(theme === 'THEME_LIGHT' ? 'THEME_DARK' : 'THEME_LIGHT');
+  };
 
   return (
-    <div className="ThemeToggler">
+    <div
+      className="ThemeToggler"
+      role="button"
+      tabIndex={0}
+      onClick={() => handleClick()}
+    >
       <img
         src={isActive ? MoonSolid : Moon}
         alt={alt}

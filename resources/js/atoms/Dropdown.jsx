@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Caret from '../../assets/icons/caret-solid.svg';
+import Caret from '@Assets/icons/caret-solid.svg';
 
 const Dropdown = (props) => {
   const { placeholder, options } = props;

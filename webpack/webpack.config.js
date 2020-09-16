@@ -50,6 +50,7 @@ module.exports = (mode, options) => ({
     alias: {
       '@': path.resolve(__dirname, '../resources/js/'),
       '@Atoms': path.resolve(__dirname, '../resources/js/atoms'),
+      '@Assets': path.resolve(__dirname, '../resources/assets'),
       '@Contexts': path.resolve(__dirname, '../resources/js/contexts'),
       '@Hooks': path.resolve(__dirname, '../resources/js/hooks'),
       '@Molecules': path.resolve(__dirname, '../resources/js/molecules'),
