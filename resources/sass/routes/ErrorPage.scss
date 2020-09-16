@@ -8,6 +8,11 @@
   align-items: center;
   text-transform: uppercase;
   font-family: $font_bold;
-  font-size: $enormous;
+  font-size: $huge;
   color: $dark_gray;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    font-size: $enormous;
+  }
 }

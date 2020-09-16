@@ -1,0 +1,80 @@
+@import '../variables';
+
+.CountryCard {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  padding: 20px;
+  transition: 0.3s linear;
+
+  @media screen and (min-width: 768px) {
+    width: 45%;
+  }
+
+  @media screen and (min-width: 992px) {
+    width: 22%;
+  }
+
+  &__Flag {
+    width: 100%;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+
+  &__Body {
+    background-color: $white;
+    position: relative;
+    top: -6px;
+    padding: 26px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    box-shadow: $subtle_shadow;
+  }
+
+  &__Row {
+    margin: 8px 0;
+  }
+
+  &:hover {
+    transform: translateY(-10px);
+
+    .CountryCard__Body {
+      background-color: darken($white, 3);
+    }
+  }
+
+  /* stylelint-disable */
+
+  a {
+    font-family: $font-semibold;
+    text-decoration: none;
+    color: $very_dark_blue;
+    font-size: $tiny;
+    b {
+      font-family: $font-bold;
+      font-size: $small;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    .CountryCard__Name {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: $medium;
+      font-family: $font-bold;
+    }
+  }
+}
+
+.Layout--dark {
+  .CountryCard:hover .CountryCard__Body {
+    background-color: lighten($very_dark_blue, 5);
+  }
+  .CountryCard__Body {
+    background-color: $very_dark_blue;
+  }
+  a {
+    color: $very_light_gray;
+  }
+}
+
+/* stylelint-enable */
