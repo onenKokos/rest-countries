@@ -1,0 +1,40 @@
+@import '../variables';
+
+.Overlay {
+  position: fixed;
+  width: 100vw;
+  height: 0;
+  background-color: hsl(0, 0, 0);
+  transition: 0.45s ease-out;
+  transition-delay: 1.7s;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+
+  &__Headline {
+    font-family: $font_bold;
+    color: $very_light_gray;
+    font-size: $huge;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 1s ease-out;
+    transition-delay: 0.7s;
+    max-width: 80%;
+
+    @media screen and (min-width: 768px) {
+      letter-spacing: 4px;
+      font-size: $enormous;
+    }
+  }
+
+  &.Overlay--visible {
+    height: 100vh;
+
+    .Overlay__Headline {
+      opacity: 1;
+    }
+  }
+}
