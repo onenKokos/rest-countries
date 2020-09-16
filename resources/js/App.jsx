@@ -7,6 +7,7 @@ import Overlay from '@Atoms/Overlay';
 
 // Contexts
 import { ThemeProvider } from '@Contexts/ThemeContext';
+import { CountriesProvider } from '@Contexts/CountriesContext';
 
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -17,19 +18,21 @@ const App = () => {
 
   return (
     <Router>
-      <ThemeProvider>
-        <Overlay visible={isLoaded ? false : true} />
-        <Layout>
-          <Switch>
-            <Route exact path="/">
-              <Homepage />
-            </Route>
-            <Route path="*">
-              <ErrorPage />
-            </Route>
-          </Switch>
-        </Layout>
-      </ThemeProvider>
+      <CountriesProvider>
+        <ThemeProvider>
+          <Overlay visible={isLoaded ? false : true} />
+          <Layout>
+            <Switch>
+              <Route exact path="/">
+                <Homepage />
+              </Route>
+              <Route path="*">
+                <ErrorPage />
+              </Route>
+            </Switch>
+          </Layout>
+        </ThemeProvider>
+      </CountriesProvider>
     </Router>
   );
 };
