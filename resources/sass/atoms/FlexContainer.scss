@@ -1,0 +1,11 @@
+.FlexContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 15px 0;
+
+  @media screen and (min-width: 992px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

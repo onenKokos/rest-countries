@@ -1,12 +1,15 @@
 import React from 'react';
-import SearchBar from '../atoms/SearchBar';
-import Dropdown from '../atoms/Dropdown';
+import SearchBar from '@Atoms/SearchBar';
+import Dropdown from '@Atoms/Dropdown';
+import FlexContainer from '@Atoms/FlexContainer';
 
 const Homepage = () => {
   return (
     <div className="Homepage">
-      <SearchBar />
-      <Dropdown />
+      <FlexContainer>
+        <SearchBar />
+        <Dropdown />
+      </FlexContainer>
     </div>
   );
 };

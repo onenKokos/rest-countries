@@ -1,13 +1,16 @@
 @import '../variables';
 
 .SearchBar {
-  padding: 15px 0;
   position: relative;
   box-sizing: border-box;
   width: 100%;
+  margin-bottom: 16px;
+  max-width: 500px;
 
   @media screen and (min-width: 992px) {
     width: 50%;
+    max-width: 500px;
+    margin-bottom: 0;
   }
 
   &__Inner {
@@ -39,5 +42,9 @@
     left: 20px;
     z-index: 0;
     opacity: 0.23;
+
+    @media screen and (min-width: 992px) {
+      top: calc(50% - 16px);
+    }
   }
 }
