@@ -23,6 +23,10 @@ const App = () => {
           <Overlay visible={isLoaded ? false : true} />
           <Layout>
             <Switch>
+              <Route exact path="/AF">
+                <div>Hello, this is should be afghanistan.</div>
+              </Route>
+
               <Route exact path="/">
                 <Homepage />
               </Route>
