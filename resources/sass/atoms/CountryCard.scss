@@ -2,21 +2,31 @@
 
 .CountryCard {
   width: 100%;
+  max-width: 345px;
   border-radius: 6px;
-  margin-bottom: 16px;
-  padding: 20px;
+  margin: 0 auto 36px auto;
   transition: 0.3s linear;
+  box-sizing: border-box;
 
   @media screen and (min-width: 768px) {
-    width: 45%;
+    width: 50%;
+    max-width: 50%;
   }
 
-  @media screen and (min-width: 992px) {
-    width: 22%;
+  @media screen and (min-width: 1440px) {
+    width: 23%;
+    max-width: 23%;
+  }
+
+  &__Flag-container {
+    width: 100%;
+    height: 225px;
   }
 
   &__Flag {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
   }

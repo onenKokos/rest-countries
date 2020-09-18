@@ -4,6 +4,7 @@ import SearchBar from '@Atoms/SearchBar';
 import Dropdown from '@Atoms/Dropdown';
 import FlexContainer from '@Atoms/FlexContainer';
 import { CountriesContext } from '@Contexts/CountriesContext';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const Homepage = () => {
   const [countries, setCountries] = useContext(CountriesContext);
@@ -22,7 +23,15 @@ const Homepage = () => {
         <SearchBar />
         <Dropdown />
       </FlexContainer>
-      <CountryCardContainer countries={countries} />
+
+      <Router>
+        <CountryCardContainer countries={countries} />
+        <Switch>
+          <Route exact path="/hell">
+            <div>Hello</div>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 };
