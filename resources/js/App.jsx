@@ -24,12 +24,14 @@ const App = () => {
           <Overlay visible={isLoaded ? false : true} />
           <Layout>
             <Switch>
-              <Route path="/country/:code">
+              <Route exact path="/country/:code">
                 <CountryPage />
               </Route>
+
               <Route exact path="/">
                 <Homepage />
               </Route>
+
               <Route path="*">
                 <ErrorPage />
               </Route>
