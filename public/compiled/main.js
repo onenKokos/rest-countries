@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "c27be0a342aee89e4e32";
+/******/ 	var hotCurrentHash = "5ab9e7e80b9325b3f6b3";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -44818,12 +44818,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Routes_Homepage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Routes/Homepage */ "./resources/js/routes/Homepage.jsx");
 /* harmony import */ var _Routes_ErrorPage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @Routes/ErrorPage */ "./resources/js/routes/ErrorPage.jsx");
 /* harmony import */ var _Atoms_Overlay__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @Atoms/Overlay */ "./resources/js/atoms/Overlay.jsx");
-/* harmony import */ var _Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @Contexts/ThemeContext */ "./resources/js/contexts/ThemeContext.jsx");
-/* harmony import */ var _Contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @Contexts/CountriesContext */ "./resources/js/contexts/CountriesContext.jsx");
+/* harmony import */ var _Routes_CountryPage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @Routes/CountryPage */ "./resources/js/routes/CountryPage.jsx");
+/* harmony import */ var _Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @Contexts/ThemeContext */ "./resources/js/contexts/ThemeContext.jsx");
+/* harmony import */ var _Contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @Contexts/CountriesContext */ "./resources/js/contexts/CountriesContext.jsx");
 
 
 var _this = undefined,
     _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/App.jsx";
+
 
 
 
@@ -44848,21 +44850,21 @@ var App = function App() {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20,
+      lineNumber: 21,
       columnNumber: 5
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_8__["CountriesProvider"], {
-    __self: _this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 21,
-      columnNumber: 7
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_7__["ThemeProvider"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_9__["CountriesProvider"], {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 22,
+      columnNumber: 7
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_8__["ThemeProvider"], {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 23,
       columnNumber: 9
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Atoms_Overlay__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -44870,40 +44872,39 @@ var App = function App() {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23,
+      lineNumber: 24,
       columnNumber: 11
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Molecules_Layout__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24,
+      lineNumber: 25,
       columnNumber: 11
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
     __self: _this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25,
+      lineNumber: 26,
       columnNumber: 13
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    exact: true,
-    path: "/AF",
-    __self: _this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 26,
-      columnNumber: 15
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    path: "/country/:code",
     __self: _this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 27,
+      columnNumber: 15
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Routes_CountryPage__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 28,
       columnNumber: 17
     }
-  }, "Hello, this is should be afghanistan.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/",
     __self: _this,
@@ -45645,8 +45646,9 @@ var CountryCardContainer = function CountryCardContainer(props) {
       population: country.population,
       region: country.region,
       capital: country.capital,
-      url: "/".concat(country.alpha2Code),
+      url: "/country/".concat(country.alpha2Code),
       flag: country.flag,
+      key: "k__".concat(country.alpha2Code),
       __self: _this,
       __source: {
         fileName: _jsxFileName,
@@ -45805,6 +45807,43 @@ Layout.defaultProps = {
   children: null
 };
 /* harmony default export */ __webpack_exports__["default"] = (Layout);
+
+/***/ }),
+
+/***/ "./resources/js/routes/CountryPage.jsx":
+/*!*********************************************!*\
+  !*** ./resources/js/routes/CountryPage.jsx ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+var _this = undefined,
+    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/routes/CountryPage.jsx";
+
+
+
+
+var CountryPage = function CountryPage(props) {
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
+      code = _useParams.code;
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "CoutnryPage",
+    __self: _this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 7,
+      columnNumber: 10
+    }
+  }, "Countrypage for ", code, "!");
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CountryPage);
 
 /***/ }),
 

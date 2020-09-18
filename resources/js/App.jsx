@@ -4,6 +4,7 @@ import Layout from '@Molecules/Layout';
 import Homepage from '@Routes/Homepage';
 import ErrorPage from '@Routes/ErrorPage';
 import Overlay from '@Atoms/Overlay';
+import CountryPage from '@Routes/CountryPage';
 
 // Contexts
 import { ThemeProvider } from '@Contexts/ThemeContext';
@@ -23,10 +24,9 @@ const App = () => {
           <Overlay visible={isLoaded ? false : true} />
           <Layout>
             <Switch>
-              <Route exact path="/AF">
-                <div>Hello, this is should be afghanistan.</div>
+              <Route path="/country/:code">
+                <CountryPage />
               </Route>
-
               <Route exact path="/">
                 <Homepage />
               </Route>

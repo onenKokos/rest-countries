@@ -14,8 +14,9 @@ const CountryCardContainer = (props) => {
             population={country.population}
             region={country.region}
             capital={country.capital}
-            url={`/${country.alpha2Code}`}
+            url={`/country/${country.alpha2Code}`}
             flag={country.flag}
+            key={`k__${country.alpha2Code}`}
           />
         ))}
     </div>
