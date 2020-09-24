@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CountryCard from '@Atoms/CountryCard';
 
 function CountryCardContainer(props) {
@@ -22,5 +23,13 @@ function CountryCardContainer(props) {
     </div>
   );
 }
+
+CountryCardContainer.propTypes = {
+  countries: PropTypes.arrayOf(PropTypes.object),
+};
+
+CountryCardContainer.defaultProps = {
+  countries: [],
+};
 
 export default CountryCardContainer;

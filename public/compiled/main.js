@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "3c54dcfd03b65c210f21";
+/******/ 	var hotCurrentHash = "6753221c8b6a9a0c4680";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -45065,11 +45065,11 @@ function CountryCard(props) {
 }
 
 CountryCard.propTypes = {
+  capital: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
   flag: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
   name: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
   population: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number.isRequired,
   region: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
-  capital: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
   url: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (CountryCard);
@@ -45118,61 +45118,73 @@ function Dropdown(props) {
       possibleRegions = _useState6[0],
       setPossibleRegions = _useState6[1];
 
-  var handleChange = function handleChange(e) {
+  function handleChange(e) {
     setPossibleRegions(options.filter(function (option) {
       return option.includes(e.target.value);
     }));
     setCurrentRegion(e.target.value);
-  };
+  }
 
-  var handleClick = function handleClick(e) {
+  function handleClick(e) {
     setCurrentRegion(e.target.innerHTML);
-  };
+  }
+
+  function handleClickToggle() {
+    setIsActive(!isActive);
+  }
+
+  function handleKeydown(e) {
+    setCurrentRegion(e.target.innerHTML);
+  }
+
+  function handleKeydownToggle(e) {
+    if (e.keyCode === 13) {
+      setIsActive(!isActive);
+    }
+  }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "Dropdown",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25,
+      lineNumber: 38,
       columnNumber: 5
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "Dropdown__Container ".concat(isActive ? 'Dropdown__Container--is-Active' : ''),
-    onClick: function onClick() {
-      return setIsActive(!isActive);
-    },
+    onClick: handleClickToggle,
+    onKeyDown: handleKeydownToggle,
     role: "button",
     tabIndex: 0,
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26,
+      lineNumber: 39,
       columnNumber: 7
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
     className: "Dropdown__Selection",
     id: "selected",
     name: "selected",
-    onChange: function onChange(e) {
-      return handleChange(e);
-    },
+    onChange: handleChange,
     placeholder: placeholder,
     type: "text",
     value: currentRegion !== '' ? currentRegion : '',
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34,
+      lineNumber: 48,
       columnNumber: 9
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Assets_icons_caret_solid_svg__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    alt: "Caret",
-    className: "Dropdown__Caret",
+    alt: "Caret"
+    /* className="Dropdown__Caret" */
+    ,
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43,
+      lineNumber: 57,
       columnNumber: 9
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -45180,22 +45192,21 @@ function Dropdown(props) {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44,
+      lineNumber: 58,
       columnNumber: 9
     }
   }, possibleRegions.length > 0 && possibleRegions.map(function (option) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "Dropdown__Option",
       key: "k__".concat(option),
-      onClick: function onClick(e) {
-        return handleClick(e);
-      },
+      onClick: handleClick,
+      onKeyDown: handleKeydown,
       role: "button",
       tabIndex: isActive ? 0 : -1,
       __self: _this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 47,
+        lineNumber: 61,
         columnNumber: 15
       }
     }, option);
@@ -45203,12 +45214,12 @@ function Dropdown(props) {
 }
 
 Dropdown.propTypes = {
-  placeholder: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
-  options: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string)
+  options: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string),
+  placeholder: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string
 };
 Dropdown.defaultProps = {
-  placeholder: 'Filter by Region',
-  options: ['Africa', 'America', 'Asia', 'Europe', 'Oceania']
+  options: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+  placeholder: 'Filter by Region'
 };
 /* harmony default export */ __webpack_exports__["default"] = (Dropdown);
 
@@ -45225,21 +45236,31 @@ Dropdown.defaultProps = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/FlexContainer.jsx";
 
 
+
 function FlexContainer(props) {
+  var children = props.children;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "FlexContainer",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 4,
+      lineNumber: 7,
       columnNumber: 10
     }
-  }, props.children);
+  }, children);
 }
 
+FlexContainer.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node
+};
+FlexContainer.defaultProps = {
+  children: null
+};
 /* harmony default export */ __webpack_exports__["default"] = (FlexContainer);
 
 /***/ }),
@@ -45255,16 +45276,20 @@ function FlexContainer(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/Overlay.jsx";
 
 
+
 function Overlay(props) {
+  var visible = props.visible;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "Overlay ".concat(props.visible ? 'Overlay--visible' : ''),
+    className: "Overlay ".concat(visible ? 'Overlay--visible' : ''),
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 5,
+      lineNumber: 7,
       columnNumber: 5
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
@@ -45272,12 +45297,15 @@ function Overlay(props) {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 6,
+      lineNumber: 8,
       columnNumber: 7
     }
   }, "Welcome to REST Countries"));
 }
 
+Overlay.propTypes = {
+  visible: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired
+};
 /* harmony default export */ __webpack_exports__["default"] = (Overlay);
 
 /***/ }),
@@ -45331,12 +45359,13 @@ function SearchBar(props) {
       lineNumber: 12,
       columnNumber: 9
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Assets_icons_search_solid_svg__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    className: "SearchBar__Icon",
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Assets_icons_search_solid_svg__WEBPACK_IMPORTED_MODULE_2__["default"]
+  /* className="SearchBar__Icon"  */
+  , {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20,
+      lineNumber: 19,
       columnNumber: 9
     }
   })));
@@ -45384,49 +45413,55 @@ function ThemeToggler(props) {
       theme = _useContext2[0],
       setTheme = _useContext2[1];
 
-  var handleClick = function handleClick() {
+  function handleClick() {
     setTheme(theme === 'THEME_LIGHT' ? 'THEME_DARK' : 'THEME_LIGHT');
-  };
+  }
+
+  function handleKeydown(e) {
+    if (e.keyCode === 13) {
+      setTheme(theme === 'THEME_LIGHT' ? 'THEME_DARK' : 'THEME_LIGHT');
+    }
+  }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "ThemeToggler",
-    onClick: function onClick() {
-      return handleClick();
-    },
+    onClick: handleClick,
+    onKeyDown: handleKeydown,
     role: "button",
     tabIndex: 0,
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15,
+      lineNumber: 21,
       columnNumber: 5
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Assets_icons_moon_solid_svg__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    alt: alt,
-    className: "ThemeToggler__Icon",
+    alt: alt
+    /* className="ThemeToggler__Icon" */
+    ,
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 21,
+      lineNumber: 28,
       columnNumber: 7
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22,
+      lineNumber: 29,
       columnNumber: 7
     }
   }, title));
 }
 
 ThemeToggler.propTypes = {
-  title: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
-  alt: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string
+  alt: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  title: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string
 };
 ThemeToggler.defaultProps = {
-  title: 'Dark mode',
-  alt: 'Theme toggler'
+  alt: 'Theme toggler',
+  title: 'Dark mode'
 };
 /* harmony default export */ __webpack_exports__["default"] = (ThemeToggler);
 
@@ -45446,11 +45481,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 
 var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/contexts/CountriesContext.jsx";
 
+
 var CountriesContext = Object(react__WEBPACK_IMPORTED_MODULE_1__["createContext"])();
 function CountriesProvider(props) {
+  var children = props.children;
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
       countries = _useState2[0],
@@ -45461,11 +45501,17 @@ function CountriesProvider(props) {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 9,
+      lineNumber: 11,
       columnNumber: 5
     }
-  }, props.children);
+  }, children);
 }
+CountriesProvider.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
+};
+CountriesProvider.defaultProps = {
+  children: null
+};
 
 /***/ }),
 
@@ -45483,8 +45529,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 
 var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/contexts/ThemeContext.jsx";
+
 
 var ThemeContext = Object(react__WEBPACK_IMPORTED_MODULE_1__["createContext"])();
 var themes = {
@@ -45492,6 +45541,8 @@ var themes = {
   THEME_LIGHT: 'THEME_LIGHT'
 };
 function ThemeProvider(props) {
+  var children = props.children;
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(themes.THEME_LIGHT),
       _useState2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
       theme = _useState2[0],
@@ -45502,11 +45553,17 @@ function ThemeProvider(props) {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 14,
+      lineNumber: 16,
       columnNumber: 5
     }
-  }, props.children);
+  }, children);
 }
+ThemeProvider.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
+};
+ThemeProvider.defaultProps = {
+  children: null
+};
 
 /***/ }),
 
@@ -45601,8 +45658,11 @@ Body.defaultProps = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Atoms_CountryCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @Atoms/CountryCard */ "./resources/js/atoms/CountryCard.jsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Atoms_CountryCard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @Atoms/CountryCard */ "./resources/js/atoms/CountryCard.jsx");
 var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/molecules/CountryCardContainer.jsx";
+
 
 
 
@@ -45615,11 +45675,11 @@ function CountryCardContainer(props) {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8,
+      lineNumber: 9,
       columnNumber: 5
     }
   }, Array.isArray(countries) && countries.length > 0 && countries.map(function (country) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Atoms_CountryCard__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Atoms_CountryCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
       capital: country.capital,
       flag: country.flag,
       key: "k__".concat(country.alpha2Code),
@@ -45630,13 +45690,19 @@ function CountryCardContainer(props) {
       __self: _this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 12,
+        lineNumber: 13,
         columnNumber: 11
       }
     });
   }));
 }
 
+CountryCardContainer.propTypes = {
+  countries: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object)
+};
+CountryCardContainer.defaultProps = {
+  countries: []
+};
 /* harmony default export */ __webpack_exports__["default"] = (CountryCardContainer);
 
 /***/ }),
@@ -45799,7 +45865,7 @@ var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/routes/Coun
 
 
 
-function CountryPage(props) {
+function CountryPage() {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
       code = _useParams.code;
 
@@ -45808,17 +45874,10 @@ function CountryPage(props) {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 8,
-      columnNumber: 5
+      lineNumber: 7,
+      columnNumber: 10
     }
-  }, "Countrypage for ", code, "!", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 9,
-      columnNumber: 30
-    }
-  }), ' ');
+  }, "Countrypage for ", code, "!");
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (CountryPage);

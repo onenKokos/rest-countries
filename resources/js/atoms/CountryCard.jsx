@@ -33,11 +33,12 @@ function CountryCard(props) {
 }
 
 CountryCard.propTypes = {
+  capital: PropTypes.string.isRequired,
   flag: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   population: PropTypes.number.isRequired,
   region: PropTypes.string.isRequired,
-  capital: PropTypes.string.isRequired,
+
   url: PropTypes.string.isRequired,
 };
 

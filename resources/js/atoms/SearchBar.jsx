@@ -16,8 +16,7 @@ function SearchBar(props) {
           placeholder={placeholder}
           type="text"
         />
-        {/* <img src={Search} alt="Search icon" className="SearchBar__Icon" /> */}
-        <Search className="SearchBar__Icon" />
+        <Search /* className="SearchBar__Icon"  */ />
       </div>
     </div>
   );

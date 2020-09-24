@@ -1,4 +1,5 @@
 import React, { useState, createContext } from 'react';
+import PropTypes from 'prop-types';
 
 export const ThemeContext = createContext();
 
@@ -8,11 +9,20 @@ const themes = {
 };
 
 export function ThemeProvider(props) {
+  const { children } = props;
   const [theme, setTheme] = useState(themes.THEME_LIGHT);
 
   return (
     <ThemeContext.Provider value={[theme, setTheme]}>
-      {props.children}
+      {children}
     </ThemeContext.Provider>
   );
 }
+
+ThemeProvider.propTypes = {
+  children: PropTypes.node,
+};
+
+ThemeProvider.defaultProps = {
+  children: null,
+};
