@@ -31,6 +31,18 @@
       "version": "detect"
     },
     "import/resolver": {
+      "alias": {
+        "map": [
+          ["@", "./resources/js"],
+          ["@Atoms", "./resources/js/atoms"],
+          ["@Assets", "./resources/assets"],
+          ["@Contexts", "./resources/js/contexts"],
+          ["@Hooks", "./resources/js/hooks"],
+          ["@Molecules", "./resources/js/molecules"],
+          ["@Routes", "./resources/js/routes"]
+        ],
+        "extensions": [".js", ".jsx"]
+      },
       "node": {
         "extensions": [".js", ".jsx"]
       }
