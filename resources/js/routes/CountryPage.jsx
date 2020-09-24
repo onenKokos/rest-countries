@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { CountriesContext } from '@Contexts/CountriesContext';
 import ErrorPage from '@Routes/ErrorPage';
+import LinkButton from '@Atoms/LinkButton';
 
 function CountryPage() {
   const { code } = useParams();
-  const [countries, setCountries] = useContext(CountriesContext);
+  const [countries, setCountries] = useState(null);
   const [displayError, setDisplayError] = useState(false);
 
   useEffect(() => {
@@ -26,22 +26,68 @@ function CountryPage() {
       }
     }
 
-    if (countries.length === 0) {
+    if (!countries) {
       fetchData();
     }
-
-    if (countries.length > 0) {
-      const found = countries.find((country) => country.alpha2Code == code);
-      if (!found) {
-        setDisplayError(true);
-      }
-    }
-  }, [countries, setCountries, code]);
+  }, [code, countries]);
 
   return displayError ? (
     <ErrorPage />
   ) : (
-    <div className="CountryPage">Countrypage for {code}!</div>
+    <div className="CountryPage">
+      <LinkButton
+        additionalClasses={['LinkButton--Block, LinkButton--show-arrows']}
+        text="Back"
+        to="/"
+      />
+      {console.log(countries)}
+      {countries && (
+        <div className="CountryPage__Content">
+          <img
+            alt={countries.aplpha3Code}
+            className="CountryPage__Flag"
+            src={countries.flag}
+          />
+          <div className="CountryPage__Information">
+            <h1 className="CountryPage__Name">{countries.name}</h1>
+            <ul className="CountryPage__List">
+              <li className="CountryPage__Entry">
+                <b>Native Name:</b>
+                {countries.nativeName}
+              </li>
+              <li className="CountryPage__Entry">
+                <b>Top Level Domain:</b>
+                {countries.topLevelDomain[0]}
+              </li>
+              <li className="CountryPage__Entry">
+                <b>Population:</b>
+                {countries.population}
+              </li>
+              <li className="CountryPage__Entry">
+                <b>Currencies:</b>
+                {countries.currencies.map((currency) => currency.name)}
+              </li>
+              <li className="CountryPage__Entry">
+                <b>Region:</b>
+                {countries.region}
+              </li>
+              <li className="CountryPage__Entry">
+                <b>Languages:</b>
+                {countries.languages.map((language) => language.name)}
+              </li>
+              <li className="CountryPage__Entry">
+                <b>Sub Region:</b>
+                {countries.subregion}
+              </li>
+              <li className="CountryPage__Entry">
+                <b>Capital</b>
+                {countries.capital}
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 

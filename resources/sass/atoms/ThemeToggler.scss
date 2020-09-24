@@ -18,10 +18,14 @@
     font-size: $medium;
   }
 
-  &__Icon {
+  /* stylelint-disable */
+
+  svg {
     width: 16px;
     margin-right: 8px;
   }
+
+  /* stylelint-enable */
 }
 
 .Layout--dark {

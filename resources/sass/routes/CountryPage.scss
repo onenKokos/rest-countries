@@ -1,0 +1,11 @@
+.CountryPage {
+  &__Content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  &__Flag {
+    width: 50%;
+  }
+}

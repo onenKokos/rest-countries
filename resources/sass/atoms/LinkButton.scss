@@ -1,0 +1,59 @@
+@import '../variables';
+
+.LinkButton {
+  /* stylelint-disable */
+
+  svg {
+    width: 14px;
+    margin-right: 14px;
+  }
+
+  a {
+    text-decoration: none;
+    font-family: $font-semibold;
+    color: $very-dark-blue;
+    display: inline-flex;
+    margin: 10px 0;
+    padding: 8px 0;
+    background-color: $white;
+    border: 1px solid $very_light_gray;
+    border-radius: 4px;
+    width: 200px;
+    display: inline-flex;
+    justify-content: center;
+    box-shadow: $subtle_shadow;
+    transition: 0.3s ease-out;
+
+    @media screen and (min-width: 992px) {
+      margin: 20px 0;
+    }
+
+    &:hover {
+      background-color: darken($white, 5);
+    }
+  }
+  /* stylelint-enable */
+}
+
+.LinkButton--Block {
+  display: block;
+  @media screen and (min-width: 992px) {
+    margin-bottom: 40px;
+  }
+}
+
+.Layout.Layout--dark {
+  .LinkButton {
+    /* stylelint-disable */
+    a {
+      background-color: $very-dark-blue;
+      color: $white;
+      border: $very-dark-blue;
+
+      &:hover {
+        background-color: lighten($very-dark-blue, 5);
+      }
+    }
+    /* stylelint-enable */
+  }
+}
