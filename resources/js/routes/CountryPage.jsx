@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
-const CountryPage = (props) => {
+function CountryPage(props) {
   const { code } = useParams();
 
   return (
@@ -9,6 +9,6 @@ const CountryPage = (props) => {
       Countrypage for {code}!<br />{' '}
     </div>
   );
-};
+}
 
 export default CountryPage;

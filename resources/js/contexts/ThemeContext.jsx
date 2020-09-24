@@ -7,7 +7,7 @@ const themes = {
   THEME_LIGHT: 'THEME_LIGHT',
 };
 
-export const ThemeProvider = (props) => {
+export function ThemeProvider(props) {
   const [theme, setTheme] = useState(themes.THEME_LIGHT);
 
   return (
@@ -15,4 +15,4 @@ export const ThemeProvider = (props) => {
       {props.children}
     </ThemeContext.Provider>
   );
-};
+}

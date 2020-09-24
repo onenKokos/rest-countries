@@ -1,7 +1,7 @@
 import React from 'react';
 
-const FlexContainer = (props) => {
+function FlexContainer(props) {
   return <div className="FlexContainer">{props.children}</div>;
-};
+}
 
 export default FlexContainer;

@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const CountryCard = (props) => {
+function CountryCard(props) {
   const { flag, name, population, capital, url, region } = props;
 
   return (
     <div className="CountryCard">
       <Link to={url}>
         <div className="CountryCard__Flag-container">
-          <img src={flag} alt={`${name} flag`} className="CountryCard__Flag" />
+          <img alt={`${name} flag`} className="CountryCard__Flag" src={flag} />
         </div>
         <div className="CountryCard__Body">
           <h3 className="CountryCard__Name">{name}</h3>
@@ -30,7 +30,7 @@ const CountryCard = (props) => {
       </Link>
     </div>
   );
-};
+}
 
 CountryCard.propTypes = {
   flag: PropTypes.string.isRequired,

@@ -4,7 +4,7 @@ import Header from './Header';
 import Body from './Body';
 import { ThemeContext } from '../contexts/ThemeContext';
 
-const Layout = (props) => {
+function Layout(props) {
   const { children } = props;
   const [theme] = useContext(ThemeContext);
 
@@ -18,7 +18,7 @@ const Layout = (props) => {
       <Body>{children}</Body>
     </div>
   );
-};
+}
 
 Layout.propTypes = {
   children: PropTypes.node,

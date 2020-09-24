@@ -2,7 +2,7 @@ import React, { useState, createContext } from 'react';
 
 export const CountriesContext = createContext();
 
-export const CountriesProvider = (props) => {
+export function CountriesProvider(props) {
   const [countries, setCountries] = useState([]);
 
   return (
@@ -10,4 +10,4 @@ export const CountriesProvider = (props) => {
       {props.children}
     </CountriesContext.Provider>
   );
-};
+}

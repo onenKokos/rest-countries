@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ThemeContext } from '@Contexts/ThemeContext';
 import Moon from '@Assets/icons/moon-solid.svg';
 
-const ThemeToggler = (props) => {
+function ThemeToggler(props) {
   const { title, alt } = props;
   const [theme, setTheme] = useContext(ThemeContext);
 
@@ -14,15 +14,15 @@ const ThemeToggler = (props) => {
   return (
     <div
       className="ThemeToggler"
+      onClick={() => handleClick()}
       role="button"
       tabIndex={0}
-      onClick={() => handleClick()}
     >
-      <Moon className="ThemeToggler__Icon" alt={alt} />
+      <Moon alt={alt} className="ThemeToggler__Icon" />
       <div>{title}</div>
     </div>
   );
-};
+}
 
 ThemeToggler.propTypes = {
   title: PropTypes.string,

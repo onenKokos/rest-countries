@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Body = (props) => {
+function Body(props) {
   const { children } = props;
 
   return (
@@ -9,7 +9,7 @@ const Body = (props) => {
       <div className="Main__Container">{children}</div>
     </main>
   );
-};
+}
 
 Body.propTypes = {
   children: PropTypes.oneOfType([

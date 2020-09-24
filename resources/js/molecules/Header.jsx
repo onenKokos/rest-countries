@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ThemeToggler from '@Atoms/ThemeToggler';
 
-const Header = (props) => {
+function Header(props) {
   const { title } = props;
 
   return (
@@ -17,7 +17,7 @@ const Header = (props) => {
       </div>
     </header>
   );
-};
+}
 
 Header.propTypes = {
   title: PropTypes.string,

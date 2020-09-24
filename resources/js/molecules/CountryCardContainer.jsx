@@ -1,7 +1,7 @@
 import React from 'react';
 import CountryCard from '@Atoms/CountryCard';
 
-const CountryCardContainer = (props) => {
+function CountryCardContainer(props) {
   const { countries } = props;
 
   return (
@@ -10,17 +10,17 @@ const CountryCardContainer = (props) => {
         countries.length > 0 &&
         countries.map((country) => (
           <CountryCard
+            capital={country.capital}
+            flag={country.flag}
+            key={`k__${country.alpha2Code}`}
             name={country.name}
             population={country.population}
             region={country.region}
-            capital={country.capital}
             url={`/country/${country.alpha2Code}`}
-            flag={country.flag}
-            key={`k__${country.alpha2Code}`}
           />
         ))}
     </div>
   );
-};
+}
 
 export default CountryCardContainer;

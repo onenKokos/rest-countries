@@ -1,0 +1,43 @@
+{
+  "parser": "babel-eslint",
+  "plugins": ["import", "jsx-a11y", "react", "react-hooks"],
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/react",
+    "plugin:import/recommended",
+    "plugin:react/all",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/strict",
+    "plugin:prettier/recommended",
+    "prettier/react"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx"]
+      }
+    }
+  },
+  "rules": {
+    "react/jsx-max-depth": 0,
+    "react/jsx-no-literals": "off"
+  }
+}

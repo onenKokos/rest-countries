@@ -3,25 +3,25 @@ import PropTypes from 'prop-types';
 
 import Search from '@Assets/icons/search-solid.svg';
 
-const SearchBar = (props) => {
+function SearchBar(props) {
   const { placeholder } = props;
 
   return (
     <div className="SearchBar">
       <div className="SearchBar__Inner">
         <input
-          type="text"
-          name="searchBar"
-          id="searchBar"
-          placeholder={placeholder}
           className="SearchBar__Input"
+          id="searchBar"
+          name="searchBar"
+          placeholder={placeholder}
+          type="text"
         />
         {/* <img src={Search} alt="Search icon" className="SearchBar__Icon" /> */}
         <Search className="SearchBar__Icon" />
       </div>
     </div>
   );
-};
+}
 
 SearchBar.propTypes = {
   placeholder: PropTypes.string,

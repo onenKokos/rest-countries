@@ -10,7 +10,7 @@ import CountryPage from '@Routes/CountryPage';
 import { ThemeProvider } from '@Contexts/ThemeContext';
 import { CountriesProvider } from '@Contexts/CountriesContext';
 
-const App = () => {
+function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -41,6 +41,6 @@ const App = () => {
       </CountriesProvider>
     </Router>
   );
-};
+}
 
 export default App;

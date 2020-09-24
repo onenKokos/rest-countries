@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Caret from '@Assets/icons/caret-solid.svg';
 
-const Dropdown = (props) => {
+function Dropdown(props) {
   const { placeholder, options } = props;
 
   const [isActive, setIsActive] = useState(false);
@@ -27,20 +27,20 @@ const Dropdown = (props) => {
         className={`Dropdown__Container ${
           isActive ? 'Dropdown__Container--is-Active' : ''
         }`}
-        tabIndex={0}
         onClick={() => setIsActive(!isActive)}
         role="button"
+        tabIndex={0}
       >
         <input
-          type="text"
           className="Dropdown__Selection"
           id="selected"
           name="selected"
-          placeholder={placeholder}
           onChange={(e) => handleChange(e)}
+          placeholder={placeholder}
+          type="text"
           value={currentRegion !== '' ? currentRegion : ''}
         />
-        <Caret className="Dropdown__Caret" alt="Caret" />
+        <Caret alt="Caret" className="Dropdown__Caret" />
         <div className="Dropdown__Options-container">
           {possibleRegions.length > 0 &&
             possibleRegions.map((option) => (
@@ -48,8 +48,8 @@ const Dropdown = (props) => {
                 className="Dropdown__Option"
                 key={`k__${option}`}
                 onClick={(e) => handleClick(e)}
-                tabIndex={isActive ? 0 : -1}
                 role="button"
+                tabIndex={isActive ? 0 : -1}
               >
                 {option}
               </div>
@@ -58,7 +58,7 @@ const Dropdown = (props) => {
       </div>
     </div>
   );
-};
+}
 
 Dropdown.propTypes = {
   placeholder: PropTypes.string,

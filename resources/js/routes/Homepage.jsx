@@ -5,7 +5,7 @@ import Dropdown from '@Atoms/Dropdown';
 import FlexContainer from '@Atoms/FlexContainer';
 import { CountriesContext } from '@Contexts/CountriesContext';
 
-const Homepage = () => {
+function Homepage() {
   const [countries, setCountries] = useContext(CountriesContext);
 
   useEffect(() => {
@@ -25,6 +25,6 @@ const Homepage = () => {
       <CountryCardContainer countries={countries} />
     </div>
   );
-};
+}
 
 export default Homepage;

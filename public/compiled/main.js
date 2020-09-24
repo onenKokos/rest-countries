@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "5a17e24c2f1d42faf888";
+/******/ 	var hotCurrentHash = "6a975a1af80fd0c412e8";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -44822,10 +44822,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @Contexts/ThemeContext */ "./resources/js/contexts/ThemeContext.jsx");
 /* harmony import */ var _Contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @Contexts/CountriesContext */ "./resources/js/contexts/CountriesContext.jsx");
 
-
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/App.jsx";
-
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/App.jsx";
 
 
 
@@ -44837,7 +44834,7 @@ var _this = undefined,
 
 
 
-var App = function App() {
+function App() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
       _useState2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
       isLoaded = _useState2[0],
@@ -44847,21 +44844,21 @@ var App = function App() {
     setIsLoaded(true);
   }, [isLoaded]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 21,
       columnNumber: 5
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_9__["CountriesProvider"], {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 22,
       columnNumber: 7
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_8__["ThemeProvider"], {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 23,
@@ -44869,21 +44866,21 @@ var App = function App() {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Atoms_Overlay__WEBPACK_IMPORTED_MODULE_6__["default"], {
     visible: isLoaded ? false : true,
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 24,
       columnNumber: 11
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Molecules_Layout__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 25,
       columnNumber: 11
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 26,
@@ -44892,14 +44889,14 @@ var App = function App() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/country/:code",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 27,
       columnNumber: 15
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Routes_CountryPage__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 28,
@@ -44908,14 +44905,14 @@ var App = function App() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 31,
       columnNumber: 15
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Routes_Homepage__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 32,
@@ -44923,21 +44920,21 @@ var App = function App() {
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "*",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 35,
       columnNumber: 15
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Routes_ErrorPage__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 36,
       columnNumber: 17
     }
   })))))));
-};
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
 
@@ -44957,14 +44954,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/CountryCard.jsx";
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/CountryCard.jsx";
 
 
 
 
-
-var CountryCard = function CountryCard(props) {
+function CountryCard(props) {
   var flag = props.flag,
       name = props.name,
       population = props.population,
@@ -44973,7 +44968,7 @@ var CountryCard = function CountryCard(props) {
       region = props.region;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "CountryCard",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 9,
@@ -44981,7 +44976,7 @@ var CountryCard = function CountryCard(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: url,
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 10,
@@ -44989,17 +44984,17 @@ var CountryCard = function CountryCard(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "CountryCard__Flag-container",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 11,
       columnNumber: 9
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: flag,
     alt: "".concat(name, " flag"),
     className: "CountryCard__Flag",
-    __self: _this,
+    src: flag,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 12,
@@ -45007,7 +45002,7 @@ var CountryCard = function CountryCard(props) {
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "CountryCard__Body",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 14,
@@ -45015,7 +45010,7 @@ var CountryCard = function CountryCard(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "CountryCard__Name",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 15,
@@ -45023,14 +45018,14 @@ var CountryCard = function CountryCard(props) {
     }
   }, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "CountryCard__Row",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 17,
       columnNumber: 11
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 18,
@@ -45038,14 +45033,14 @@ var CountryCard = function CountryCard(props) {
     }
   }, "Population:"), population), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "CountryCard__Row",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 21,
       columnNumber: 11
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 22,
@@ -45053,21 +45048,21 @@ var CountryCard = function CountryCard(props) {
     }
   }, "Region"), region), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "CountryCard__Row",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 25,
       columnNumber: 11
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 26,
       columnNumber: 13
     }
   }, "Capital:"), capital))));
-};
+}
 
 CountryCard.propTypes = {
   flag: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
@@ -45097,15 +45092,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Assets_icons_caret_solid_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Assets/icons/caret-solid.svg */ "./resources/assets/icons/caret-solid.svg");
 
-
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/Dropdown.jsx";
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/Dropdown.jsx";
 
 
 
 
+function Dropdown(props) {
+  var _this = this;
 
-var Dropdown = function Dropdown(props) {
   var placeholder = props.placeholder,
       options = props.options;
 
@@ -45137,7 +45131,7 @@ var Dropdown = function Dropdown(props) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "Dropdown",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 25,
@@ -45145,37 +45139,37 @@ var Dropdown = function Dropdown(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "Dropdown__Container ".concat(isActive ? 'Dropdown__Container--is-Active' : ''),
-    tabIndex: 0,
     onClick: function onClick() {
       return setIsActive(!isActive);
     },
     role: "button",
-    __self: _this,
+    tabIndex: 0,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 26,
       columnNumber: 7
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-    type: "text",
     className: "Dropdown__Selection",
     id: "selected",
     name: "selected",
-    placeholder: placeholder,
     onChange: function onChange(e) {
       return handleChange(e);
     },
+    placeholder: placeholder,
+    type: "text",
     value: currentRegion !== '' ? currentRegion : '',
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 34,
       columnNumber: 9
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Assets_icons_caret_solid_svg__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    className: "Dropdown__Caret",
     alt: "Caret",
-    __self: _this,
+    className: "Dropdown__Caret",
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 43,
@@ -45183,7 +45177,7 @@ var Dropdown = function Dropdown(props) {
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "Dropdown__Options-container",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 44,
@@ -45196,8 +45190,8 @@ var Dropdown = function Dropdown(props) {
       onClick: function onClick(e) {
         return handleClick(e);
       },
-      tabIndex: isActive ? 0 : -1,
       role: "button",
+      tabIndex: isActive ? 0 : -1,
       __self: _this,
       __source: {
         fileName: _jsxFileName,
@@ -45206,7 +45200,7 @@ var Dropdown = function Dropdown(props) {
       }
     }, option);
   }))));
-};
+}
 
 Dropdown.propTypes = {
   placeholder: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
@@ -45231,22 +45225,20 @@ Dropdown.defaultProps = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/FlexContainer.jsx";
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/FlexContainer.jsx";
 
 
-
-var FlexContainer = function FlexContainer(props) {
+function FlexContainer(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "FlexContainer",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 4,
       columnNumber: 10
     }
   }, props.children);
-};
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (FlexContainer);
 
@@ -45263,15 +45255,13 @@ var FlexContainer = function FlexContainer(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/Overlay.jsx";
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/Overlay.jsx";
 
 
-
-var Overlay = function Overlay(props) {
+function Overlay(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "Overlay ".concat(props.visible ? 'Overlay--visible' : ''),
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 5,
@@ -45279,14 +45269,14 @@ var Overlay = function Overlay(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "Overlay__Headline",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 6,
       columnNumber: 7
     }
   }, "Welcome to REST Countries"));
-};
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (Overlay);
 
@@ -45306,18 +45296,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Assets_icons_search_solid_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @Assets/icons/search-solid.svg */ "./resources/assets/icons/search-solid.svg");
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/SearchBar.jsx";
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/SearchBar.jsx";
 
 
 
 
-
-var SearchBar = function SearchBar(props) {
+function SearchBar(props) {
   var placeholder = props.placeholder;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "SearchBar",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 10,
@@ -45325,19 +45313,19 @@ var SearchBar = function SearchBar(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "SearchBar__Inner",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 11,
       columnNumber: 7
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "text",
-    name: "searchBar",
-    id: "searchBar",
-    placeholder: placeholder,
     className: "SearchBar__Input",
-    __self: _this,
+    id: "searchBar",
+    name: "searchBar",
+    placeholder: placeholder,
+    type: "text",
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 12,
@@ -45345,14 +45333,14 @@ var SearchBar = function SearchBar(props) {
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Assets_icons_search_solid_svg__WEBPACK_IMPORTED_MODULE_2__["default"], {
     className: "SearchBar__Icon",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 20,
       columnNumber: 9
     }
   })));
-};
+}
 
 SearchBar.propTypes = {
   placeholder: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
@@ -45381,16 +45369,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Contexts/ThemeContext */ "./resources/js/contexts/ThemeContext.jsx");
 /* harmony import */ var _Assets_icons_moon_solid_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Assets/icons/moon-solid.svg */ "./resources/assets/icons/moon-solid.svg");
 
-
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/ThemeToggler.jsx";
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/ThemeToggler.jsx";
 
 
 
 
 
-
-var ThemeToggler = function ThemeToggler(props) {
+function ThemeToggler(props) {
   var title = props.title,
       alt = props.alt;
 
@@ -45405,35 +45390,35 @@ var ThemeToggler = function ThemeToggler(props) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "ThemeToggler",
-    role: "button",
-    tabIndex: 0,
     onClick: function onClick() {
       return handleClick();
     },
-    __self: _this,
+    role: "button",
+    tabIndex: 0,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 15,
       columnNumber: 5
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Assets_icons_moon_solid_svg__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    className: "ThemeToggler__Icon",
     alt: alt,
-    __self: _this,
+    className: "ThemeToggler__Icon",
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 21,
       columnNumber: 7
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 22,
       columnNumber: 7
     }
   }, title));
-};
+}
 
 ThemeToggler.propTypes = {
   title: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
@@ -45462,13 +45447,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 
-
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/contexts/CountriesContext.jsx";
-
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/contexts/CountriesContext.jsx";
 
 var CountriesContext = Object(react__WEBPACK_IMPORTED_MODULE_1__["createContext"])();
-var CountriesProvider = function CountriesProvider(props) {
+function CountriesProvider(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
       countries = _useState2[0],
@@ -45476,14 +45458,14 @@ var CountriesProvider = function CountriesProvider(props) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(CountriesContext.Provider, {
     value: [countries, setCountries],
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 9,
       columnNumber: 5
     }
   }, props.children);
-};
+}
 
 /***/ }),
 
@@ -45502,17 +45484,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 
-
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/contexts/ThemeContext.jsx";
-
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/contexts/ThemeContext.jsx";
 
 var ThemeContext = Object(react__WEBPACK_IMPORTED_MODULE_1__["createContext"])();
 var themes = {
   THEME_DARK: 'THEME_DARK',
   THEME_LIGHT: 'THEME_LIGHT'
 };
-var ThemeProvider = function ThemeProvider(props) {
+function ThemeProvider(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(themes.THEME_LIGHT),
       _useState2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
       theme = _useState2[0],
@@ -45520,14 +45499,14 @@ var ThemeProvider = function ThemeProvider(props) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(ThemeContext.Provider, {
     value: [theme, setTheme],
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 14,
       columnNumber: 5
     }
   }, props.children);
-};
+}
 
 /***/ }),
 
@@ -45576,17 +45555,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/molecules/Body.jsx";
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/molecules/Body.jsx";
 
 
 
-
-var Body = function Body(props) {
+function Body(props) {
   var children = props.children;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
     className: "Main",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 8,
@@ -45594,14 +45571,14 @@ var Body = function Body(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "Main__Container",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 9,
       columnNumber: 7
     }
   }, children));
-};
+}
 
 Body.propTypes = {
   children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.element), prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.element])
@@ -45625,17 +45602,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Atoms_CountryCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @Atoms/CountryCard */ "./resources/js/atoms/CountryCard.jsx");
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/molecules/CountryCardContainer.jsx";
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/molecules/CountryCardContainer.jsx";
 
 
 
+function CountryCardContainer(props) {
+  var _this = this;
 
-var CountryCardContainer = function CountryCardContainer(props) {
   var countries = props.countries;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "CountryCardContainer",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 8,
@@ -45643,13 +45620,13 @@ var CountryCardContainer = function CountryCardContainer(props) {
     }
   }, Array.isArray(countries) && countries.length > 0 && countries.map(function (country) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Atoms_CountryCard__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      capital: country.capital,
+      flag: country.flag,
+      key: "k__".concat(country.alpha2Code),
       name: country.name,
       population: country.population,
       region: country.region,
-      capital: country.capital,
       url: "/country/".concat(country.alpha2Code),
-      flag: country.flag,
-      key: "k__".concat(country.alpha2Code),
       __self: _this,
       __source: {
         fileName: _jsxFileName,
@@ -45658,7 +45635,7 @@ var CountryCardContainer = function CountryCardContainer(props) {
       }
     });
   }));
-};
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (CountryCardContainer);
 
@@ -45679,19 +45656,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _Atoms_ThemeToggler__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Atoms/ThemeToggler */ "./resources/js/atoms/ThemeToggler.jsx");
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/molecules/Header.jsx";
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/molecules/Header.jsx";
 
 
 
 
 
-
-var Header = function Header(props) {
+function Header(props) {
   var title = props.title;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
     className: "Header",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 10,
@@ -45699,7 +45674,7 @@ var Header = function Header(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "Header__Inner",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 11,
@@ -45707,7 +45682,7 @@ var Header = function Header(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "Header__Title",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 12,
@@ -45715,21 +45690,21 @@ var Header = function Header(props) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 13,
       columnNumber: 11
     }
   }, title, " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Atoms_ThemeToggler__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 16,
       columnNumber: 9
     }
   })));
-};
+}
 
 Header.propTypes = {
   title: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
@@ -45759,17 +45734,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Body__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Body */ "./resources/js/molecules/Body.jsx");
 /* harmony import */ var _contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../contexts/ThemeContext */ "./resources/js/contexts/ThemeContext.jsx");
 
-
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/molecules/Layout.jsx";
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/molecules/Layout.jsx";
 
 
 
 
 
 
-
-var Layout = function Layout(props) {
+function Layout(props) {
   var children = props.children;
 
   var _useContext = Object(react__WEBPACK_IMPORTED_MODULE_1__["useContext"])(_contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_5__["ThemeContext"]),
@@ -45778,28 +45750,28 @@ var Layout = function Layout(props) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     className: "Layout ".concat(theme === 'THEME_LIGHT' ? 'Layout--light' : 'Layout--dark'),
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 12,
       columnNumber: 5
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 17,
       columnNumber: 7
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Body__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 18,
       columnNumber: 7
     }
   }, children));
-};
+}
 
 Layout.propTypes = {
   children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
@@ -45823,33 +45795,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/routes/CountryPage.jsx";
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/routes/CountryPage.jsx";
 
 
 
-
-var CountryPage = function CountryPage(props) {
+function CountryPage(props) {
   var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
       code = _useParams.code;
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "CoutnryPage",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 8,
       columnNumber: 5
     }
   }, "Countrypage for ", code, "!", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 9,
       columnNumber: 30
     }
   }), ' ');
-};
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (CountryPage);
 
@@ -45866,22 +45836,20 @@ var CountryPage = function CountryPage(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/routes/ErrorPage.jsx";
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/routes/ErrorPage.jsx";
 
 
-
-var ErrorPage = function ErrorPage() {
+function ErrorPage() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ErrorPage",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 5,
       columnNumber: 5
     }
   }, "The country you are looking for was not found.");
-};
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (ErrorPage);
 
@@ -45910,9 +45878,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-var _this = undefined,
-    _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/routes/Homepage.jsx";
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/routes/Homepage.jsx";
 
 
 
@@ -45920,8 +45886,7 @@ var _this = undefined,
 
 
 
-
-var Homepage = function Homepage() {
+function Homepage() {
   var _useContext = Object(react__WEBPACK_IMPORTED_MODULE_3__["useContext"])(_Contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_8__["CountriesContext"]),
       _useContext2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useContext, 2),
       countries = _useContext2[0],
@@ -45956,28 +45921,28 @@ var Homepage = function Homepage() {
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
     className: "Homepage",
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 20,
       columnNumber: 5
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_Atoms_FlexContainer__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 21,
       columnNumber: 7
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_Atoms_SearchBar__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 22,
       columnNumber: 9
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 23,
@@ -45985,14 +45950,14 @@ var Homepage = function Homepage() {
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_Molecules_CountryCardContainer__WEBPACK_IMPORTED_MODULE_4__["default"], {
     countries: countries,
-    __self: _this,
+    __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 25,
       columnNumber: 7
     }
   }));
-};
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (Homepage);
 
