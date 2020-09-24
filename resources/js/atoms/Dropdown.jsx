@@ -54,7 +54,7 @@ function Dropdown(props) {
           type="text"
           value={currentRegion !== '' ? currentRegion : ''}
         />
-        <Caret alt="Caret" /* className="Dropdown__Caret" */ />
+        <Caret alt="Caret" />
         <div className="Dropdown__Options-container">
           {possibleRegions.length > 0 &&
             possibleRegions.map((option) => (

@@ -64,7 +64,9 @@
     background-color: $white;
   }
 
-  &__Caret {
+  /* stylelint-disable */
+
+  svg {
     position: absolute;
     width: 14px;
     right: 37px;
@@ -75,14 +77,16 @@
     cursor: pointer;
   }
 
+  .Dropdown__Container--is-Active svg {
+    transform: rotate(0deg);
+  }
+
+  /* stylelint-enable */
+
   &__Container {
     width: 100%;
     position: relative;
     &--is-Active {
-      .Dropdown__Caret {
-        transform: rotate(0);
-      }
-
       .Dropdown__Options-container {
         display: block;
         opacity: 1;
@@ -115,9 +119,13 @@
     background-color: $very_dark_blue;
   }
 
-  .Dropdown__Caret {
+  /* stylelint-disable */
+
+  svg {
     color: $white;
     opacity: 1;
     transition: 0.3s ease-in-out;
   }
+
+  /* stylelint-enable */
 }

@@ -29,7 +29,7 @@ CountryCardContainer.propTypes = {
 };
 
 CountryCardContainer.defaultProps = {
-  countries: [],
+  countries: null,
 };
 
 export default CountryCardContainer;

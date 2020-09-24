@@ -35,7 +35,9 @@
     font-size: $small;
   }
 
-  &__Icon {
+  /* stylelint-disable */
+
+  svg {
     width: 16px;
     position: absolute;
     top: calc(50% - 8px);
@@ -47,6 +49,8 @@
       top: calc(50% - 16px);
     }
   }
+
+  /* stylelint-enable */
 }
 
 .Layout--dark {
@@ -60,9 +64,13 @@
     }
   }
 
-  .SearchBar__Icon {
+  /* stylelint-disable */
+
+  svg {
     color: $white;
     opacity: 1;
     transition: 0.3s ease-in-out;
   }
+
+  /* stylelint-enable */
 }

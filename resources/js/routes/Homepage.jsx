@@ -14,7 +14,7 @@ function Homepage() {
       const data = await res.json();
       setCountries(data);
     })();
-  }, []);
+  }, [setCountries]);
 
   return (
     <div className="Homepage">
