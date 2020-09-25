@@ -1,4 +1,33 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
 /******/ 	function hotDisposeChunk(chunkId) {
 /******/ 		delete installedChunks[chunkId];
 /******/ 	}
@@ -63,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "5989bd926d3c3372a0a0";
+/******/ 	var hotCurrentHash = "efd033e3648b65f0e684";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -282,7 +311,7 @@
 /******/ 				};
 /******/ 			});
 /******/ 			hotUpdate = {};
-/******/ 			var chunkId = "main";
+/******/ 			for(var chunkId in installedChunks)
 /******/ 			// eslint-disable-next-line no-lone-blocks
 /******/ 			{
 /******/ 				hotEnsureUpdateChunk(chunkId);
@@ -769,6 +798,20 @@
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		"main": 0
+/******/ 	};
+/******/
+/******/
+/******/
+/******/ 	// script path function
+/******/ 	function jsonpScriptSrc(chunkId) {
+/******/ 		return __webpack_require__.p + "" + ({}[chunkId]||chunkId) + ".js"
+/******/ 	}
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/
@@ -796,6 +839,67 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// JSONP chunk loading for javascript
+/******/
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
+/******/
+/******/ 			// a Promise means "currently loading".
+/******/ 			if(installedChunkData) {
+/******/ 				promises.push(installedChunkData[2]);
+/******/ 			} else {
+/******/ 				// setup Promise in chunk cache
+/******/ 				var promise = new Promise(function(resolve, reject) {
+/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 				});
+/******/ 				promises.push(installedChunkData[2] = promise);
+/******/
+/******/ 				// start chunk loading
+/******/ 				var script = document.createElement('script');
+/******/ 				var onScriptComplete;
+/******/
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.src = jsonpScriptSrc(chunkId);
+/******/
+/******/ 				// create error before stack unwound to get useful stacktrace later
+/******/ 				var error = new Error();
+/******/ 				onScriptComplete = function (event) {
+/******/ 					// avoid mem leaks in IE.
+/******/ 					script.onerror = script.onload = null;
+/******/ 					clearTimeout(timeout);
+/******/ 					var chunk = installedChunks[chunkId];
+/******/ 					if(chunk !== 0) {
+/******/ 						if(chunk) {
+/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 							var realSrc = event && event.target && event.target.src;
+/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 							error.name = 'ChunkLoadError';
+/******/ 							error.type = errorType;
+/******/ 							error.request = realSrc;
+/******/ 							chunk[1](error);
+/******/ 						}
+/******/ 						installedChunks[chunkId] = undefined;
+/******/ 					}
+/******/ 				};
+/******/ 				var timeout = setTimeout(function(){
+/******/ 					onScriptComplete({ type: 'timeout', target: script });
+/******/ 				}, 120000);
+/******/ 				script.onerror = script.onload = onScriptComplete;
+/******/ 				document.head.appendChild(script);
+/******/ 			}
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -849,8 +953,18 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/compiled";
 /******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/
 /******/ 	// __webpack_hash__
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -1352,7 +1466,7 @@ var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_g
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_assets_fonts_NunitoSans_SemiBold_ttf__WEBPACK_IMPORTED_MODULE_3___default.a);
 var ___CSS_LOADER_URL_REPLACEMENT_2___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_assets_fonts_NunitoSans_ExtraBold_ttf__WEBPACK_IMPORTED_MODULE_4___default.a);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "/* stylelint-disable */\n/* stylelint-enable */\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Light;\n  font-weight: 300;\n  font-style: normal;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-SemiBold;\n  font-weight: 600;\n  font-style: normal;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Bold;\n  font-weight: 800;\n  font-style: normal;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") format(\"truetype\");\n}\n/* stylelint-disable */\n/* stylelint-enable */\n.Header {\n  padding: 30px 15px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  position: relative;\n  transition: 0.3s ease-in-out;\n  /* stylelint-disable */\n}\n.Header__Inner {\n  display: flex;\n  justify-content: space-between;\n  margin: 0 auto;\n  width: 100%;\n}\n@media screen and (min-width: 768px) {\n  .Header__Inner {\n    width: 80%;\n  }\n}\n@media scren and (min-width: 1140px) {\n  .Header__Inner {\n    max-width: 1140px;\n  }\n}\n.Header__Title a {\n  font-size: 16px;\n  color: #202c37;\n  font-weight: 800;\n  font-family: \"Nunito-Bold\", sans-serif;\n  text-decoration: none;\n  text-decoration: none;\n}\n@media screen and (min-width: 992px) {\n  .Header__Title a {\n    font-size: 20px;\n  }\n}\n\n.Layout--dark .Header {\n  background-color: #202c37;\n  transition: 0.3s ease-in-out;\n}\n.Layout--dark .Header__Title a {\n  color: white;\n}\n\n/* stylelint-enable */\n/* stylelint-disable */\n/* stylelint-enable */\n.Main {\n  background-color: white;\n  padding: 0 15px;\n  min-height: calc(100vh - 87px);\n  transition: 0.3s ease-in-out;\n}\n.Main__Container {\n  width: 100%;\n  margin: 0 auto;\n}\n@media screen and (min-width: 768px) {\n  .Main__Container {\n    width: 80%;\n  }\n}\n.Layout--dark .Main {\n  background-color: #111517;\n}\n\n.CountryCardContainer {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.ThemeToggler {\n  display: flex;\n  align-items: center;\n  font-size: 14px;\n  color: #111517;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  cursor: pointer;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.ThemeToggler:focus, .ThemeToggler:active {\n  outline: none;\n  border: none;\n}\n@media screen and (min-width: 992px) {\n  .ThemeToggler {\n    font-size: 18px;\n  }\n}\n.ThemeToggler svg {\n  width: 16px;\n  margin-right: 8px;\n}\n\n.Layout--dark .ThemeToggler {\n  color: white;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.SearchBar {\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n  margin-bottom: 16px;\n  max-width: 500px;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n@media screen and (min-width: 992px) {\n  .SearchBar {\n    width: 50%;\n    max-width: 500px;\n    margin-bottom: 0;\n  }\n}\n.SearchBar__Inner {\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n.SearchBar__Input {\n  border-radius: 6px;\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px 20px 15px 60px;\n  box-sizing: border-box;\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar__Input::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar svg {\n  width: 16px;\n  position: absolute;\n  top: calc(50% - 8px);\n  left: 20px;\n  z-index: 0;\n  opacity: 0.23;\n}\n@media screen and (min-width: 992px) {\n  .SearchBar svg {\n    top: calc(50% - 16px);\n  }\n}\n\n.Layout--dark {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.Layout--dark .SearchBar__Input {\n  background-color: #202c37;\n  color: white;\n  transition: 0.3s ease-in-out;\n}\n.Layout--dark .SearchBar__Input::placeholder {\n  color: white;\n}\n.Layout--dark svg {\n  color: white;\n  opacity: 1;\n  transition: 0.3s ease-in-out;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Dropdown {\n  width: 60%;\n  min-width: 207px;\n  margin-bottom: 20px;\n  max-width: 300px;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n@media screen and (min-width: 992px) {\n  .Dropdown {\n    width: 50%;\n  }\n}\n.Dropdown__Selection {\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px 20px;\n  font-family: \"Nunito-light\", sans-serif;\n  color: #858585;\n  font-size: 16px;\n  border-radius: 6px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  box-sizing: border-box;\n}\n.Dropdown__Selection:focus, .Dropdown__Selection:active {\n  border: none;\n  outline: none;\n}\n.Dropdown__Selection::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.Dropdown__Option {\n  font-family: \"Nunito-light\", sans-serif;\n  cursor: pointer;\n  color: #858585;\n  font-size: 16px;\n  transition: 0.3s ease-out;\n  padding: 8px 20px 8px 60px;\n}\n.Dropdown__Option:hover {\n  background-color: #f2f2f2;\n}\n@media screen and (min-width: 992px) {\n  .Dropdown__Option {\n    font-size: 18px;\n  }\n}\n.Dropdown__Options-container {\n  display: none;\n  opacity: 0;\n  transition: 0.3s ease-out;\n  position: absolute;\n  left: 0;\n  right: 0;\n  border-radius: 6px;\n  top: 64px;\n  background-color: white;\n}\n.Dropdown svg {\n  position: absolute;\n  width: 14px;\n  right: 37px;\n  top: calc(50% - 11px);\n  opacity: 0.23;\n  transition: 0.3s ease-out;\n  transform: rotate(180deg);\n  cursor: pointer;\n}\n.Dropdown .Dropdown__Container--is-Active svg {\n  transform: rotate(0deg);\n}\n.Dropdown__Container {\n  width: 100%;\n  position: relative;\n}\n.Dropdown__Container--is-Active .Dropdown__Options-container {\n  display: block;\n  opacity: 1;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n\n.Layout--dark {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.Layout--dark .Dropdown__Selection {\n  background-color: #202c37;\n  color: white;\n  transition: 0.3s ease-in-out;\n}\n.Layout--dark .Dropdown__Selection::placeholder {\n  color: white;\n}\n.Layout--dark .Dropdown__Option {\n  color: white;\n}\n.Layout--dark .Dropdown__Option:hover {\n  background-color: #2a3a47;\n}\n.Layout--dark .Dropdown__Options-container {\n  background-color: #202c37;\n}\n.Layout--dark svg {\n  color: white;\n  opacity: 1;\n  transition: 0.3s ease-in-out;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Overlay {\n  position: fixed;\n  width: 100vw;\n  height: 0;\n  background-color: black;\n  transition: 0.45s ease-out;\n  transition-delay: 1.7s;\n  z-index: 100;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  pointer-events: none;\n}\n.Overlay__Headline {\n  font-family: \"Nunito-Bold\", sans-serif;\n  color: #fafafa;\n  font-size: 24px;\n  text-align: center;\n  opacity: 0;\n  pointer-events: none;\n  transition: 1s ease-out;\n  transition-delay: 0.7s;\n  max-width: 80%;\n}\n@media screen and (min-width: 768px) {\n  .Overlay__Headline {\n    letter-spacing: 4px;\n    font-size: 36px;\n  }\n}\n.Overlay.Overlay--visible {\n  height: 100vh;\n}\n.Overlay.Overlay--visible .Overlay__Headline {\n  opacity: 1;\n}\n\n.FlexContainer {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: column;\n  padding: 15px 0;\n}\n@media screen and (min-width: 992px) {\n  .FlexContainer {\n    flex-direction: row;\n    justify-content: space-between;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.CountryCard {\n  width: 100%;\n  max-width: 345px;\n  border-radius: 6px;\n  margin: 0 auto 36px auto;\n  transition: 0.3s linear;\n  box-sizing: border-box;\n  /* stylelint-disable */\n}\n@media screen and (min-width: 768px) {\n  .CountryCard {\n    width: 47%;\n    max-width: 47%;\n  }\n}\n@media screen and (min-width: 1440px) {\n  .CountryCard {\n    width: 23%;\n    max-width: 23%;\n  }\n}\n.CountryCard__Flag-container {\n  width: 100%;\n  height: 225px;\n}\n.CountryCard__Flag {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-top-left-radius: 6px;\n  border-top-right-radius: 6px;\n}\n.CountryCard__Body {\n  background-color: white;\n  position: relative;\n  top: -6px;\n  padding: 26px;\n  border-bottom-right-radius: 6px;\n  border-bottom-left-radius: 6px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n.CountryCard__Row {\n  margin: 8px 0;\n}\n.CountryCard:hover {\n  transform: translateY(-10px);\n}\n.CountryCard:hover .CountryCard__Body {\n  background-color: #f7f7f7;\n}\n.CountryCard a {\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  text-decoration: none;\n  color: #202c37;\n  font-size: 14px;\n}\n.CountryCard a b {\n  font-family: \"Nunito-Bold\", sans-serif;\n  font-size: 16px;\n  display: inline-block;\n  margin-right: 10px;\n}\n.CountryCard a .CountryCard__Name {\n  margin-top: 0;\n  margin-bottom: 16px;\n  font-size: 18px;\n  font-family: \"Nunito-Bold\", sans-serif;\n}\n\n.Layout--dark .CountryCard:hover .CountryCard__Body {\n  background-color: #2a3a47;\n}\n.Layout--dark .CountryCard__Body {\n  background-color: #202c37;\n}\n.Layout--dark a {\n  color: #fafafa;\n}\n\n/* stylelint-enable */\n/* stylelint-disable */\n/* stylelint-enable */\n.LinkButton {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.LinkButton svg {\n  width: 14px;\n  margin-right: 14px;\n}\n.LinkButton a {\n  text-decoration: none;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  color: #202c37;\n  display: inline-flex;\n  margin: 10px 0;\n  padding: 8px 0;\n  background-color: white;\n  border: 1px solid #fafafa;\n  border-radius: 4px;\n  width: 200px;\n  display: inline-flex;\n  justify-content: center;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  transition: 0.3s ease-out;\n}\n@media screen and (min-width: 992px) {\n  .LinkButton a {\n    margin: 20px 0;\n  }\n}\n.LinkButton a:hover {\n  background-color: #f2f2f2;\n}\n\n.LinkButton--Block {\n  display: block;\n}\n@media screen and (min-width: 992px) {\n  .LinkButton--Block {\n    margin-bottom: 40px;\n  }\n}\n\n.LinkButton--inline {\n  display: inline;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.LinkButton--inline a {\n  margin: 0 4px;\n  width: auto;\n  padding: 6px 12px;\n}\n.LinkButton--inline svg {\n  display: none;\n}\n\n.Layout.Layout--dark .LinkButton {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.Layout.Layout--dark .LinkButton a {\n  background-color: #202c37;\n  color: white;\n  border: #202c37;\n}\n.Layout.Layout--dark .LinkButton a:hover {\n  background-color: #2a3a47;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.ErrorPage {\n  width: 100%;\n  height: calc(100vh - 87px);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  text-transform: uppercase;\n  font-family: \"Nunito-Bold\", sans-serif;\n  font-size: 24px;\n  color: #858585;\n  text-align: center;\n}\n@media screen and (min-width: 768px) {\n  .ErrorPage {\n    font-size: 36px;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.CountryPage__Content {\n  display: flex;\n  flex-wrap: wrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.CountryPage__Flag-container {\n  width: 100%;\n  height: 0;\n  padding-top: calc(56.25% / 2);\n  overflow: hidden;\n  position: relative;\n}\n@media screen and (min-width: 992px) {\n  .CountryPage__Flag-container {\n    width: 40%;\n  }\n}\n.CountryPage__Flag {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  position: absolute;\n  top: 0;\n}\n.CountryPage__Information {\n  width: 50%;\n}\n.CountryPage__List {\n  list-style-type: none;\n  padding-left: 0;\n  display: flex;\n  flex-wrap: wrap;\n}\n.CountryPage__Entry {\n  width: 50%;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  font-size: 18px;\n  margin-bottom: 6px;\n}\n@media screen and (min-width: 992px) {\n  .CountryPage__Entry {\n    margin-bottom: 12px;\n  }\n}\n.CountryPage__Highlight {\n  font-family: \"Nunito-Bold\", sans-serif;\n  display: inline-block;\n  margin-right: 8px;\n}\n.CountryPage__Name {\n  color: black;\n  font-family: \"Nunito-Bold\", sans-serif;\n  font-size: 24px;\n}\n@media screen and (min-width: 992px) {\n  .CountryPage__Name {\n    font-size: 36px;\n  }\n}\n\n.Layout.Layout--dark {\n  color: white;\n}\n.Layout.Layout--dark .CountryPage__Name {\n  color: white;\n}\n\n/* stylelint-disable */\nbody {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-size: 16px;\n}\n\n/* stylelint-enable */", "",{"version":3,"sources":["/home/lukas/Projects/rest-countries/resources/sass/_variables.scss","/home/lukas/Projects/rest-countries/resources/sass/_typography.scss","webpack://resources/sass/index.scss","/home/lukas/Projects/rest-countries/resources/sass/molecules/Header.scss","/home/lukas/Projects/rest-countries/resources/sass/molecules/Main.scss","/home/lukas/Projects/rest-countries/resources/sass/molecules/CountryCardContainer.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/ThemeToggler.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/SearchBar.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/Dropdown.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/Overlay.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/FlexContainer.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/CountryCard.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/LinkButton.scss","/home/lukas/Projects/rest-countries/resources/sass/routes/ErrorPage.scss","/home/lukas/Projects/rest-countries/resources/sass/routes/CountryPage.scss","/home/lukas/Projects/rest-countries/resources/sass/index.scss"],"names":[],"mappings":"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","sourcesContent":["/* stylelint-disable */\n\n// BREAKPOINTS\n$xs: 375px;\n$lg: 1440px;\n\n// FONT SIZES\n$tiny: 14px;\n$small: 16px;\n$medium: 18px;\n$large: 20px;\n$huge: 24px;\n$enormous: 36px;\n\n// COLORS\n$dark_blue: hsl(209, 23, 22);\n$very_dark_blue: hsl(207, 26, 17);\n$very_dark_blue--alt: hsl(200, 15, 8);\n$dark_gray: hsl(0, 0, 52);\n$very_light_gray: hsl(0, 0, 98);\n$white: hsl(0, 0, 100);\n\n// FONTS\n$font_light: 'Nunito-light', sans-serif;\n$font_semibold: 'Nunito-SemiBold', sans-serif;\n$font_bold: 'Nunito-Bold', sans-serif;\n\n// OTHERS\n$subtle_shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n\n/* stylelint-enable */\n","@font-face {\n  font-display: swap;\n  font-family: Nunito-Light;\n  font-weight: 300;\n  font-style: normal;\n  src: url('../assets/fonts/NunitoSans-Light.ttf') format('truetype');\n}\n\n@font-face {\n  font-display: swap;\n  font-family: Nunito-SemiBold;\n  font-weight: 600;\n  font-style: normal;\n  src: url('../assets/fonts/NunitoSans-SemiBold.ttf') format('truetype');\n}\n\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Bold;\n  font-weight: 800;\n  font-style: normal;\n  src: url('../assets/fonts/NunitoSans-ExtraBold.ttf') format('truetype');\n}\n","/* stylelint-disable */\n/* stylelint-enable */\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Light;\n  font-weight: 300;\n  font-style: normal;\n  src: url(\"../assets/fonts/NunitoSans-Light.ttf\") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-SemiBold;\n  font-weight: 600;\n  font-style: normal;\n  src: url(\"../assets/fonts/NunitoSans-SemiBold.ttf\") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Bold;\n  font-weight: 800;\n  font-style: normal;\n  src: url(\"../assets/fonts/NunitoSans-ExtraBold.ttf\") format(\"truetype\");\n}\n/* stylelint-disable */\n/* stylelint-enable */\n.Header {\n  padding: 30px 15px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  position: relative;\n  transition: 0.3s ease-in-out;\n  /* stylelint-disable */\n}\n.Header__Inner {\n  display: flex;\n  justify-content: space-between;\n  margin: 0 auto;\n  width: 100%;\n}\n@media screen and (min-width: 768px) {\n  .Header__Inner {\n    width: 80%;\n  }\n}\n@media scren and (min-width: 1140px) {\n  .Header__Inner {\n    max-width: 1140px;\n  }\n}\n.Header__Title a {\n  font-size: 16px;\n  color: #202c37;\n  font-weight: 800;\n  font-family: \"Nunito-Bold\", sans-serif;\n  text-decoration: none;\n  text-decoration: none;\n}\n@media screen and (min-width: 992px) {\n  .Header__Title a {\n    font-size: 20px;\n  }\n}\n\n.Layout--dark .Header {\n  background-color: #202c37;\n  transition: 0.3s ease-in-out;\n}\n.Layout--dark .Header__Title a {\n  color: white;\n}\n\n/* stylelint-enable */\n/* stylelint-disable */\n/* stylelint-enable */\n.Main {\n  background-color: white;\n  padding: 0 15px;\n  min-height: calc(100vh - 87px);\n  transition: 0.3s ease-in-out;\n}\n.Main__Container {\n  width: 100%;\n  margin: 0 auto;\n}\n@media screen and (min-width: 768px) {\n  .Main__Container {\n    width: 80%;\n  }\n}\n.Layout--dark .Main {\n  background-color: #111517;\n}\n\n.CountryCardContainer {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.ThemeToggler {\n  display: flex;\n  align-items: center;\n  font-size: 14px;\n  color: #111517;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  cursor: pointer;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.ThemeToggler:focus, .ThemeToggler:active {\n  outline: none;\n  border: none;\n}\n@media screen and (min-width: 992px) {\n  .ThemeToggler {\n    font-size: 18px;\n  }\n}\n.ThemeToggler svg {\n  width: 16px;\n  margin-right: 8px;\n}\n\n.Layout--dark .ThemeToggler {\n  color: white;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.SearchBar {\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n  margin-bottom: 16px;\n  max-width: 500px;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n@media screen and (min-width: 992px) {\n  .SearchBar {\n    width: 50%;\n    max-width: 500px;\n    margin-bottom: 0;\n  }\n}\n.SearchBar__Inner {\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n.SearchBar__Input {\n  border-radius: 6px;\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px 20px 15px 60px;\n  box-sizing: border-box;\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar__Input::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar svg {\n  width: 16px;\n  position: absolute;\n  top: calc(50% - 8px);\n  left: 20px;\n  z-index: 0;\n  opacity: 0.23;\n}\n@media screen and (min-width: 992px) {\n  .SearchBar svg {\n    top: calc(50% - 16px);\n  }\n}\n\n.Layout--dark {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.Layout--dark .SearchBar__Input {\n  background-color: #202c37;\n  color: white;\n  transition: 0.3s ease-in-out;\n}\n.Layout--dark .SearchBar__Input::placeholder {\n  color: white;\n}\n.Layout--dark svg {\n  color: white;\n  opacity: 1;\n  transition: 0.3s ease-in-out;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Dropdown {\n  width: 60%;\n  min-width: 207px;\n  margin-bottom: 20px;\n  max-width: 300px;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n@media screen and (min-width: 992px) {\n  .Dropdown {\n    width: 50%;\n  }\n}\n.Dropdown__Selection {\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px 20px;\n  font-family: \"Nunito-light\", sans-serif;\n  color: #858585;\n  font-size: 16px;\n  border-radius: 6px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  box-sizing: border-box;\n}\n.Dropdown__Selection:focus, .Dropdown__Selection:active {\n  border: none;\n  outline: none;\n}\n.Dropdown__Selection::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.Dropdown__Option {\n  font-family: \"Nunito-light\", sans-serif;\n  cursor: pointer;\n  color: #858585;\n  font-size: 16px;\n  transition: 0.3s ease-out;\n  padding: 8px 20px 8px 60px;\n}\n.Dropdown__Option:hover {\n  background-color: #f2f2f2;\n}\n@media screen and (min-width: 992px) {\n  .Dropdown__Option {\n    font-size: 18px;\n  }\n}\n.Dropdown__Options-container {\n  display: none;\n  opacity: 0;\n  transition: 0.3s ease-out;\n  position: absolute;\n  left: 0;\n  right: 0;\n  border-radius: 6px;\n  top: 64px;\n  background-color: white;\n}\n.Dropdown svg {\n  position: absolute;\n  width: 14px;\n  right: 37px;\n  top: calc(50% - 11px);\n  opacity: 0.23;\n  transition: 0.3s ease-out;\n  transform: rotate(180deg);\n  cursor: pointer;\n}\n.Dropdown .Dropdown__Container--is-Active svg {\n  transform: rotate(0deg);\n}\n.Dropdown__Container {\n  width: 100%;\n  position: relative;\n}\n.Dropdown__Container--is-Active .Dropdown__Options-container {\n  display: block;\n  opacity: 1;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n\n.Layout--dark {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.Layout--dark .Dropdown__Selection {\n  background-color: #202c37;\n  color: white;\n  transition: 0.3s ease-in-out;\n}\n.Layout--dark .Dropdown__Selection::placeholder {\n  color: white;\n}\n.Layout--dark .Dropdown__Option {\n  color: white;\n}\n.Layout--dark .Dropdown__Option:hover {\n  background-color: #2a3a47;\n}\n.Layout--dark .Dropdown__Options-container {\n  background-color: #202c37;\n}\n.Layout--dark svg {\n  color: white;\n  opacity: 1;\n  transition: 0.3s ease-in-out;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Overlay {\n  position: fixed;\n  width: 100vw;\n  height: 0;\n  background-color: black;\n  transition: 0.45s ease-out;\n  transition-delay: 1.7s;\n  z-index: 100;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  pointer-events: none;\n}\n.Overlay__Headline {\n  font-family: \"Nunito-Bold\", sans-serif;\n  color: #fafafa;\n  font-size: 24px;\n  text-align: center;\n  opacity: 0;\n  pointer-events: none;\n  transition: 1s ease-out;\n  transition-delay: 0.7s;\n  max-width: 80%;\n}\n@media screen and (min-width: 768px) {\n  .Overlay__Headline {\n    letter-spacing: 4px;\n    font-size: 36px;\n  }\n}\n.Overlay.Overlay--visible {\n  height: 100vh;\n}\n.Overlay.Overlay--visible .Overlay__Headline {\n  opacity: 1;\n}\n\n.FlexContainer {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: column;\n  padding: 15px 0;\n}\n@media screen and (min-width: 992px) {\n  .FlexContainer {\n    flex-direction: row;\n    justify-content: space-between;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.CountryCard {\n  width: 100%;\n  max-width: 345px;\n  border-radius: 6px;\n  margin: 0 auto 36px auto;\n  transition: 0.3s linear;\n  box-sizing: border-box;\n  /* stylelint-disable */\n}\n@media screen and (min-width: 768px) {\n  .CountryCard {\n    width: 47%;\n    max-width: 47%;\n  }\n}\n@media screen and (min-width: 1440px) {\n  .CountryCard {\n    width: 23%;\n    max-width: 23%;\n  }\n}\n.CountryCard__Flag-container {\n  width: 100%;\n  height: 225px;\n}\n.CountryCard__Flag {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-top-left-radius: 6px;\n  border-top-right-radius: 6px;\n}\n.CountryCard__Body {\n  background-color: white;\n  position: relative;\n  top: -6px;\n  padding: 26px;\n  border-bottom-right-radius: 6px;\n  border-bottom-left-radius: 6px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n.CountryCard__Row {\n  margin: 8px 0;\n}\n.CountryCard:hover {\n  transform: translateY(-10px);\n}\n.CountryCard:hover .CountryCard__Body {\n  background-color: #f7f7f7;\n}\n.CountryCard a {\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  text-decoration: none;\n  color: #202c37;\n  font-size: 14px;\n}\n.CountryCard a b {\n  font-family: \"Nunito-Bold\", sans-serif;\n  font-size: 16px;\n  display: inline-block;\n  margin-right: 10px;\n}\n.CountryCard a .CountryCard__Name {\n  margin-top: 0;\n  margin-bottom: 16px;\n  font-size: 18px;\n  font-family: \"Nunito-Bold\", sans-serif;\n}\n\n.Layout--dark .CountryCard:hover .CountryCard__Body {\n  background-color: #2a3a47;\n}\n.Layout--dark .CountryCard__Body {\n  background-color: #202c37;\n}\n.Layout--dark a {\n  color: #fafafa;\n}\n\n/* stylelint-enable */\n/* stylelint-disable */\n/* stylelint-enable */\n.LinkButton {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.LinkButton svg {\n  width: 14px;\n  margin-right: 14px;\n}\n.LinkButton a {\n  text-decoration: none;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  color: #202c37;\n  display: inline-flex;\n  margin: 10px 0;\n  padding: 8px 0;\n  background-color: white;\n  border: 1px solid #fafafa;\n  border-radius: 4px;\n  width: 200px;\n  display: inline-flex;\n  justify-content: center;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  transition: 0.3s ease-out;\n}\n@media screen and (min-width: 992px) {\n  .LinkButton a {\n    margin: 20px 0;\n  }\n}\n.LinkButton a:hover {\n  background-color: #f2f2f2;\n}\n\n.LinkButton--Block {\n  display: block;\n}\n@media screen and (min-width: 992px) {\n  .LinkButton--Block {\n    margin-bottom: 40px;\n  }\n}\n\n.LinkButton--inline {\n  display: inline;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.LinkButton--inline a {\n  margin: 0 4px;\n  width: auto;\n  padding: 6px 12px;\n}\n.LinkButton--inline svg {\n  display: none;\n}\n\n.Layout.Layout--dark .LinkButton {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.Layout.Layout--dark .LinkButton a {\n  background-color: #202c37;\n  color: white;\n  border: #202c37;\n}\n.Layout.Layout--dark .LinkButton a:hover {\n  background-color: #2a3a47;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.ErrorPage {\n  width: 100%;\n  height: calc(100vh - 87px);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  text-transform: uppercase;\n  font-family: \"Nunito-Bold\", sans-serif;\n  font-size: 24px;\n  color: #858585;\n  text-align: center;\n}\n@media screen and (min-width: 768px) {\n  .ErrorPage {\n    font-size: 36px;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.CountryPage__Content {\n  display: flex;\n  flex-wrap: wrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.CountryPage__Flag-container {\n  width: 100%;\n  height: 0;\n  padding-top: calc(56.25% / 2);\n  overflow: hidden;\n  position: relative;\n}\n@media screen and (min-width: 992px) {\n  .CountryPage__Flag-container {\n    width: 40%;\n  }\n}\n.CountryPage__Flag {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  position: absolute;\n  top: 0;\n}\n.CountryPage__Information {\n  width: 50%;\n}\n.CountryPage__List {\n  list-style-type: none;\n  padding-left: 0;\n  display: flex;\n  flex-wrap: wrap;\n}\n.CountryPage__Entry {\n  width: 50%;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  font-size: 18px;\n  margin-bottom: 6px;\n}\n@media screen and (min-width: 992px) {\n  .CountryPage__Entry {\n    margin-bottom: 12px;\n  }\n}\n.CountryPage__Highlight {\n  font-family: \"Nunito-Bold\", sans-serif;\n  display: inline-block;\n  margin-right: 8px;\n}\n.CountryPage__Name {\n  color: black;\n  font-family: \"Nunito-Bold\", sans-serif;\n  font-size: 24px;\n}\n@media screen and (min-width: 992px) {\n  .CountryPage__Name {\n    font-size: 36px;\n  }\n}\n\n.Layout.Layout--dark {\n  color: white;\n}\n.Layout.Layout--dark .CountryPage__Name {\n  color: white;\n}\n\n/* stylelint-disable */\nbody {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-size: 16px;\n}\n\n/* stylelint-enable */","@import '../variables';\n\n.Header {\n  padding: 30px 15px;\n  box-shadow: $subtle_shadow;\n  position: relative;\n  transition: 0.3s ease-in-out;\n\n  &__Inner {\n    display: flex;\n    justify-content: space-between;\n    margin: 0 auto;\n    width: 100%;\n\n    @media screen and (min-width: 768px) {\n      width: 80%;\n    }\n\n    @media scren and (min-width: 1140px) {\n      max-width: 1140px;\n    }\n  }\n\n  /* stylelint-disable */\n\n  &__Title {\n    a {\n      font-size: $small;\n      color: $very_dark_blue;\n      font-weight: 800;\n      font-family: $font-bold;\n      text-decoration: none;\n      text-decoration: none;\n\n      @media screen and (min-width: 992px) {\n        font-size: $large;\n      }\n    }\n  }\n}\n\n.Layout--dark {\n  .Header {\n    background-color: $very_dark_blue;\n    transition: 0.3s ease-in-out;\n    &__Title a {\n      color: $white;\n    }\n  }\n}\n\n/* stylelint-enable */\n","@import '../variables';\n\n.Main {\n  background-color: $white;\n  padding: 0 15px;\n  min-height: calc(100vh - 87px);\n  transition: 0.3s ease-in-out;\n\n  &__Container {\n    width: 100%;\n    margin: 0 auto;\n\n    @media screen and (min-width: 768px) {\n      width: 80%;\n    }\n\n    @media screen and (min-width: 1140px) {\n      //max-width: 1140px;\n    }\n  }\n}\n\n.Layout--dark {\n  .Main {\n    background-color: $very_dark_blue--alt;\n  }\n}\n",".CountryCardContainer {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n}\n","@import '../variables';\n\n.ThemeToggler {\n  display: flex;\n  align-items: center;\n  font-size: $tiny;\n  color: $very_dark_blue--alt;\n  font-family: $font_semibold;\n  cursor: pointer;\n\n  &:focus,\n  &:active {\n    outline: none;\n    border: none;\n  }\n\n  @media screen and (min-width: 992px) {\n    font-size: $medium;\n  }\n\n  /* stylelint-disable */\n\n  svg {\n    width: 16px;\n    margin-right: 8px;\n  }\n\n  /* stylelint-enable */\n}\n\n.Layout--dark {\n  .ThemeToggler {\n    color: $white;\n  }\n}\n","@import '../variables';\n\n.SearchBar {\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n  margin-bottom: 16px;\n  max-width: 500px;\n\n  @media screen and (min-width: 992px) {\n    width: 50%;\n    max-width: 500px;\n    margin-bottom: 0;\n  }\n\n  &__Inner {\n    box-shadow: $subtle_shadow;\n  }\n\n  &__Input {\n    border-radius: 6px;\n    width: 100%;\n    border: none;\n    outline: none;\n    padding: 15px 20px 15px 60px;\n    box-sizing: border-box;\n    color: $dark_gray;\n    font-family: $font_light;\n    font-size: $small;\n  }\n\n  &__Input::placeholder {\n    color: $dark_gray;\n    font-family: $font_light;\n    font-size: $small;\n  }\n\n  /* stylelint-disable */\n\n  svg {\n    width: 16px;\n    position: absolute;\n    top: calc(50% - 8px);\n    left: 20px;\n    z-index: 0;\n    opacity: 0.23;\n\n    @media screen and (min-width: 992px) {\n      top: calc(50% - 16px);\n    }\n  }\n\n  /* stylelint-enable */\n}\n\n.Layout--dark {\n  .SearchBar__Input {\n    background-color: $very_dark_blue;\n    color: $white;\n    transition: 0.3s ease-in-out;\n\n    &::placeholder {\n      color: $white;\n    }\n  }\n\n  /* stylelint-disable */\n\n  svg {\n    color: $white;\n    opacity: 1;\n    transition: 0.3s ease-in-out;\n  }\n\n  /* stylelint-enable */\n}\n","@import '../variables';\n\n.Dropdown {\n  width: 60%;\n  min-width: 207px;\n  margin-bottom: 20px;\n  max-width: 300px;\n\n  @media screen and (min-width: 992px) {\n    width: 50%;\n  }\n\n  &__Selection {\n    width: 100%;\n    border: none;\n    outline: none;\n    padding: 15px 20px;\n    font-family: $font_light;\n    color: $dark_gray;\n    font-size: $small;\n    border-radius: 6px;\n    box-shadow: $subtle_shadow;\n    box-sizing: border-box;\n\n    &:focus,\n    &:active {\n      border: none;\n      outline: none;\n    }\n  }\n\n  &__Selection::placeholder {\n    color: $dark_gray;\n    font-family: $font_light;\n    font-size: $small;\n  }\n\n  &__Option {\n    font-family: $font_light;\n    cursor: pointer;\n    color: $dark_gray;\n    font-size: $small;\n    transition: 0.3s ease-out;\n    padding: 8px 20px 8px 60px;\n\n    &:hover {\n      background-color: darken($white, 5);\n    }\n\n    @media screen and (min-width: 992px) {\n      font-size: $medium;\n    }\n  }\n\n  &__Options-container {\n    display: none;\n    opacity: 0;\n    transition: 0.3s ease-out;\n    position: absolute;\n    left: 0;\n    right: 0;\n    border-radius: 6px;\n    top: 64px;\n    background-color: $white;\n  }\n\n  /* stylelint-disable */\n\n  svg {\n    position: absolute;\n    width: 14px;\n    right: 37px;\n    top: calc(50% - 11px);\n    opacity: 0.23;\n    transition: 0.3s ease-out;\n    transform: rotate(180deg);\n    cursor: pointer;\n  }\n\n  .Dropdown__Container--is-Active svg {\n    transform: rotate(0deg);\n  }\n\n  /* stylelint-enable */\n\n  &__Container {\n    width: 100%;\n    position: relative;\n    &--is-Active {\n      .Dropdown__Options-container {\n        display: block;\n        opacity: 1;\n        box-shadow: $subtle_shadow;\n      }\n    }\n  }\n}\n\n.Layout--dark {\n  .Dropdown__Selection {\n    background-color: $very_dark_blue;\n    color: $white;\n    transition: 0.3s ease-in-out;\n\n    &::placeholder {\n      color: $white;\n    }\n  }\n\n  .Dropdown__Option {\n    color: $white;\n\n    &:hover {\n      background-color: lighten($very_dark_blue, 5);\n    }\n  }\n\n  .Dropdown__Options-container {\n    background-color: $very_dark_blue;\n  }\n\n  /* stylelint-disable */\n\n  svg {\n    color: $white;\n    opacity: 1;\n    transition: 0.3s ease-in-out;\n  }\n\n  /* stylelint-enable */\n}\n","@import '../variables';\n\n.Overlay {\n  position: fixed;\n  width: 100vw;\n  height: 0;\n  background-color: hsl(0, 0, 0);\n  transition: 0.45s ease-out;\n  transition-delay: 1.7s;\n  z-index: 100;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  pointer-events: none;\n\n  &__Headline {\n    font-family: $font_bold;\n    color: $very_light_gray;\n    font-size: $huge;\n    text-align: center;\n    opacity: 0;\n    pointer-events: none;\n    transition: 1s ease-out;\n    transition-delay: 0.7s;\n    max-width: 80%;\n\n    @media screen and (min-width: 768px) {\n      letter-spacing: 4px;\n      font-size: $enormous;\n    }\n  }\n\n  &.Overlay--visible {\n    height: 100vh;\n\n    .Overlay__Headline {\n      opacity: 1;\n    }\n  }\n}\n",".FlexContainer {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: column;\n  padding: 15px 0;\n\n  @media screen and (min-width: 992px) {\n    flex-direction: row;\n    justify-content: space-between;\n  }\n}\n","@import '../variables';\n\n.CountryCard {\n  width: 100%;\n  max-width: 345px;\n  border-radius: 6px;\n  margin: 0 auto 36px auto;\n  transition: 0.3s linear;\n  box-sizing: border-box;\n\n  @media screen and (min-width: 768px) {\n    width: 47%;\n    max-width: 47%;\n  }\n\n  @media screen and (min-width: 1440px) {\n    width: 23%;\n    max-width: 23%;\n  }\n\n  &__Flag-container {\n    width: 100%;\n    height: 225px;\n  }\n\n  &__Flag {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    border-top-left-radius: 6px;\n    border-top-right-radius: 6px;\n  }\n\n  &__Body {\n    background-color: $white;\n    position: relative;\n    top: -6px;\n    padding: 26px;\n    border-bottom-right-radius: 6px;\n    border-bottom-left-radius: 6px;\n    box-shadow: $subtle_shadow;\n  }\n\n  &__Row {\n    margin: 8px 0;\n  }\n\n  &:hover {\n    transform: translateY(-10px);\n\n    .CountryCard__Body {\n      background-color: darken($white, 3);\n    }\n  }\n\n  /* stylelint-disable */\n\n  a {\n    font-family: $font-semibold;\n    text-decoration: none;\n    color: $very_dark_blue;\n    font-size: $tiny;\n    b {\n      font-family: $font-bold;\n      font-size: $small;\n      display: inline-block;\n      margin-right: 10px;\n    }\n    .CountryCard__Name {\n      margin-top: 0;\n      margin-bottom: 16px;\n      font-size: $medium;\n      font-family: $font-bold;\n    }\n  }\n}\n\n.Layout--dark {\n  .CountryCard:hover .CountryCard__Body {\n    background-color: lighten($very_dark_blue, 5);\n  }\n  .CountryCard__Body {\n    background-color: $very_dark_blue;\n  }\n  a {\n    color: $very_light_gray;\n  }\n}\n\n/* stylelint-enable */\n","@import '../variables';\n\n.LinkButton {\n  /* stylelint-disable */\n\n  svg {\n    width: 14px;\n    margin-right: 14px;\n  }\n\n  a {\n    text-decoration: none;\n    font-family: $font-semibold;\n    color: $very-dark-blue;\n    display: inline-flex;\n    margin: 10px 0;\n    padding: 8px 0;\n    background-color: $white;\n    border: 1px solid $very_light_gray;\n    border-radius: 4px;\n    width: 200px;\n    display: inline-flex;\n    justify-content: center;\n    box-shadow: $subtle_shadow;\n    transition: 0.3s ease-out;\n\n    @media screen and (min-width: 992px) {\n      margin: 20px 0;\n    }\n\n    &:hover {\n      background-color: darken($white, 5);\n    }\n  }\n  /* stylelint-enable */\n}\n\n.LinkButton--Block {\n  display: block;\n  @media screen and (min-width: 992px) {\n    margin-bottom: 40px;\n  }\n}\n\n.LinkButton--inline {\n  display: inline;\n\n  /* stylelint-disable */\n\n  a {\n    margin: 0 4px;\n    width: auto;\n    padding: 6px 12px;\n  }\n\n  svg {\n    display: none;\n  }\n\n  /* stylelint-enable */\n}\n\n.Layout.Layout--dark {\n  .LinkButton {\n    /* stylelint-disable */\n    a {\n      background-color: $very-dark-blue;\n      color: $white;\n      border: $very-dark-blue;\n\n      &:hover {\n        background-color: lighten($very-dark-blue, 5);\n      }\n    }\n    /* stylelint-enable */\n  }\n}\n","@import '../variables';\n\n.ErrorPage {\n  width: 100%;\n  height: calc(100vh - 87px);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  text-transform: uppercase;\n  font-family: $font_bold;\n  font-size: $huge;\n  color: $dark_gray;\n  text-align: center;\n\n  @media screen and (min-width: 768px) {\n    font-size: $enormous;\n  }\n}\n","@import '../variables';\n\n.CountryPage {\n  &__Content {\n    display: flex;\n    flex-wrap: wrap;\n    width: 100%;\n    justify-content: space-between;\n  }\n\n  &__Flag-container {\n    width: 100%;\n    height: 0;\n    padding-top: calc(56.25% / 2);\n    overflow: hidden;\n    position: relative;\n\n    @media screen and (min-width: 992px) {\n      width: 40%;\n    }\n  }\n\n  &__Flag {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    position: absolute;\n    top: 0;\n  }\n\n  &__Information {\n    width: 50%;\n  }\n\n  &__List {\n    list-style-type: none;\n    padding-left: 0;\n    display: flex;\n    flex-wrap: wrap;\n  }\n\n  &__Entry {\n    width: 50%;\n    font-family: $font-semibold;\n    font-size: $medium;\n    margin-bottom: 6px;\n\n    @media screen and (min-width: 992px) {\n      margin-bottom: 12px;\n    }\n  }\n\n  &__Highlight {\n    font-family: $font-bold;\n    display: inline-block;\n    margin-right: 8px;\n  }\n\n  &__Name {\n    color: hsl(0, 0, 0);\n    font-family: $font-bold;\n    font-size: $huge;\n\n    @media screen and (min-width: 992px) {\n      font-size: $enormous;\n    }\n  }\n}\n\n.Layout.Layout--dark {\n  color: $white;\n\n  .CountryPage__Name {\n    color: $white;\n  }\n}\n","@use 'sass:string';\n@use './variables';\n@use './typography';\n@use './molecules';\n@use './atoms';\n@use './routes';\n\n/* stylelint-disable */\n\nbody {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-size: 16px;\n}\n\n/* stylelint-enable */\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.i, "/* stylelint-disable */\n/* stylelint-enable */\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Light;\n  font-weight: 300;\n  font-style: normal;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-SemiBold;\n  font-weight: 600;\n  font-style: normal;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Bold;\n  font-weight: 800;\n  font-style: normal;\n  src: url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") format(\"truetype\");\n}\n/* stylelint-disable */\n/* stylelint-enable */\n.Header {\n  padding: 30px 15px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  position: relative;\n  transition: 0.3s ease-in-out;\n  /* stylelint-disable */\n}\n.Header__Inner {\n  display: flex;\n  justify-content: space-between;\n  margin: 0 auto;\n  width: 100%;\n}\n@media screen and (min-width: 768px) {\n  .Header__Inner {\n    width: 80%;\n  }\n}\n@media scren and (min-width: 1140px) {\n  .Header__Inner {\n    max-width: 1140px;\n  }\n}\n.Header__Title a {\n  font-size: 16px;\n  color: #202c37;\n  font-weight: 800;\n  font-family: \"Nunito-Bold\", sans-serif;\n  text-decoration: none;\n  text-decoration: none;\n}\n@media screen and (min-width: 992px) {\n  .Header__Title a {\n    font-size: 20px;\n  }\n}\n\n.Layout--dark .Header {\n  background-color: #202c37;\n  transition: 0.3s ease-in-out;\n}\n.Layout--dark .Header__Title a {\n  color: white;\n}\n\n/* stylelint-enable */\n/* stylelint-disable */\n/* stylelint-enable */\n.Main {\n  background-color: white;\n  padding: 0;\n  min-height: calc(100vh - 87px);\n  transition: 0.3s ease-in-out;\n}\n.Main__Container {\n  width: 100%;\n  margin: 0 auto;\n}\n@media screen and (min-width: 768px) {\n  .Main__Container {\n    width: 80%;\n  }\n}\n.Layout--dark .Main {\n  background-color: #111517;\n}\n\n.CountryCardContainer {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.ThemeToggler {\n  display: flex;\n  align-items: center;\n  font-size: 14px;\n  color: #111517;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  cursor: pointer;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.ThemeToggler:focus, .ThemeToggler:active {\n  outline: none;\n  border: none;\n}\n@media screen and (min-width: 992px) {\n  .ThemeToggler {\n    font-size: 18px;\n  }\n}\n.ThemeToggler svg {\n  width: 16px;\n  margin-right: 8px;\n}\n\n.Layout--dark .ThemeToggler {\n  color: white;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.SearchBar {\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n  margin-bottom: 16px;\n  max-width: 500px;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n@media screen and (min-width: 992px) {\n  .SearchBar {\n    width: 50%;\n    max-width: 500px;\n    margin-bottom: 0;\n  }\n}\n.SearchBar__Inner {\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n.SearchBar__Input {\n  border-radius: 6px;\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px 20px 15px 60px;\n  box-sizing: border-box;\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar__Input::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar svg {\n  width: 16px;\n  position: absolute;\n  top: calc(50% - 8px);\n  left: 20px;\n  z-index: 0;\n  opacity: 0.23;\n}\n@media screen and (min-width: 992px) {\n  .SearchBar svg {\n    top: calc(50% - 16px);\n  }\n}\n\n.Layout--dark {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.Layout--dark .SearchBar__Input {\n  background-color: #202c37;\n  color: white;\n  transition: 0.3s ease-in-out;\n}\n.Layout--dark .SearchBar__Input::placeholder {\n  color: white;\n}\n.Layout--dark svg {\n  color: white;\n  opacity: 1;\n  transition: 0.3s ease-in-out;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Dropdown {\n  width: 60%;\n  min-width: 207px;\n  margin-bottom: 20px;\n  max-width: 300px;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n@media screen and (min-width: 992px) {\n  .Dropdown {\n    width: 50%;\n  }\n}\n.Dropdown__Selection {\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px 20px;\n  font-family: \"Nunito-light\", sans-serif;\n  color: #858585;\n  font-size: 16px;\n  border-radius: 6px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  box-sizing: border-box;\n}\n.Dropdown__Selection:focus, .Dropdown__Selection:active {\n  border: none;\n  outline: none;\n}\n.Dropdown__Selection::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.Dropdown__Option {\n  font-family: \"Nunito-light\", sans-serif;\n  cursor: pointer;\n  color: #858585;\n  font-size: 16px;\n  transition: 0.3s ease-out;\n  padding: 8px 20px 8px 60px;\n}\n.Dropdown__Option:hover {\n  background-color: #f2f2f2;\n}\n@media screen and (min-width: 992px) {\n  .Dropdown__Option {\n    font-size: 18px;\n  }\n}\n.Dropdown__Options-container {\n  display: none;\n  opacity: 0;\n  transition: 0.3s ease-out;\n  position: absolute;\n  left: 0;\n  right: 0;\n  border-radius: 6px;\n  top: 64px;\n  background-color: white;\n}\n.Dropdown svg {\n  position: absolute;\n  width: 14px;\n  right: 37px;\n  top: calc(50% - 11px);\n  opacity: 0.23;\n  transition: 0.3s ease-out;\n  transform: rotate(180deg);\n  cursor: pointer;\n}\n.Dropdown .Dropdown__Container--is-Active svg {\n  transform: rotate(0deg);\n}\n.Dropdown__Container {\n  width: 100%;\n  position: relative;\n}\n.Dropdown__Container--is-Active .Dropdown__Options-container {\n  display: block;\n  opacity: 1;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n\n.Layout--dark {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.Layout--dark .Dropdown__Selection {\n  background-color: #202c37;\n  color: white;\n  transition: 0.3s ease-in-out;\n}\n.Layout--dark .Dropdown__Selection::placeholder {\n  color: white;\n}\n.Layout--dark .Dropdown__Option {\n  color: white;\n}\n.Layout--dark .Dropdown__Option:hover {\n  background-color: #2a3a47;\n}\n.Layout--dark .Dropdown__Options-container {\n  background-color: #202c37;\n}\n.Layout--dark svg {\n  color: white;\n  opacity: 1;\n  transition: 0.3s ease-in-out;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Overlay {\n  position: fixed;\n  width: 100vw;\n  height: 0;\n  background-color: black;\n  transition: 0.45s ease-out;\n  transition-delay: 1.7s;\n  z-index: 100;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  pointer-events: none;\n}\n.Overlay__Headline {\n  font-family: \"Nunito-Bold\", sans-serif;\n  color: #fafafa;\n  font-size: 24px;\n  text-align: center;\n  opacity: 0;\n  pointer-events: none;\n  transition: 0.1s ease-out;\n  transition-delay: 0.7s;\n  max-width: 80%;\n}\n@media screen and (min-width: 768px) {\n  .Overlay__Headline {\n    letter-spacing: 4px;\n    font-size: 36px;\n  }\n}\n.Overlay.Overlay--visible {\n  height: 100vh;\n}\n.Overlay.Overlay--visible .Overlay__Headline {\n  opacity: 1;\n}\n\n.FlexContainer {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: column;\n  padding: 15px 0;\n}\n@media screen and (min-width: 992px) {\n  .FlexContainer {\n    flex-direction: row;\n    justify-content: space-between;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.CountryCard {\n  width: 100%;\n  max-width: 345px;\n  border-radius: 6px;\n  margin: 0 auto 36px auto;\n  transition: 0.3s linear;\n  box-sizing: border-box;\n  /* stylelint-disable */\n}\n@media screen and (min-width: 768px) {\n  .CountryCard {\n    width: 47%;\n    max-width: 47%;\n  }\n}\n@media screen and (min-width: 1440px) {\n  .CountryCard {\n    width: 23%;\n    max-width: 23%;\n  }\n}\n.CountryCard__Flag-container {\n  width: 100%;\n  height: 225px;\n}\n.CountryCard__Flag {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-top-left-radius: 6px;\n  border-top-right-radius: 6px;\n}\n.CountryCard__Body {\n  background-color: white;\n  position: relative;\n  top: -6px;\n  padding: 26px;\n  border-bottom-right-radius: 6px;\n  border-bottom-left-radius: 6px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n.CountryCard__Row {\n  margin: 8px 0;\n}\n.CountryCard:hover {\n  transform: translateY(-10px);\n}\n.CountryCard:hover .CountryCard__Body {\n  background-color: #f7f7f7;\n}\n.CountryCard a {\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  text-decoration: none;\n  color: #202c37;\n  font-size: 14px;\n}\n.CountryCard a b {\n  font-family: \"Nunito-Bold\", sans-serif;\n  font-size: 16px;\n  display: inline-block;\n  margin-right: 10px;\n}\n.CountryCard a .CountryCard__Name {\n  margin-top: 0;\n  margin-bottom: 16px;\n  font-size: 18px;\n  font-family: \"Nunito-Bold\", sans-serif;\n}\n\n.Layout--dark .CountryCard:hover .CountryCard__Body {\n  background-color: #2a3a47;\n}\n.Layout--dark .CountryCard__Body {\n  background-color: #202c37;\n}\n.Layout--dark a {\n  color: #fafafa;\n}\n\n/* stylelint-enable */\n/* stylelint-disable */\n/* stylelint-enable */\n.LinkButton {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.LinkButton svg {\n  width: 14px;\n  margin-right: 14px;\n}\n.LinkButton a {\n  text-decoration: none;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  color: #202c37;\n  display: inline-flex;\n  margin: 10px 0;\n  padding: 8px 0;\n  background-color: white;\n  border: 1px solid #fafafa;\n  border-radius: 4px;\n  width: 200px;\n  display: inline-flex;\n  justify-content: center;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  transition: 0.3s ease-out;\n}\n@media screen and (min-width: 992px) {\n  .LinkButton a {\n    margin: 20px 0;\n  }\n}\n.LinkButton a:hover {\n  background-color: #f2f2f2;\n}\n\n.LinkButton--Block {\n  display: block;\n}\n@media screen and (min-width: 992px) {\n  .LinkButton--Block {\n    margin-bottom: 40px;\n  }\n}\n\n.LinkButton--inline {\n  display: inline;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.LinkButton--inline a {\n  margin: 0 4px;\n  width: auto;\n  padding: 6px 12px;\n}\n.LinkButton--inline svg {\n  display: none;\n}\n\n.Layout.Layout--dark .LinkButton {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.Layout.Layout--dark .LinkButton a {\n  background-color: #202c37;\n  color: white;\n  border: #202c37;\n}\n.Layout.Layout--dark .LinkButton a:hover {\n  background-color: #2a3a47;\n}\n\n.Loading {\n  position: fixed;\n  background-color: rgba(0, 0, 0, 0.2);\n  z-index: 100;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100vw;\n  left: 0;\n  height: calc(100vh - 87px);\n}\n.Loading__Dot-Container {\n  display: flex;\n  width: 100px;\n  justify-content: space-between;\n}\n.Loading__Dot {\n  width: 20px;\n  height: 20px;\n  background-color: black;\n  border-radius: 50%;\n  display: inline-block;\n}\n.Loading__Dot:first-of-type {\n  animation: move 1s infinite linear;\n}\n.Loading__Dot:nth-of-type(2) {\n  animation: move 1s infinite linear;\n  animation-delay: 0.1s;\n}\n.Loading__Dot:nth-of-type(3) {\n  animation: move 1s infinite linear;\n  animation-delay: 0.2s;\n}\n@keyframes move {\n  0% {\n    transform: translateY(0);\n  }\n  25% {\n    transform: translateY(-20px);\n  }\n  50% {\n    transform: translateY(0);\n  }\n  75% {\n    transform: translateY(20px);\n  }\n  100% {\n    transform: translateY(0);\n  }\n}\n\n.Layout.Layout--dark .Loading__Dot {\n  background-color: white;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.ErrorPage {\n  width: 100%;\n  height: calc(100vh - 87px);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  text-transform: uppercase;\n  font-family: \"Nunito-Bold\", sans-serif;\n  font-size: 24px;\n  color: #858585;\n  text-align: center;\n}\n@media screen and (min-width: 768px) {\n  .ErrorPage {\n    font-size: 36px;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.CountryPage__Content {\n  display: flex;\n  flex-wrap: wrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.CountryPage__Flag-container {\n  width: 100%;\n  height: 0;\n  padding-top: calc(56.25% / 2);\n  overflow: hidden;\n  position: relative;\n}\n@media screen and (min-width: 992px) {\n  .CountryPage__Flag-container {\n    width: 40%;\n  }\n}\n.CountryPage__Flag {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  position: absolute;\n  top: 0;\n}\n.CountryPage__Information {\n  width: 50%;\n}\n.CountryPage__List {\n  list-style-type: none;\n  padding-left: 0;\n  display: flex;\n  flex-wrap: wrap;\n}\n.CountryPage__Entry {\n  width: 50%;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  font-size: 18px;\n  margin-bottom: 6px;\n}\n@media screen and (min-width: 992px) {\n  .CountryPage__Entry {\n    margin-bottom: 12px;\n  }\n}\n.CountryPage__Highlight {\n  font-family: \"Nunito-Bold\", sans-serif;\n  display: inline-block;\n  margin-right: 8px;\n}\n.CountryPage__Name {\n  color: black;\n  font-family: \"Nunito-Bold\", sans-serif;\n  font-size: 24px;\n}\n@media screen and (min-width: 992px) {\n  .CountryPage__Name {\n    font-size: 36px;\n  }\n}\n\n.Layout.Layout--dark {\n  color: white;\n}\n.Layout.Layout--dark .CountryPage__Name {\n  color: white;\n}\n\n/* stylelint-disable */\nbody {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-size: 16px;\n}\n\n/* stylelint-enable */", "",{"version":3,"sources":["/home/lukas/Projects/rest-countries/resources/sass/_variables.scss","/home/lukas/Projects/rest-countries/resources/sass/_typography.scss","webpack://resources/sass/index.scss","/home/lukas/Projects/rest-countries/resources/sass/molecules/Header.scss","/home/lukas/Projects/rest-countries/resources/sass/molecules/Main.scss","/home/lukas/Projects/rest-countries/resources/sass/molecules/CountryCardContainer.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/ThemeToggler.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/SearchBar.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/Dropdown.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/Overlay.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/FlexContainer.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/CountryCard.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/LinkButton.scss","/home/lukas/Projects/rest-countries/resources/sass/atoms/Loading.scss","/home/lukas/Projects/rest-countries/resources/sass/routes/ErrorPage.scss","/home/lukas/Projects/rest-countries/resources/sass/routes/CountryPage.scss","/home/lukas/Projects/rest-countries/resources/sass/index.scss"],"names":[],"mappings":"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","sourcesContent":["/* stylelint-disable */\n\n// BREAKPOINTS\n$xs: 375px;\n$lg: 1440px;\n\n// FONT SIZES\n$tiny: 14px;\n$small: 16px;\n$medium: 18px;\n$large: 20px;\n$huge: 24px;\n$enormous: 36px;\n\n// COLORS\n$dark_blue: hsl(209, 23, 22);\n$very_dark_blue: hsl(207, 26, 17);\n$very_dark_blue--alt: hsl(200, 15, 8);\n$dark_gray: hsl(0, 0, 52);\n$very_light_gray: hsl(0, 0, 98);\n$white: hsl(0, 0, 100);\n\n// FONTS\n$font_light: 'Nunito-light', sans-serif;\n$font_semibold: 'Nunito-SemiBold', sans-serif;\n$font_bold: 'Nunito-Bold', sans-serif;\n\n// OTHERS\n$subtle_shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n\n/* stylelint-enable */\n","@font-face {\n  font-display: swap;\n  font-family: Nunito-Light;\n  font-weight: 300;\n  font-style: normal;\n  src: url('../assets/fonts/NunitoSans-Light.ttf') format('truetype');\n}\n\n@font-face {\n  font-display: swap;\n  font-family: Nunito-SemiBold;\n  font-weight: 600;\n  font-style: normal;\n  src: url('../assets/fonts/NunitoSans-SemiBold.ttf') format('truetype');\n}\n\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Bold;\n  font-weight: 800;\n  font-style: normal;\n  src: url('../assets/fonts/NunitoSans-ExtraBold.ttf') format('truetype');\n}\n","/* stylelint-disable */\n/* stylelint-enable */\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Light;\n  font-weight: 300;\n  font-style: normal;\n  src: url(\"../assets/fonts/NunitoSans-Light.ttf\") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-SemiBold;\n  font-weight: 600;\n  font-style: normal;\n  src: url(\"../assets/fonts/NunitoSans-SemiBold.ttf\") format(\"truetype\");\n}\n@font-face {\n  font-display: swap;\n  font-family: Nunito-Bold;\n  font-weight: 800;\n  font-style: normal;\n  src: url(\"../assets/fonts/NunitoSans-ExtraBold.ttf\") format(\"truetype\");\n}\n/* stylelint-disable */\n/* stylelint-enable */\n.Header {\n  padding: 30px 15px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  position: relative;\n  transition: 0.3s ease-in-out;\n  /* stylelint-disable */\n}\n.Header__Inner {\n  display: flex;\n  justify-content: space-between;\n  margin: 0 auto;\n  width: 100%;\n}\n@media screen and (min-width: 768px) {\n  .Header__Inner {\n    width: 80%;\n  }\n}\n@media scren and (min-width: 1140px) {\n  .Header__Inner {\n    max-width: 1140px;\n  }\n}\n.Header__Title a {\n  font-size: 16px;\n  color: #202c37;\n  font-weight: 800;\n  font-family: \"Nunito-Bold\", sans-serif;\n  text-decoration: none;\n  text-decoration: none;\n}\n@media screen and (min-width: 992px) {\n  .Header__Title a {\n    font-size: 20px;\n  }\n}\n\n.Layout--dark .Header {\n  background-color: #202c37;\n  transition: 0.3s ease-in-out;\n}\n.Layout--dark .Header__Title a {\n  color: white;\n}\n\n/* stylelint-enable */\n/* stylelint-disable */\n/* stylelint-enable */\n.Main {\n  background-color: white;\n  padding: 0;\n  min-height: calc(100vh - 87px);\n  transition: 0.3s ease-in-out;\n}\n.Main__Container {\n  width: 100%;\n  margin: 0 auto;\n}\n@media screen and (min-width: 768px) {\n  .Main__Container {\n    width: 80%;\n  }\n}\n.Layout--dark .Main {\n  background-color: #111517;\n}\n\n.CountryCardContainer {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.ThemeToggler {\n  display: flex;\n  align-items: center;\n  font-size: 14px;\n  color: #111517;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  cursor: pointer;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.ThemeToggler:focus, .ThemeToggler:active {\n  outline: none;\n  border: none;\n}\n@media screen and (min-width: 992px) {\n  .ThemeToggler {\n    font-size: 18px;\n  }\n}\n.ThemeToggler svg {\n  width: 16px;\n  margin-right: 8px;\n}\n\n.Layout--dark .ThemeToggler {\n  color: white;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.SearchBar {\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n  margin-bottom: 16px;\n  max-width: 500px;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n@media screen and (min-width: 992px) {\n  .SearchBar {\n    width: 50%;\n    max-width: 500px;\n    margin-bottom: 0;\n  }\n}\n.SearchBar__Inner {\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n.SearchBar__Input {\n  border-radius: 6px;\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px 20px 15px 60px;\n  box-sizing: border-box;\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar__Input::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.SearchBar svg {\n  width: 16px;\n  position: absolute;\n  top: calc(50% - 8px);\n  left: 20px;\n  z-index: 0;\n  opacity: 0.23;\n}\n@media screen and (min-width: 992px) {\n  .SearchBar svg {\n    top: calc(50% - 16px);\n  }\n}\n\n.Layout--dark {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.Layout--dark .SearchBar__Input {\n  background-color: #202c37;\n  color: white;\n  transition: 0.3s ease-in-out;\n}\n.Layout--dark .SearchBar__Input::placeholder {\n  color: white;\n}\n.Layout--dark svg {\n  color: white;\n  opacity: 1;\n  transition: 0.3s ease-in-out;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Dropdown {\n  width: 60%;\n  min-width: 207px;\n  margin-bottom: 20px;\n  max-width: 300px;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n@media screen and (min-width: 992px) {\n  .Dropdown {\n    width: 50%;\n  }\n}\n.Dropdown__Selection {\n  width: 100%;\n  border: none;\n  outline: none;\n  padding: 15px 20px;\n  font-family: \"Nunito-light\", sans-serif;\n  color: #858585;\n  font-size: 16px;\n  border-radius: 6px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  box-sizing: border-box;\n}\n.Dropdown__Selection:focus, .Dropdown__Selection:active {\n  border: none;\n  outline: none;\n}\n.Dropdown__Selection::placeholder {\n  color: #858585;\n  font-family: \"Nunito-light\", sans-serif;\n  font-size: 16px;\n}\n.Dropdown__Option {\n  font-family: \"Nunito-light\", sans-serif;\n  cursor: pointer;\n  color: #858585;\n  font-size: 16px;\n  transition: 0.3s ease-out;\n  padding: 8px 20px 8px 60px;\n}\n.Dropdown__Option:hover {\n  background-color: #f2f2f2;\n}\n@media screen and (min-width: 992px) {\n  .Dropdown__Option {\n    font-size: 18px;\n  }\n}\n.Dropdown__Options-container {\n  display: none;\n  opacity: 0;\n  transition: 0.3s ease-out;\n  position: absolute;\n  left: 0;\n  right: 0;\n  border-radius: 6px;\n  top: 64px;\n  background-color: white;\n}\n.Dropdown svg {\n  position: absolute;\n  width: 14px;\n  right: 37px;\n  top: calc(50% - 11px);\n  opacity: 0.23;\n  transition: 0.3s ease-out;\n  transform: rotate(180deg);\n  cursor: pointer;\n}\n.Dropdown .Dropdown__Container--is-Active svg {\n  transform: rotate(0deg);\n}\n.Dropdown__Container {\n  width: 100%;\n  position: relative;\n}\n.Dropdown__Container--is-Active .Dropdown__Options-container {\n  display: block;\n  opacity: 1;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n\n.Layout--dark {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.Layout--dark .Dropdown__Selection {\n  background-color: #202c37;\n  color: white;\n  transition: 0.3s ease-in-out;\n}\n.Layout--dark .Dropdown__Selection::placeholder {\n  color: white;\n}\n.Layout--dark .Dropdown__Option {\n  color: white;\n}\n.Layout--dark .Dropdown__Option:hover {\n  background-color: #2a3a47;\n}\n.Layout--dark .Dropdown__Options-container {\n  background-color: #202c37;\n}\n.Layout--dark svg {\n  color: white;\n  opacity: 1;\n  transition: 0.3s ease-in-out;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.Overlay {\n  position: fixed;\n  width: 100vw;\n  height: 0;\n  background-color: black;\n  transition: 0.45s ease-out;\n  transition-delay: 1.7s;\n  z-index: 100;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  pointer-events: none;\n}\n.Overlay__Headline {\n  font-family: \"Nunito-Bold\", sans-serif;\n  color: #fafafa;\n  font-size: 24px;\n  text-align: center;\n  opacity: 0;\n  pointer-events: none;\n  transition: 0.1s ease-out;\n  transition-delay: 0.7s;\n  max-width: 80%;\n}\n@media screen and (min-width: 768px) {\n  .Overlay__Headline {\n    letter-spacing: 4px;\n    font-size: 36px;\n  }\n}\n.Overlay.Overlay--visible {\n  height: 100vh;\n}\n.Overlay.Overlay--visible .Overlay__Headline {\n  opacity: 1;\n}\n\n.FlexContainer {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: column;\n  padding: 15px 0;\n}\n@media screen and (min-width: 992px) {\n  .FlexContainer {\n    flex-direction: row;\n    justify-content: space-between;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.CountryCard {\n  width: 100%;\n  max-width: 345px;\n  border-radius: 6px;\n  margin: 0 auto 36px auto;\n  transition: 0.3s linear;\n  box-sizing: border-box;\n  /* stylelint-disable */\n}\n@media screen and (min-width: 768px) {\n  .CountryCard {\n    width: 47%;\n    max-width: 47%;\n  }\n}\n@media screen and (min-width: 1440px) {\n  .CountryCard {\n    width: 23%;\n    max-width: 23%;\n  }\n}\n.CountryCard__Flag-container {\n  width: 100%;\n  height: 225px;\n}\n.CountryCard__Flag {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-top-left-radius: 6px;\n  border-top-right-radius: 6px;\n}\n.CountryCard__Body {\n  background-color: white;\n  position: relative;\n  top: -6px;\n  padding: 26px;\n  border-bottom-right-radius: 6px;\n  border-bottom-left-radius: 6px;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n}\n.CountryCard__Row {\n  margin: 8px 0;\n}\n.CountryCard:hover {\n  transform: translateY(-10px);\n}\n.CountryCard:hover .CountryCard__Body {\n  background-color: #f7f7f7;\n}\n.CountryCard a {\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  text-decoration: none;\n  color: #202c37;\n  font-size: 14px;\n}\n.CountryCard a b {\n  font-family: \"Nunito-Bold\", sans-serif;\n  font-size: 16px;\n  display: inline-block;\n  margin-right: 10px;\n}\n.CountryCard a .CountryCard__Name {\n  margin-top: 0;\n  margin-bottom: 16px;\n  font-size: 18px;\n  font-family: \"Nunito-Bold\", sans-serif;\n}\n\n.Layout--dark .CountryCard:hover .CountryCard__Body {\n  background-color: #2a3a47;\n}\n.Layout--dark .CountryCard__Body {\n  background-color: #202c37;\n}\n.Layout--dark a {\n  color: #fafafa;\n}\n\n/* stylelint-enable */\n/* stylelint-disable */\n/* stylelint-enable */\n.LinkButton {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.LinkButton svg {\n  width: 14px;\n  margin-right: 14px;\n}\n.LinkButton a {\n  text-decoration: none;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  color: #202c37;\n  display: inline-flex;\n  margin: 10px 0;\n  padding: 8px 0;\n  background-color: white;\n  border: 1px solid #fafafa;\n  border-radius: 4px;\n  width: 200px;\n  display: inline-flex;\n  justify-content: center;\n  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, 0.09);\n  transition: 0.3s ease-out;\n}\n@media screen and (min-width: 992px) {\n  .LinkButton a {\n    margin: 20px 0;\n  }\n}\n.LinkButton a:hover {\n  background-color: #f2f2f2;\n}\n\n.LinkButton--Block {\n  display: block;\n}\n@media screen and (min-width: 992px) {\n  .LinkButton--Block {\n    margin-bottom: 40px;\n  }\n}\n\n.LinkButton--inline {\n  display: inline;\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.LinkButton--inline a {\n  margin: 0 4px;\n  width: auto;\n  padding: 6px 12px;\n}\n.LinkButton--inline svg {\n  display: none;\n}\n\n.Layout.Layout--dark .LinkButton {\n  /* stylelint-disable */\n  /* stylelint-enable */\n}\n.Layout.Layout--dark .LinkButton a {\n  background-color: #202c37;\n  color: white;\n  border: #202c37;\n}\n.Layout.Layout--dark .LinkButton a:hover {\n  background-color: #2a3a47;\n}\n\n.Loading {\n  position: fixed;\n  background-color: rgba(0, 0, 0, 0.2);\n  z-index: 100;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100vw;\n  left: 0;\n  height: calc(100vh - 87px);\n}\n.Loading__Dot-Container {\n  display: flex;\n  width: 100px;\n  justify-content: space-between;\n}\n.Loading__Dot {\n  width: 20px;\n  height: 20px;\n  background-color: black;\n  border-radius: 50%;\n  display: inline-block;\n}\n.Loading__Dot:first-of-type {\n  animation: move 1s infinite linear;\n}\n.Loading__Dot:nth-of-type(2) {\n  animation: move 1s infinite linear;\n  animation-delay: 0.1s;\n}\n.Loading__Dot:nth-of-type(3) {\n  animation: move 1s infinite linear;\n  animation-delay: 0.2s;\n}\n@keyframes move {\n  0% {\n    transform: translateY(0);\n  }\n  25% {\n    transform: translateY(-20px);\n  }\n  50% {\n    transform: translateY(0);\n  }\n  75% {\n    transform: translateY(20px);\n  }\n  100% {\n    transform: translateY(0);\n  }\n}\n\n.Layout.Layout--dark .Loading__Dot {\n  background-color: white;\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.ErrorPage {\n  width: 100%;\n  height: calc(100vh - 87px);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  text-transform: uppercase;\n  font-family: \"Nunito-Bold\", sans-serif;\n  font-size: 24px;\n  color: #858585;\n  text-align: center;\n}\n@media screen and (min-width: 768px) {\n  .ErrorPage {\n    font-size: 36px;\n  }\n}\n\n/* stylelint-disable */\n/* stylelint-enable */\n.CountryPage__Content {\n  display: flex;\n  flex-wrap: wrap;\n  width: 100%;\n  justify-content: space-between;\n}\n.CountryPage__Flag-container {\n  width: 100%;\n  height: 0;\n  padding-top: calc(56.25% / 2);\n  overflow: hidden;\n  position: relative;\n}\n@media screen and (min-width: 992px) {\n  .CountryPage__Flag-container {\n    width: 40%;\n  }\n}\n.CountryPage__Flag {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  position: absolute;\n  top: 0;\n}\n.CountryPage__Information {\n  width: 50%;\n}\n.CountryPage__List {\n  list-style-type: none;\n  padding-left: 0;\n  display: flex;\n  flex-wrap: wrap;\n}\n.CountryPage__Entry {\n  width: 50%;\n  font-family: \"Nunito-SemiBold\", sans-serif;\n  font-size: 18px;\n  margin-bottom: 6px;\n}\n@media screen and (min-width: 992px) {\n  .CountryPage__Entry {\n    margin-bottom: 12px;\n  }\n}\n.CountryPage__Highlight {\n  font-family: \"Nunito-Bold\", sans-serif;\n  display: inline-block;\n  margin-right: 8px;\n}\n.CountryPage__Name {\n  color: black;\n  font-family: \"Nunito-Bold\", sans-serif;\n  font-size: 24px;\n}\n@media screen and (min-width: 992px) {\n  .CountryPage__Name {\n    font-size: 36px;\n  }\n}\n\n.Layout.Layout--dark {\n  color: white;\n}\n.Layout.Layout--dark .CountryPage__Name {\n  color: white;\n}\n\n/* stylelint-disable */\nbody {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-size: 16px;\n}\n\n/* stylelint-enable */","@import '../variables';\n\n.Header {\n  padding: 30px 15px;\n  box-shadow: $subtle_shadow;\n  position: relative;\n  transition: 0.3s ease-in-out;\n\n  &__Inner {\n    display: flex;\n    justify-content: space-between;\n    margin: 0 auto;\n    width: 100%;\n\n    @media screen and (min-width: 768px) {\n      width: 80%;\n    }\n\n    @media scren and (min-width: 1140px) {\n      max-width: 1140px;\n    }\n  }\n\n  /* stylelint-disable */\n\n  &__Title {\n    a {\n      font-size: $small;\n      color: $very_dark_blue;\n      font-weight: 800;\n      font-family: $font-bold;\n      text-decoration: none;\n      text-decoration: none;\n\n      @media screen and (min-width: 992px) {\n        font-size: $large;\n      }\n    }\n  }\n}\n\n.Layout--dark {\n  .Header {\n    background-color: $very_dark_blue;\n    transition: 0.3s ease-in-out;\n    &__Title a {\n      color: $white;\n    }\n  }\n}\n\n/* stylelint-enable */\n","@import '../variables';\n\n.Main {\n  background-color: $white;\n  padding: 0;\n  min-height: calc(100vh - 87px);\n  transition: 0.3s ease-in-out;\n\n  &__Container {\n    width: 100%;\n    margin: 0 auto;\n\n    @media screen and (min-width: 768px) {\n      width: 80%;\n    }\n\n    @media screen and (min-width: 1140px) {\n      //max-width: 1140px;\n    }\n  }\n}\n\n.Layout--dark {\n  .Main {\n    background-color: $very_dark_blue--alt;\n  }\n}\n",".CountryCardContainer {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n}\n","@import '../variables';\n\n.ThemeToggler {\n  display: flex;\n  align-items: center;\n  font-size: $tiny;\n  color: $very_dark_blue--alt;\n  font-family: $font_semibold;\n  cursor: pointer;\n\n  &:focus,\n  &:active {\n    outline: none;\n    border: none;\n  }\n\n  @media screen and (min-width: 992px) {\n    font-size: $medium;\n  }\n\n  /* stylelint-disable */\n\n  svg {\n    width: 16px;\n    margin-right: 8px;\n  }\n\n  /* stylelint-enable */\n}\n\n.Layout--dark {\n  .ThemeToggler {\n    color: $white;\n  }\n}\n","@import '../variables';\n\n.SearchBar {\n  position: relative;\n  box-sizing: border-box;\n  width: 100%;\n  margin-bottom: 16px;\n  max-width: 500px;\n\n  @media screen and (min-width: 992px) {\n    width: 50%;\n    max-width: 500px;\n    margin-bottom: 0;\n  }\n\n  &__Inner {\n    box-shadow: $subtle_shadow;\n  }\n\n  &__Input {\n    border-radius: 6px;\n    width: 100%;\n    border: none;\n    outline: none;\n    padding: 15px 20px 15px 60px;\n    box-sizing: border-box;\n    color: $dark_gray;\n    font-family: $font_light;\n    font-size: $small;\n  }\n\n  &__Input::placeholder {\n    color: $dark_gray;\n    font-family: $font_light;\n    font-size: $small;\n  }\n\n  /* stylelint-disable */\n\n  svg {\n    width: 16px;\n    position: absolute;\n    top: calc(50% - 8px);\n    left: 20px;\n    z-index: 0;\n    opacity: 0.23;\n\n    @media screen and (min-width: 992px) {\n      top: calc(50% - 16px);\n    }\n  }\n\n  /* stylelint-enable */\n}\n\n.Layout--dark {\n  .SearchBar__Input {\n    background-color: $very_dark_blue;\n    color: $white;\n    transition: 0.3s ease-in-out;\n\n    &::placeholder {\n      color: $white;\n    }\n  }\n\n  /* stylelint-disable */\n\n  svg {\n    color: $white;\n    opacity: 1;\n    transition: 0.3s ease-in-out;\n  }\n\n  /* stylelint-enable */\n}\n","@import '../variables';\n\n.Dropdown {\n  width: 60%;\n  min-width: 207px;\n  margin-bottom: 20px;\n  max-width: 300px;\n\n  @media screen and (min-width: 992px) {\n    width: 50%;\n  }\n\n  &__Selection {\n    width: 100%;\n    border: none;\n    outline: none;\n    padding: 15px 20px;\n    font-family: $font_light;\n    color: $dark_gray;\n    font-size: $small;\n    border-radius: 6px;\n    box-shadow: $subtle_shadow;\n    box-sizing: border-box;\n\n    &:focus,\n    &:active {\n      border: none;\n      outline: none;\n    }\n  }\n\n  &__Selection::placeholder {\n    color: $dark_gray;\n    font-family: $font_light;\n    font-size: $small;\n  }\n\n  &__Option {\n    font-family: $font_light;\n    cursor: pointer;\n    color: $dark_gray;\n    font-size: $small;\n    transition: 0.3s ease-out;\n    padding: 8px 20px 8px 60px;\n\n    &:hover {\n      background-color: darken($white, 5);\n    }\n\n    @media screen and (min-width: 992px) {\n      font-size: $medium;\n    }\n  }\n\n  &__Options-container {\n    display: none;\n    opacity: 0;\n    transition: 0.3s ease-out;\n    position: absolute;\n    left: 0;\n    right: 0;\n    border-radius: 6px;\n    top: 64px;\n    background-color: $white;\n  }\n\n  /* stylelint-disable */\n\n  svg {\n    position: absolute;\n    width: 14px;\n    right: 37px;\n    top: calc(50% - 11px);\n    opacity: 0.23;\n    transition: 0.3s ease-out;\n    transform: rotate(180deg);\n    cursor: pointer;\n  }\n\n  .Dropdown__Container--is-Active svg {\n    transform: rotate(0deg);\n  }\n\n  /* stylelint-enable */\n\n  &__Container {\n    width: 100%;\n    position: relative;\n    &--is-Active {\n      .Dropdown__Options-container {\n        display: block;\n        opacity: 1;\n        box-shadow: $subtle_shadow;\n      }\n    }\n  }\n}\n\n.Layout--dark {\n  .Dropdown__Selection {\n    background-color: $very_dark_blue;\n    color: $white;\n    transition: 0.3s ease-in-out;\n\n    &::placeholder {\n      color: $white;\n    }\n  }\n\n  .Dropdown__Option {\n    color: $white;\n\n    &:hover {\n      background-color: lighten($very_dark_blue, 5);\n    }\n  }\n\n  .Dropdown__Options-container {\n    background-color: $very_dark_blue;\n  }\n\n  /* stylelint-disable */\n\n  svg {\n    color: $white;\n    opacity: 1;\n    transition: 0.3s ease-in-out;\n  }\n\n  /* stylelint-enable */\n}\n","@import '../variables';\n\n.Overlay {\n  position: fixed;\n  width: 100vw;\n  height: 0;\n  background-color: hsl(0, 0, 0);\n  transition: 0.45s ease-out;\n  transition-delay: 1.7s;\n  z-index: 100;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  pointer-events: none;\n\n  &__Headline {\n    font-family: $font_bold;\n    color: $very_light_gray;\n    font-size: $huge;\n    text-align: center;\n    opacity: 0;\n    pointer-events: none;\n    transition: 0.1s ease-out;\n    transition-delay: 0.7s;\n    max-width: 80%;\n\n    @media screen and (min-width: 768px) {\n      letter-spacing: 4px;\n      font-size: $enormous;\n    }\n  }\n\n  &.Overlay--visible {\n    height: 100vh;\n\n    .Overlay__Headline {\n      opacity: 1;\n    }\n  }\n}\n",".FlexContainer {\n  display: flex;\n  flex-wrap: wrap;\n  flex-direction: column;\n  padding: 15px 0;\n\n  @media screen and (min-width: 992px) {\n    flex-direction: row;\n    justify-content: space-between;\n  }\n}\n","@import '../variables';\n\n.CountryCard {\n  width: 100%;\n  max-width: 345px;\n  border-radius: 6px;\n  margin: 0 auto 36px auto;\n  transition: 0.3s linear;\n  box-sizing: border-box;\n\n  @media screen and (min-width: 768px) {\n    width: 47%;\n    max-width: 47%;\n  }\n\n  @media screen and (min-width: 1440px) {\n    width: 23%;\n    max-width: 23%;\n  }\n\n  &__Flag-container {\n    width: 100%;\n    height: 225px;\n  }\n\n  &__Flag {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    border-top-left-radius: 6px;\n    border-top-right-radius: 6px;\n  }\n\n  &__Body {\n    background-color: $white;\n    position: relative;\n    top: -6px;\n    padding: 26px;\n    border-bottom-right-radius: 6px;\n    border-bottom-left-radius: 6px;\n    box-shadow: $subtle_shadow;\n  }\n\n  &__Row {\n    margin: 8px 0;\n  }\n\n  &:hover {\n    transform: translateY(-10px);\n\n    .CountryCard__Body {\n      background-color: darken($white, 3);\n    }\n  }\n\n  /* stylelint-disable */\n\n  a {\n    font-family: $font-semibold;\n    text-decoration: none;\n    color: $very_dark_blue;\n    font-size: $tiny;\n    b {\n      font-family: $font-bold;\n      font-size: $small;\n      display: inline-block;\n      margin-right: 10px;\n    }\n    .CountryCard__Name {\n      margin-top: 0;\n      margin-bottom: 16px;\n      font-size: $medium;\n      font-family: $font-bold;\n    }\n  }\n}\n\n.Layout--dark {\n  .CountryCard:hover .CountryCard__Body {\n    background-color: lighten($very_dark_blue, 5);\n  }\n  .CountryCard__Body {\n    background-color: $very_dark_blue;\n  }\n  a {\n    color: $very_light_gray;\n  }\n}\n\n/* stylelint-enable */\n","@import '../variables';\n\n.LinkButton {\n  /* stylelint-disable */\n\n  svg {\n    width: 14px;\n    margin-right: 14px;\n  }\n\n  a {\n    text-decoration: none;\n    font-family: $font-semibold;\n    color: $very-dark-blue;\n    display: inline-flex;\n    margin: 10px 0;\n    padding: 8px 0;\n    background-color: $white;\n    border: 1px solid $very_light_gray;\n    border-radius: 4px;\n    width: 200px;\n    display: inline-flex;\n    justify-content: center;\n    box-shadow: $subtle_shadow;\n    transition: 0.3s ease-out;\n\n    @media screen and (min-width: 992px) {\n      margin: 20px 0;\n    }\n\n    &:hover {\n      background-color: darken($white, 5);\n    }\n  }\n  /* stylelint-enable */\n}\n\n.LinkButton--Block {\n  display: block;\n  @media screen and (min-width: 992px) {\n    margin-bottom: 40px;\n  }\n}\n\n.LinkButton--inline {\n  display: inline;\n\n  /* stylelint-disable */\n\n  a {\n    margin: 0 4px;\n    width: auto;\n    padding: 6px 12px;\n  }\n\n  svg {\n    display: none;\n  }\n\n  /* stylelint-enable */\n}\n\n.Layout.Layout--dark {\n  .LinkButton {\n    /* stylelint-disable */\n    a {\n      background-color: $very-dark-blue;\n      color: $white;\n      border: $very-dark-blue;\n\n      &:hover {\n        background-color: lighten($very-dark-blue, 5);\n      }\n    }\n    /* stylelint-enable */\n  }\n}\n",".Loading {\n  position: fixed;\n  background-color: hsla(0, 0, 0, 0.2);\n  z-index: 100;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 100vw;\n  left: 0;\n  height: calc(100vh - 87px);\n\n  &__Dot-Container {\n    display: flex;\n    width: 100px;\n    justify-content: space-between;\n  }\n\n  &__Dot {\n    width: 20px;\n    height: 20px;\n    background-color: hsla(0, 0, 0, 1);\n    border-radius: 50%;\n    display: inline-block;\n\n    &:first-of-type {\n      animation: move 1s infinite linear;\n    }\n\n    &:nth-of-type(2) {\n      animation: move 1s infinite linear;\n      animation-delay: 0.1s;\n    }\n\n    &:nth-of-type(3) {\n      animation: move 1s infinite linear;\n      animation-delay: 0.2s;\n    }\n  }\n\n  @keyframes move {\n    0% {\n      transform: translateY(0);\n    }\n\n    25% {\n      transform: translateY(-20px);\n    }\n\n    50% {\n      transform: translateY(0);\n    }\n\n    75% {\n      transform: translateY(20px);\n    }\n\n    100% {\n      transform: translateY(0);\n    }\n  }\n}\n\n.Layout.Layout--dark {\n  .Loading__Dot {\n    background-color: hsla(360, 100%, 100%, 1);\n  }\n}\n","@import '../variables';\n\n.ErrorPage {\n  width: 100%;\n  height: calc(100vh - 87px);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  text-transform: uppercase;\n  font-family: $font_bold;\n  font-size: $huge;\n  color: $dark_gray;\n  text-align: center;\n\n  @media screen and (min-width: 768px) {\n    font-size: $enormous;\n  }\n}\n","@import '../variables';\n\n.CountryPage {\n  &__Content {\n    display: flex;\n    flex-wrap: wrap;\n    width: 100%;\n    justify-content: space-between;\n  }\n\n  &__Flag-container {\n    width: 100%;\n    height: 0;\n    padding-top: calc(56.25% / 2);\n    overflow: hidden;\n    position: relative;\n\n    @media screen and (min-width: 992px) {\n      width: 40%;\n    }\n  }\n\n  &__Flag {\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    position: absolute;\n    top: 0;\n  }\n\n  &__Information {\n    width: 50%;\n  }\n\n  &__List {\n    list-style-type: none;\n    padding-left: 0;\n    display: flex;\n    flex-wrap: wrap;\n  }\n\n  &__Entry {\n    width: 50%;\n    font-family: $font-semibold;\n    font-size: $medium;\n    margin-bottom: 6px;\n\n    @media screen and (min-width: 992px) {\n      margin-bottom: 12px;\n    }\n  }\n\n  &__Highlight {\n    font-family: $font-bold;\n    display: inline-block;\n    margin-right: 8px;\n  }\n\n  &__Name {\n    color: hsl(0, 0, 0);\n    font-family: $font-bold;\n    font-size: $huge;\n\n    @media screen and (min-width: 992px) {\n      font-size: $enormous;\n    }\n  }\n}\n\n.Layout.Layout--dark {\n  color: $white;\n\n  .CountryPage__Name {\n    color: $white;\n  }\n}\n","@use 'sass:string';\n@use './variables';\n@use './typography';\n@use './molecules';\n@use './atoms';\n@use './routes';\n\n/* stylelint-disable */\n\nbody {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-size: 16px;\n}\n\n/* stylelint-enable */\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -44733,40 +44847,6 @@ function SvgArrowLeftSolid(props) {
 
 /***/ }),
 
-/***/ "./resources/assets/icons/caret-solid.svg":
-/*!************************************************!*\
-  !*** ./resources/assets/icons/caret-solid.svg ***!
-  \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-
-
-var _ref = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("path", {
-  fill: "currentColor",
-  d: "M288.662 352H31.338c-17.818 0-26.741-21.543-14.142-34.142l128.662-128.662c7.81-7.81 20.474-7.81 28.284 0l128.662 128.662c12.6 12.599 3.676 34.142-14.142 34.142z"
-});
-
-function SvgCaretSolid(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("svg", _extends({
-    "aria-hidden": "true",
-    "data-prefix": "fas",
-    "data-icon": "caret-up",
-    className: "caret-solid_svg__svg-inline--fa caret-solid_svg__fa-caret-up caret-solid_svg__fa-w-10",
-    viewBox: "0 0 320 512"
-  }, props), _ref);
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (SvgCaretSolid);
-
-/***/ }),
-
 /***/ "./resources/assets/icons/moon-solid.svg":
 /*!***********************************************!*\
   !*** ./resources/assets/icons/moon-solid.svg ***!
@@ -44801,40 +44881,6 @@ function SvgMoonSolid(props) {
 
 /***/ }),
 
-/***/ "./resources/assets/icons/search-solid.svg":
-/*!*************************************************!*\
-  !*** ./resources/assets/icons/search-solid.svg ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-
-
-var _ref = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("path", {
-  fill: "currentColor",
-  d: "M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
-});
-
-function SvgSearchSolid(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("svg", _extends({
-    "aria-hidden": "true",
-    "data-prefix": "fas",
-    "data-icon": "search",
-    className: "search-solid_svg__svg-inline--fa search-solid_svg__fa-search search-solid_svg__fa-w-16",
-    viewBox: "0 0 512 512"
-  }, props), _ref);
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (SvgSearchSolid);
-
-/***/ }),
-
 /***/ "./resources/js/App.jsx":
 /*!******************************!*\
   !*** ./resources/js/App.jsx ***!
@@ -44844,456 +44890,137 @@ function SvgSearchSolid(props) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _Molecules_Layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Molecules/Layout */ "./resources/js/molecules/Layout.jsx");
-/* harmony import */ var _Routes_Homepage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Routes/Homepage */ "./resources/js/routes/Homepage.jsx");
-/* harmony import */ var _Routes_ErrorPage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @Routes/ErrorPage */ "./resources/js/routes/ErrorPage.jsx");
-/* harmony import */ var _Atoms_Overlay__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @Atoms/Overlay */ "./resources/js/atoms/Overlay.jsx");
-/* harmony import */ var _Routes_CountryPage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @Routes/CountryPage */ "./resources/js/routes/CountryPage.jsx");
-/* harmony import */ var _Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @Contexts/ThemeContext */ "./resources/js/contexts/ThemeContext.jsx");
-/* harmony import */ var _Contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @Contexts/CountriesContext */ "./resources/js/contexts/CountriesContext.jsx");
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _Molecules_Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @Molecules/Layout */ "./resources/js/molecules/Layout.jsx");
+/* harmony import */ var _Routes_ErrorPage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Routes/ErrorPage */ "./resources/js/routes/ErrorPage.jsx");
+/* harmony import */ var _Routes_CountryPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Routes/CountryPage */ "./resources/js/routes/CountryPage.jsx");
+/* harmony import */ var _Atoms_Loading__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @Atoms/Loading */ "./resources/js/atoms/Loading.jsx");
+/* harmony import */ var _Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @Contexts/ThemeContext */ "./resources/js/contexts/ThemeContext.jsx");
+/* harmony import */ var _Contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @Contexts/CountriesContext */ "./resources/js/contexts/CountriesContext.jsx");
 var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/App.jsx";
 
 
 
 
+/* import Overlay from '@Atoms/Overlay'; */
 
 
- // Contexts
+
+var Homepage = react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./routes/Homepage */ "./resources/js/routes/Homepage.jsx"));
+}); // Contexts
 
 
 
 
 function App() {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
-      _useState2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
-      isLoaded = _useState2[0],
-      setIsLoaded = _useState2[1];
-
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+  /*   const [isLoaded, setIsLoaded] = useState(false);
+   useEffect(() => {
     setIsLoaded(true);
-  }, [isLoaded]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 21,
-      columnNumber: 5
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_9__["CountriesProvider"], {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 22,
-      columnNumber: 7
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_8__["ThemeProvider"], {
+  }, [isLoaded]); */
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["BrowserRouter"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 23,
-      columnNumber: 9
+      columnNumber: 5
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Atoms_Overlay__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    visible: isLoaded ? false : true,
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_7__["CountriesProvider"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 24,
-      columnNumber: 11
+      columnNumber: 7
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Molecules_Layout__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_6__["ThemeProvider"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 25,
-      columnNumber: 11
+      columnNumber: 9
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Molecules_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26,
+      lineNumber: 27,
+      columnNumber: 11
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 29,
       columnNumber: 13
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/country/:code",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27,
+      lineNumber: 30,
       columnNumber: 15
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Routes_CountryPage__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Routes_CountryPage__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28,
+      lineNumber: 31,
       columnNumber: 17
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31,
+      lineNumber: 34,
       columnNumber: 15
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Routes_Homepage__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 32,
-      columnNumber: 17
-    }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    path: "*",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
+    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Atoms_Loading__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 35,
+        columnNumber: 37
+      }
+    }),
     __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 35,
-      columnNumber: 15
+      columnNumber: 17
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Routes_ErrorPage__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Homepage, {
     __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 36,
+      columnNumber: 19
+    }
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "*",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 40,
+      columnNumber: 15
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Routes_ErrorPage__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 41,
       columnNumber: 17
     }
   })))))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
-
-/***/ }),
-
-/***/ "./resources/js/atoms/CountryCard.jsx":
-/*!********************************************!*\
-  !*** ./resources/js/atoms/CountryCard.jsx ***!
-  \********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/CountryCard.jsx";
-
-
-
-
-function CountryCard(props) {
-  var flag = props.flag,
-      name = props.name,
-      population = props.population,
-      capital = props.capital,
-      url = props.url,
-      region = props.region;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "CountryCard",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 9,
-      columnNumber: 5
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: url,
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 10,
-      columnNumber: 7
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "CountryCard__Flag-container",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 11,
-      columnNumber: 9
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    alt: "".concat(name, " flag"),
-    className: "CountryCard__Flag",
-    src: flag,
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 12,
-      columnNumber: 11
-    }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "CountryCard__Body",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 14,
-      columnNumber: 9
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "CountryCard__Name",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 15,
-      columnNumber: 11
-    }
-  }, name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "CountryCard__Row",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 17,
-      columnNumber: 11
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 18,
-      columnNumber: 13
-    }
-  }, "Population:"), population), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "CountryCard__Row",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 21,
-      columnNumber: 11
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 22,
-      columnNumber: 13
-    }
-  }, "Region"), region), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "CountryCard__Row",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 25,
-      columnNumber: 11
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 26,
-      columnNumber: 13
-    }
-  }, "Capital:"), capital))));
-}
-
-CountryCard.propTypes = {
-  capital: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
-  flag: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
-  name: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
-  population: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number.isRequired,
-  region: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
-  url: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired
-};
-/* harmony default export */ __webpack_exports__["default"] = (CountryCard);
-
-/***/ }),
-
-/***/ "./resources/js/atoms/Dropdown.jsx":
-/*!*****************************************!*\
-  !*** ./resources/js/atoms/Dropdown.jsx ***!
-  \*****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Assets_icons_caret_solid_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Assets/icons/caret-solid.svg */ "./resources/assets/icons/caret-solid.svg");
-
-var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/Dropdown.jsx";
-
-
-
-
-function Dropdown(props) {
-  var _this = this;
-
-  var placeholder = props.placeholder,
-      options = props.options;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
-      _useState2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
-      isActive = _useState2[0],
-      setIsActive = _useState2[1];
-
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
-      _useState4 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
-      currentRegion = _useState4[0],
-      setCurrentRegion = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(options),
-      _useState6 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
-      possibleRegions = _useState6[0],
-      setPossibleRegions = _useState6[1];
-
-  function handleChange(e) {
-    setPossibleRegions(options.filter(function (option) {
-      return option.includes(e.target.value);
-    }));
-    setCurrentRegion(e.target.value);
-  }
-
-  function handleClick(e) {
-    setCurrentRegion(e.target.innerHTML);
-  }
-
-  function handleClickToggle() {
-    setIsActive(!isActive);
-  }
-
-  function handleKeydown(e) {
-    setCurrentRegion(e.target.innerHTML);
-  }
-
-  function handleKeydownToggle(e) {
-    if (e.keyCode === 13) {
-      setIsActive(!isActive);
-    }
-  }
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "Dropdown",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 38,
-      columnNumber: 5
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "Dropdown__Container ".concat(isActive ? 'Dropdown__Container--is-Active' : ''),
-    onClick: handleClickToggle,
-    onKeyDown: handleKeydownToggle,
-    role: "button",
-    tabIndex: 0,
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 39,
-      columnNumber: 7
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-    className: "Dropdown__Selection",
-    id: "selected",
-    name: "selected",
-    onChange: handleChange,
-    placeholder: placeholder,
-    type: "text",
-    value: currentRegion !== '' ? currentRegion : '',
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 48,
-      columnNumber: 9
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Assets_icons_caret_solid_svg__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    alt: "Caret",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 57,
-      columnNumber: 9
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: "Dropdown__Options-container",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 58,
-      columnNumber: 9
-    }
-  }, possibleRegions.length > 0 && possibleRegions.map(function (option) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "Dropdown__Option",
-      key: "k__".concat(option),
-      onClick: handleClick,
-      onKeyDown: handleKeydown,
-      role: "button",
-      tabIndex: isActive ? 0 : -1,
-      __self: _this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 61,
-        columnNumber: 15
-      }
-    }, option);
-  }))));
-}
-
-Dropdown.propTypes = {
-  options: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string),
-  placeholder: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string
-};
-Dropdown.defaultProps = {
-  options: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
-  placeholder: 'Filter by Region'
-};
-/* harmony default export */ __webpack_exports__["default"] = (Dropdown);
-
-/***/ }),
-
-/***/ "./resources/js/atoms/FlexContainer.jsx":
-/*!**********************************************!*\
-  !*** ./resources/js/atoms/FlexContainer.jsx ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/FlexContainer.jsx";
-
-
-
-function FlexContainer(props) {
-  var children = props.children;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "FlexContainer",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 7,
-      columnNumber: 10
-    }
-  }, children);
-}
-
-FlexContainer.propTypes = {
-  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node
-};
-FlexContainer.defaultProps = {
-  children: null
-};
-/* harmony default export */ __webpack_exports__["default"] = (FlexContainer);
 
 /***/ }),
 
@@ -45361,9 +45088,9 @@ LinkButton.defaultProps = {
 
 /***/ }),
 
-/***/ "./resources/js/atoms/Overlay.jsx":
+/***/ "./resources/js/atoms/Loading.jsx":
 /*!****************************************!*\
-  !*** ./resources/js/atoms/Overlay.jsx ***!
+  !*** ./resources/js/atoms/Loading.jsx ***!
   \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -45372,106 +45099,54 @@ LinkButton.defaultProps = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/Overlay.jsx";
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/Loading.jsx";
 
 
-
-function Overlay(props) {
-  var visible = props.visible;
+function Loading() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "Overlay ".concat(visible ? 'Overlay--visible' : ''),
+    className: "Loading",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 5,
+      columnNumber: 5
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Loading__Dot-Container",
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6,
+      columnNumber: 7
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Loading__Dot",
     __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 7,
-      columnNumber: 5
+      columnNumber: 9
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-    className: "Overlay__Headline",
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Loading__Dot",
     __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 8,
-      columnNumber: 7
-    }
-  }, "Welcome to REST Countries"));
-}
-
-Overlay.propTypes = {
-  visible: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired
-};
-/* harmony default export */ __webpack_exports__["default"] = (Overlay);
-
-/***/ }),
-
-/***/ "./resources/js/atoms/SearchBar.jsx":
-/*!******************************************!*\
-  !*** ./resources/js/atoms/SearchBar.jsx ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Assets_icons_search_solid_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @Assets/icons/search-solid.svg */ "./resources/assets/icons/search-solid.svg");
-var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/SearchBar.jsx";
-
-
-
-
-function SearchBar(props) {
-  var placeholder = props.placeholder;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "SearchBar",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 10,
-      columnNumber: 5
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "SearchBar__Inner",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 11,
-      columnNumber: 7
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    className: "SearchBar__Input",
-    id: "searchBar",
-    name: "searchBar",
-    placeholder: placeholder,
-    type: "text",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 12,
       columnNumber: 9
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Assets_icons_search_solid_svg__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Loading__Dot",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19,
+      lineNumber: 9,
       columnNumber: 9
     }
   })));
 }
 
-SearchBar.propTypes = {
-  placeholder: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
-};
-SearchBar.defaultProps = {
-  placeholder: 'Search for a country...'
-};
-/* harmony default export */ __webpack_exports__["default"] = (SearchBar);
+/* harmony default export */ __webpack_exports__["default"] = (Loading);
 
 /***/ }),
 
@@ -45738,66 +45413,6 @@ Body.defaultProps = {
   children: null
 };
 /* harmony default export */ __webpack_exports__["default"] = (Body);
-
-/***/ }),
-
-/***/ "./resources/js/molecules/CountryCardContainer.jsx":
-/*!*********************************************************!*\
-  !*** ./resources/js/molecules/CountryCardContainer.jsx ***!
-  \*********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Atoms_CountryCard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @Atoms/CountryCard */ "./resources/js/atoms/CountryCard.jsx");
-var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/molecules/CountryCardContainer.jsx";
-
-
-
-
-function CountryCardContainer(props) {
-  var _this = this;
-
-  var countries = props.countries;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "CountryCardContainer",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 9,
-      columnNumber: 5
-    }
-  }, Array.isArray(countries) && countries.length > 0 && countries.map(function (country) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Atoms_CountryCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      capital: country.capital,
-      flag: country.flag,
-      key: "k__".concat(country.alpha2Code),
-      name: country.name,
-      population: country.population,
-      region: country.region,
-      url: "/country/".concat(country.alpha2Code),
-      __self: _this,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 13,
-        columnNumber: 11
-      }
-    });
-  }));
-}
-
-CountryCardContainer.propTypes = {
-  countries: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object)
-};
-CountryCardContainer.defaultProps = {
-  countries: null
-};
-/* harmony default export */ __webpack_exports__["default"] = (CountryCardContainer);
 
 /***/ }),
 
@@ -46307,114 +45922,6 @@ function ErrorPage() {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (ErrorPage);
-
-/***/ }),
-
-/***/ "./resources/js/routes/Homepage.jsx":
-/*!******************************************!*\
-  !*** ./resources/js/routes/Homepage.jsx ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/regenerator */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _Molecules_CountryCardContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Molecules/CountryCardContainer */ "./resources/js/molecules/CountryCardContainer.jsx");
-/* harmony import */ var _Atoms_SearchBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @Atoms/SearchBar */ "./resources/js/atoms/SearchBar.jsx");
-/* harmony import */ var _Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @Atoms/Dropdown */ "./resources/js/atoms/Dropdown.jsx");
-/* harmony import */ var _Atoms_FlexContainer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @Atoms/FlexContainer */ "./resources/js/atoms/FlexContainer.jsx");
-/* harmony import */ var _Contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @Contexts/CountriesContext */ "./resources/js/contexts/CountriesContext.jsx");
-
-
-
-var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/routes/Homepage.jsx";
-
-
-
-
-
-
-
-function Homepage() {
-  var _useContext = Object(react__WEBPACK_IMPORTED_MODULE_3__["useContext"])(_Contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_8__["CountriesContext"]),
-      _useContext2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useContext, 2),
-      countries = _useContext2[0],
-      setCountries = _useContext2[1];
-
-  Object(react__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
-    Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])( /*#__PURE__*/_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var res, data;
-      return _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return fetch('https://restcountries.eu/rest/v2/all');
-
-            case 2:
-              res = _context.sent;
-              _context.next = 5;
-              return res.json();
-
-            case 5:
-              data = _context.sent;
-              setCountries(data);
-
-            case 7:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
-  }, [setCountries]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
-    className: "Homepage",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 20,
-      columnNumber: 5
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_Atoms_FlexContainer__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 21,
-      columnNumber: 7
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_Atoms_SearchBar__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 22,
-      columnNumber: 9
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_Atoms_Dropdown__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 23,
-      columnNumber: 9
-    }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_Molecules_CountryCardContainer__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    countries: countries,
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 25,
-      columnNumber: 7
-    }
-  }));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Homepage);
 
 /***/ }),
 

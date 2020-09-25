@@ -1,0 +1,67 @@
+.Loading {
+  position: fixed;
+  background-color: hsla(0, 0, 0, 0.2);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  left: 0;
+  height: calc(100vh - 87px);
+
+  &__Dot-Container {
+    display: flex;
+    width: 100px;
+    justify-content: space-between;
+  }
+
+  &__Dot {
+    width: 20px;
+    height: 20px;
+    background-color: hsla(0, 0, 0, 1);
+    border-radius: 50%;
+    display: inline-block;
+
+    &:first-of-type {
+      animation: move 1s infinite linear;
+    }
+
+    &:nth-of-type(2) {
+      animation: move 1s infinite linear;
+      animation-delay: 0.1s;
+    }
+
+    &:nth-of-type(3) {
+      animation: move 1s infinite linear;
+      animation-delay: 0.2s;
+    }
+  }
+
+  @keyframes move {
+    0% {
+      transform: translateY(0);
+    }
+
+    25% {
+      transform: translateY(-20px);
+    }
+
+    50% {
+      transform: translateY(0);
+    }
+
+    75% {
+      transform: translateY(20px);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+}
+
+.Layout.Layout--dark {
+  .Loading__Dot {
+    background-color: hsla(360, 100%, 100%, 1);
+  }
+}
