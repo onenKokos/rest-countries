@@ -43,47 +43,60 @@ function CountryPage() {
       {console.log(countries)}
       {countries && (
         <div className="CountryPage__Content">
-          <img
-            alt={countries.aplpha3Code}
-            className="CountryPage__Flag"
-            src={countries.flag}
-          />
+          <div className="CountryPage__Flag-container">
+            <img
+              alt={countries.alpha3Code}
+              className="CountryPage__Flag"
+              src={countries.flag}
+            />
+          </div>
           <div className="CountryPage__Information">
             <h1 className="CountryPage__Name">{countries.name}</h1>
             <ul className="CountryPage__List">
               <li className="CountryPage__Entry">
-                <b>Native Name:</b>
+                <b className="CountryPage__Highlight"> Native Name:</b>
                 {countries.nativeName}
               </li>
               <li className="CountryPage__Entry">
-                <b>Top Level Domain:</b>
+                <b className="CountryPage__Highlight"> Top Level Domain:</b>
                 {countries.topLevelDomain[0]}
               </li>
               <li className="CountryPage__Entry">
-                <b>Population:</b>
+                <b className="CountryPage__Highlight"> Population:</b>
                 {countries.population}
               </li>
               <li className="CountryPage__Entry">
-                <b>Currencies:</b>
+                <b className="CountryPage__Highlight"> Currencies:</b>
                 {countries.currencies.map((currency) => currency.name)}
               </li>
               <li className="CountryPage__Entry">
-                <b>Region:</b>
+                <b className="CountryPage__Highlight"> Region:</b>
                 {countries.region}
               </li>
               <li className="CountryPage__Entry">
-                <b>Languages:</b>
+                <b className="CountryPage__Highlight"> Languages:</b>
                 {countries.languages.map((language) => language.name)}
               </li>
               <li className="CountryPage__Entry">
-                <b>Sub Region:</b>
+                <b className="CountryPage__Highlight"> Sub Region:</b>
                 {countries.subregion}
               </li>
               <li className="CountryPage__Entry">
-                <b>Capital</b>
+                <b className="CountryPage__Highlight"> Capital:</b>
                 {countries.capital}
               </li>
             </ul>
+            <div className="CountryPage__Border-Countries">
+              <span className="CountryPage__Highlight">Border Countries: </span>
+              {countries.borders.map((border) => (
+                <LinkButton
+                  additionalClasses={['LinkButton--inline']}
+                  key={`LB__${border}`}
+                  text={border}
+                  to={`/country/${border}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       )}
