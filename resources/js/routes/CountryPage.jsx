@@ -41,6 +41,7 @@ function CountryPage() {
         to="/"
       />
       {console.log(countries)}
+
       {countries && (
         <div className="CountryPage__Content">
           <div className="CountryPage__Flag-container">

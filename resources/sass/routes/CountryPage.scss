@@ -14,6 +14,7 @@
     padding-top: calc(56.25% / 2);
     overflow: hidden;
     position: relative;
+    box-shadow: $subtle_shadow;
 
     @media screen and (min-width: 992px) {
       width: 40%;
