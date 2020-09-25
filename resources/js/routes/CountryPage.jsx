@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ErrorPage from '@Routes/ErrorPage';
 import LinkButton from '@Atoms/LinkButton';
+import usePrev from '@Hooks/usePrev';
 
 function CountryPage() {
   const { code } = useParams();
   const [countries, setCountries] = useState(null);
   const [displayError, setDisplayError] = useState(false);
+
+  const prevCode = usePrev(code);
 
   useEffect(() => {
     async function fetchData() {
@@ -29,7 +32,11 @@ function CountryPage() {
     if (!countries) {
       fetchData();
     }
-  }, [code, countries]);
+
+    if (prevCode !== code) {
+      fetchData();
+    }
+  }, [code, countries, prevCode]);
 
   return displayError ? (
     <ErrorPage />
