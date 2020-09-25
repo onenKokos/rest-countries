@@ -67,7 +67,9 @@ function CountryPage() {
               </li>
               <li className="CountryPage__Entry">
                 <b className="CountryPage__Highlight"> Currencies:</b>
-                {countries.currencies.map((currency) => currency.name)}
+                {countries.currencies
+                  .map((currency) => currency.name)
+                  .join(', ')}
               </li>
               <li className="CountryPage__Entry">
                 <b className="CountryPage__Highlight"> Region:</b>
@@ -75,7 +77,9 @@ function CountryPage() {
               </li>
               <li className="CountryPage__Entry">
                 <b className="CountryPage__Highlight"> Languages:</b>
-                {countries.languages.map((language) => language.name)}
+                {countries.languages
+                  .map((language) => language.name)
+                  .join(', ')}
               </li>
               <li className="CountryPage__Entry">
                 <b className="CountryPage__Highlight"> Sub Region:</b>
