@@ -16,6 +16,7 @@
   @media screen and (min-width: 1440px) {
     width: 23%;
     max-width: 23%;
+    margin: 0 10px 36px 10px;
   }
 
   &__Flag-container {
@@ -60,6 +61,32 @@
     text-decoration: none;
     color: $very_dark_blue;
     font-size: $tiny;
+    position: relative;
+    display: block;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0px;
+      left: 0;
+      bottom: 3px;
+      right: 0;
+      border-radius: 6px;
+      border: 3px solid hsl(0, 0, 0);
+      opacity: 0;
+      transition: 0.3s ease-out;
+    }
+
+    &:focus,
+    &:active {
+      outline: none;
+      border: none;
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
     b {
       font-family: $font-bold;
       font-size: $small;

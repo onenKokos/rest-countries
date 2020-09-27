@@ -6,15 +6,15 @@ import FlexContainer from '@Atoms/FlexContainer';
 import { CountriesContext } from '@Contexts/CountriesContext';
 
 function Homepage() {
-  const [countries, setCountries] = useContext(CountriesContext);
+  const [activeCountries, handleCountries] = useContext(CountriesContext);
 
   useEffect(() => {
     (async () => {
       const res = await fetch('https://restcountries.eu/rest/v2/all');
       const data = await res.json();
-      setCountries(data);
+      handleCountries(data);
     })();
-  }, [setCountries]);
+  }, [handleCountries]);
 
   return (
     <div className="Homepage">
@@ -22,7 +22,7 @@ function Homepage() {
         <SearchBar />
         <Dropdown />
       </FlexContainer>
-      <CountryCardContainer countries={countries} />
+      <CountryCardContainer countries={activeCountries} />
     </div>
   );
 }
