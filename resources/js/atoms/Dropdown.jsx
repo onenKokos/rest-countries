@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Caret from '@Assets/icons/caret-solid.svg';
+import useClickOutside from '@Hooks/useClickOutside';
 
 function Dropdown(props) {
   const { placeholder, options } = props;
@@ -8,6 +9,10 @@ function Dropdown(props) {
   const [isActive, setIsActive] = useState(false);
   const [currentRegion, setCurrentRegion] = useState('');
   const [possibleRegions, setPossibleRegions] = useState(options);
+
+  const dropdownRef = useRef();
+
+  useClickOutside(dropdownRef, () => setIsActive(false));
 
   function handleChange(e) {
     setPossibleRegions(
@@ -35,7 +40,7 @@ function Dropdown(props) {
   }
 
   return (
-    <div className="Dropdown">
+    <div className="Dropdown" ref={dropdownRef}>
       <div
         className={`Dropdown__Container ${
           isActive ? 'Dropdown__Container--is-Active' : ''

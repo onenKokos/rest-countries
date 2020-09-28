@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "8a3a6d6cbe8b5bc0fcab";
+/******/ 	var hotCurrentHash = "dc67d9bec59b94ab7c24";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -44408,46 +44408,12 @@ function CountriesProvider(props) {
       countries = _useState2[0],
       setCountries = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState4 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
-      activeCountries = _useState4[0],
-      setActiveCountries = _useState4[1];
-
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
-      _useState6 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
-      activeRegion = _useState6[0],
-      setActiveRegion = _useState6[1];
-
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(''),
-      _useState8 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState7, 2),
-      searchCountry = _useState8[0],
-      setSearchCountry = _useState8[1];
-
-  function handleCountries(data) {
-    setCountries(data);
-
-    if (activeRegion) {
-      console.log(activeRegion);
-    }
-
-    if (searchCountry) {
-      console.log(searchCountry);
-    }
-
-    setActiveCountries(data);
-  }
-
-  function handleRegions(region) {
-    setActiveRegion(region);
-    handleCountries(countries);
-  }
-
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(CountriesContext.Provider, {
-    value: [countries, setCountries, activeCountries, setActiveCountries, activeRegion, setActiveRegion, searchCountry, setSearchCountry, handleCountries, handleRegions],
+    value: [countries, setCountries],
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32,
+      lineNumber: 11,
       columnNumber: 5
     }
   }, children);

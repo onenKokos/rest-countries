@@ -6,15 +6,15 @@ import FlexContainer from '@Atoms/FlexContainer';
 import { CountriesContext } from '@Contexts/CountriesContext';
 
 function Homepage() {
-  const [activeCountries, handleCountries] = useContext(CountriesContext);
+  const [activeCountries, setCountries] = useContext(CountriesContext);
 
   useEffect(() => {
     (async () => {
       const res = await fetch('https://restcountries.eu/rest/v2/all');
       const data = await res.json();
-      handleCountries(data);
+      setCountries(data);
     })();
-  }, [handleCountries]);
+  }, [setCountries]);
 
   return (
     <div className="Homepage">
