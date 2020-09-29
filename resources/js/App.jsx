@@ -7,10 +7,12 @@ import Loading from '@Atoms/Loading';
 
 const Homepage = React.lazy(() => import('./routes/Homepage'));
 const CountryPage = React.lazy(() => import('./routes/CountryPage'));
+const ExamplePage = React.lazy(() => import('./routes/ExampleContextPage'));
 
 // Contexts
 import { ThemeProvider } from '@Contexts/ThemeContext';
 import { CountriesProvider } from '@Contexts/CountriesContext';
+import { TestContextProvider } from '@Contexts/TestContext';
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -27,6 +29,12 @@ function App() {
           <Layout>
             <Suspense fallback={<Loading />}>
               <Switch>
+                <Route exact path="/country/example/context">
+                  <TestContextProvider>
+                    <ExamplePage />
+                  </TestContextProvider>
+                </Route>
+
                 <Route exact path="/country/:code">
                   <CountryPage />
                 </Route>
