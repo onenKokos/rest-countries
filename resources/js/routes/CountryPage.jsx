@@ -47,7 +47,6 @@ function CountryPage() {
         text="Back"
         to="/"
       />
-      {console.log(countries)}
 
       {countries && (
         <div className="CountryPage__Content">

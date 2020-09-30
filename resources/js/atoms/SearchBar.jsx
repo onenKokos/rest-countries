@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
 import Search from '@Assets/icons/search-solid.svg';
+import useCountries from '@Hooks/useCountries';
 
 function SearchBar(props) {
   const { placeholder } = props;
+
+  const { setSearch } = useCountries();
+
+  const [input, setInput] = useState('');
+
+  function handleChange(e) {
+    setSearch(e.target.value);
+    setInput(e.target.value);
+  }
 
   return (
     <div className="SearchBar">
@@ -13,8 +22,10 @@ function SearchBar(props) {
           className="SearchBar__Input"
           id="searchBar"
           name="searchBar"
+          onChange={handleChange}
           placeholder={placeholder}
           type="text"
+          value={input}
         />
         <Search />
       </div>

@@ -2,12 +2,14 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Caret from '@Assets/icons/caret-solid.svg';
 import useClickOutside from '@Hooks/useClickOutside';
+import useCountries from '@Hooks/useCountries';
 
 function Dropdown(props) {
   const { placeholder, options } = props;
 
+  const { setRegion, activeRegion } = useCountries();
+
   const [isActive, setIsActive] = useState(false);
-  const [currentRegion, setCurrentRegion] = useState('');
   const [possibleRegions, setPossibleRegions] = useState(options);
 
   const dropdownRef = useRef();
@@ -18,11 +20,11 @@ function Dropdown(props) {
     setPossibleRegions(
       options.filter((option) => option.includes(e.target.value)),
     );
-    setCurrentRegion(e.target.value);
+    setRegion(e.target.value);
   }
 
   function handleClick(e) {
-    setCurrentRegion(e.target.innerHTML);
+    setRegion(e.target.innerHTML);
   }
 
   function handleClickToggle() {
@@ -30,7 +32,7 @@ function Dropdown(props) {
   }
 
   function handleKeydown(e) {
-    setCurrentRegion(e.target.innerHTML);
+    setRegion(e.target.innerHTML);
   }
 
   function handleKeydownToggle(e) {
@@ -58,7 +60,7 @@ function Dropdown(props) {
           onChange={handleChange}
           placeholder={placeholder}
           type="text"
-          value={currentRegion !== '' ? currentRegion : ''}
+          value={activeRegion !== '' ? activeRegion : ''}
         />
         <Caret alt="Caret" />
         <div className="Dropdown__Options-container">

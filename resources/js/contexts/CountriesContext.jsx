@@ -39,11 +39,17 @@ function reducer(state, action) {
       return {
         ...state,
         activeRegion: payload,
+        activeCountries: state.countries.filter((country) =>
+          country.region.includes(payload),
+        ),
       };
     case 'SET_SEARCH':
       return {
         ...state,
         search: payload,
+        activeCountries: state.countries.filter((country) =>
+          country.name.includes(payload),
+        ),
       };
     case 'INIT':
       return init();
@@ -80,7 +86,7 @@ function CountriesContextProvider(props) {
 
   const setSearch = useCallback(
     (payload) => {
-      dispatch({ type: 'SET_SEACH', payload });
+      dispatch({ type: 'SET_SEARCH', payload });
     },
     [dispatch],
   );
