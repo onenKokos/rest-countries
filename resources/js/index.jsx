@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import '../sass/index.scss';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import CountriesContextProvider from './contexts/CountriesContext';
+import ThemeContextProvider from './contexts/ThemeContext';
+
+ReactDOM.render(
+  <StrictMode>
+    <CountriesContextProvider>
+      <ThemeContextProvider>
+        <App />
+      </ThemeContextProvider>
+    </CountriesContextProvider>
+  </StrictMode>,
+  document.getElementById('root'),
+);

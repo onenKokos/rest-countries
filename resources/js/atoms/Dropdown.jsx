@@ -48,9 +48,10 @@ function Dropdown(props) {
         onClick={handleClickToggle}
         onKeyDown={handleKeydownToggle}
         role="button"
-        tabIndex={0}
+        tabIndex={-1}
       >
         <input
+          autoComplete="off"
           className="Dropdown__Selection"
           id="selected"
           name="selected"

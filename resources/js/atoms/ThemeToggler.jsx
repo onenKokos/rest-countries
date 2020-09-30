@@ -1,19 +1,19 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { ThemeContext } from '@Contexts/ThemeContext';
 import Moon from '@Assets/icons/moon-solid.svg';
+import useTheme from '@Hooks/useTheme';
 
 function ThemeToggler(props) {
   const { title, alt } = props;
-  const [theme, setTheme] = useContext(ThemeContext);
+  const { toggleTheme } = useTheme();
 
   function handleClick() {
-    setTheme(theme === 'THEME_LIGHT' ? 'THEME_DARK' : 'THEME_LIGHT');
+    toggleTheme();
   }
 
   function handleKeydown(e) {
     if (e.keyCode === 13) {
-      setTheme(theme === 'THEME_LIGHT' ? 'THEME_DARK' : 'THEME_LIGHT');
+      toggleTheme();
     }
   }
 
@@ -25,7 +25,7 @@ function ThemeToggler(props) {
       role="button"
       tabIndex={0}
     >
-      <Moon alt={alt} /* className="ThemeToggler__Icon" */ />
+      <Moon alt={alt} />
       <div>{title}</div>
     </div>
   );
