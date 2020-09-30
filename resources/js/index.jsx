@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import '../sass/index.scss';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import AnotherCountriesContext from './contexts/AnotherCountriesContext';
+
+ReactDOM.render(
+  <StrictMode>
+    <AnotherCountriesContext>
+      <App />
+    </AnotherCountriesContext>
+  </StrictMode>,
+  document.getElementById('root'),
+);

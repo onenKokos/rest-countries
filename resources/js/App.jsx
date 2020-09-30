@@ -8,6 +8,9 @@ import Loading from '@Atoms/Loading';
 const Homepage = React.lazy(() => import('./routes/Homepage'));
 const CountryPage = React.lazy(() => import('./routes/CountryPage'));
 const ExamplePage = React.lazy(() => import('./routes/ExampleContextPage'));
+const AnotherExamplePage = React.lazy(() =>
+  import('./routes/AnotherExampleContextPage'),
+);
 
 // Contexts
 import { ThemeProvider } from '@Contexts/ThemeContext';
@@ -29,6 +32,10 @@ function App() {
           <Layout>
             <Suspense fallback={<Loading />}>
               <Switch>
+                <Route exact path="/country/example/another">
+                  <AnotherExamplePage />
+                </Route>
+
                 <Route exact path="/country/example/context">
                   <TestContextProvider>
                     <ExamplePage />
