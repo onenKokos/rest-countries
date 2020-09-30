@@ -7,15 +7,6 @@ import Loading from '@Atoms/Loading';
 
 const Homepage = React.lazy(() => import('./routes/Homepage'));
 const CountryPage = React.lazy(() => import('./routes/CountryPage'));
-const ExamplePage = React.lazy(() => import('./routes/ExampleContextPage'));
-const AnotherExamplePage = React.lazy(() =>
-  import('./routes/AnotherExampleContextPage'),
-);
-
-// Contexts
-import { ThemeProvider } from '@Contexts/ThemeContext';
-import { CountriesProvider } from '@Contexts/CountriesContext';
-import { TestContextProvider } from '@Contexts/TestContext';
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -26,38 +17,24 @@ function App() {
 
   return (
     <Router>
-      <CountriesProvider>
-        <ThemeProvider>
-          <Overlay visible={isLoaded ? false : true} />
-          <Layout>
-            <Suspense fallback={<Loading />}>
-              <Switch>
-                <Route exact path="/country/example/another">
-                  <AnotherExamplePage />
-                </Route>
+      <Overlay visible={isLoaded ? false : true} />
+      <Layout>
+        <Suspense fallback={<Loading />}>
+          <Switch>
+            <Route exact path="/country/:code">
+              <CountryPage />
+            </Route>
 
-                <Route exact path="/country/example/context">
-                  <TestContextProvider>
-                    <ExamplePage />
-                  </TestContextProvider>
-                </Route>
+            <Route exact path="/">
+              <Homepage />
+            </Route>
 
-                <Route exact path="/country/:code">
-                  <CountryPage />
-                </Route>
-
-                <Route exact path="/">
-                  <Homepage />
-                </Route>
-
-                <Route path="*">
-                  <ErrorPage />
-                </Route>
-              </Switch>
-            </Suspense>
-          </Layout>
-        </ThemeProvider>
-      </CountriesProvider>
+            <Route path="*">
+              <ErrorPage />
+            </Route>
+          </Switch>
+        </Suspense>
+      </Layout>
     </Router>
   );
 }

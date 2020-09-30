@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Header from './Header';
 import Body from './Body';
-import { ThemeContext } from '../contexts/ThemeContext';
+import useTheme from '@Hooks/useTheme';
 
 function Layout(props) {
   const { children } = props;
-  const [theme] = useContext(ThemeContext);
+
+  const { theme } = useTheme();
 
   return (
     <div

@@ -92,7 +92,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "7b2c1e52978748f16cab";
+/******/ 	var hotCurrentHash = "4fde38e1bad25c63929e";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -44121,9 +44121,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Routes_ErrorPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Routes/ErrorPage */ "./resources/js/routes/ErrorPage.jsx");
 /* harmony import */ var _Atoms_Overlay__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @Atoms/Overlay */ "./resources/js/atoms/Overlay.jsx");
 /* harmony import */ var _Atoms_Loading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @Atoms/Loading */ "./resources/js/atoms/Loading.jsx");
-/* harmony import */ var _Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @Contexts/ThemeContext */ "./resources/js/contexts/ThemeContext.jsx");
-/* harmony import */ var _Contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @Contexts/CountriesContext */ "./resources/js/contexts/CountriesContext.jsx");
-/* harmony import */ var _Contexts_TestContext__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @Contexts/TestContext */ "./resources/js/contexts/TestContext.jsx");
 
 var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/App.jsx";
 
@@ -44138,16 +44135,6 @@ var Homepage = react__WEBPACK_IMPORTED_MODULE_1___default.a.lazy(function () {
 var CountryPage = react__WEBPACK_IMPORTED_MODULE_1___default.a.lazy(function () {
   return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ./routes/CountryPage */ "./resources/js/routes/CountryPage.jsx"));
 });
-var ExamplePage = react__WEBPACK_IMPORTED_MODULE_1___default.a.lazy(function () {
-  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./routes/ExampleContextPage */ "./resources/js/routes/ExampleContextPage.jsx"));
-});
-var AnotherExamplePage = react__WEBPACK_IMPORTED_MODULE_1___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./routes/AnotherExampleContextPage */ "./resources/js/routes/AnotherExampleContextPage.jsx"));
-}); // Contexts
-
-
-
-
 
 function App() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(false),
@@ -44162,114 +44149,61 @@ function App() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28,
+      lineNumber: 19,
       columnNumber: 5
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_8__["CountriesProvider"], {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 29,
-      columnNumber: 7
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_7__["ThemeProvider"], {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 30,
-      columnNumber: 9
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Atoms_Overlay__WEBPACK_IMPORTED_MODULE_5__["default"], {
     visible: isLoaded ? false : true,
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31,
-      columnNumber: 11
+      lineNumber: 20,
+      columnNumber: 7
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Molecules_Layout__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32,
-      columnNumber: 11
+      lineNumber: 21,
+      columnNumber: 7
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1__["Suspense"], {
     fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Atoms_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], {
       __self: this,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 33,
-        columnNumber: 33
+        lineNumber: 22,
+        columnNumber: 29
       }
     }),
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33,
-      columnNumber: 13
+      lineNumber: 22,
+      columnNumber: 9
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34,
-      columnNumber: 15
+      lineNumber: 23,
+      columnNumber: 11
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    exact: true,
-    path: "/country/example/another",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 35,
-      columnNumber: 17
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(AnotherExamplePage, {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 36,
-      columnNumber: 19
-    }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-    exact: true,
-    path: "/country/example/context",
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 39,
-      columnNumber: 17
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Contexts_TestContext__WEBPACK_IMPORTED_MODULE_9__["TestContextProvider"], {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 40,
-      columnNumber: 19
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(ExamplePage, {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 41,
-      columnNumber: 21
-    }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/country/:code",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45,
-      columnNumber: 17
+      lineNumber: 24,
+      columnNumber: 13
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(CountryPage, {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46,
-      columnNumber: 19
+      lineNumber: 25,
+      columnNumber: 15
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
@@ -44277,32 +44211,32 @@ function App() {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49,
-      columnNumber: 17
+      lineNumber: 28,
+      columnNumber: 13
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Homepage, {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 50,
-      columnNumber: 19
+      lineNumber: 29,
+      columnNumber: 15
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: "*",
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 53,
-      columnNumber: 17
+      lineNumber: 32,
+      columnNumber: 13
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Routes_ErrorPage__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54,
-      columnNumber: 19
+      lineNumber: 33,
+      columnNumber: 15
     }
-  }))))))));
+  }))))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -44425,14 +44359,12 @@ Overlay.propTypes = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Contexts/ThemeContext */ "./resources/js/contexts/ThemeContext.jsx");
-/* harmony import */ var _Assets_icons_moon_solid_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Assets/icons/moon-solid.svg */ "./resources/assets/icons/moon-solid.svg");
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Assets_icons_moon_solid_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @Assets/icons/moon-solid.svg */ "./resources/assets/icons/moon-solid.svg");
+/* harmony import */ var _Hooks_useTheme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Hooks/useTheme */ "./resources/js/hooks/useTheme.jsx");
 var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/atoms/ThemeToggler.jsx";
 
 
@@ -44443,22 +44375,20 @@ function ThemeToggler(props) {
   var title = props.title,
       alt = props.alt;
 
-  var _useContext = Object(react__WEBPACK_IMPORTED_MODULE_1__["useContext"])(_Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_3__["ThemeContext"]),
-      _useContext2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useContext, 2),
-      theme = _useContext2[0],
-      setTheme = _useContext2[1];
+  var _useTheme = Object(_Hooks_useTheme__WEBPACK_IMPORTED_MODULE_3__["default"])(),
+      toggleTheme = _useTheme.toggleTheme;
 
   function handleClick() {
-    setTheme(theme === 'THEME_LIGHT' ? 'THEME_DARK' : 'THEME_LIGHT');
+    toggleTheme();
   }
 
   function handleKeydown(e) {
     if (e.keyCode === 13) {
-      setTheme(theme === 'THEME_LIGHT' ? 'THEME_DARK' : 'THEME_LIGHT');
+      toggleTheme();
     }
   }
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ThemeToggler",
     onClick: handleClick,
     onKeyDown: handleKeydown,
@@ -44470,17 +44400,15 @@ function ThemeToggler(props) {
       lineNumber: 21,
       columnNumber: 5
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Assets_icons_moon_solid_svg__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    alt: alt
-    /* className="ThemeToggler__Icon" */
-    ,
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Assets_icons_moon_solid_svg__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    alt: alt,
     __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 28,
       columnNumber: 7
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     __self: this,
     __source: {
       fileName: _jsxFileName,
@@ -44491,8 +44419,8 @@ function ThemeToggler(props) {
 }
 
 ThemeToggler.propTypes = {
-  alt: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
-  title: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string
+  alt: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  title: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
 };
 ThemeToggler.defaultProps = {
   alt: 'Theme toggler',
@@ -44502,10 +44430,10 @@ ThemeToggler.defaultProps = {
 
 /***/ }),
 
-/***/ "./resources/js/contexts/AnotherCountriesContext.jsx":
-/*!***********************************************************!*\
-  !*** ./resources/js/contexts/AnotherCountriesContext.jsx ***!
-  \***********************************************************/
+/***/ "./resources/js/contexts/CountriesContext.jsx":
+/*!****************************************************!*\
+  !*** ./resources/js/contexts/CountriesContext.jsx ***!
+  \****************************************************/
 /*! exports provided: CountriesContext, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -44520,7 +44448,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
 
 
-var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/contexts/AnotherCountriesContext.jsx";
+var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/contexts/CountriesContext.jsx";
 
 
 var CountriesContext = Object(react__WEBPACK_IMPORTED_MODULE_2__["createContext"])();
@@ -44548,7 +44476,8 @@ function reducer(state, action) {
   switch (type) {
     case 'SET_COUNTRIES':
       return Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_1__["default"])(Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state), {}, {
-        countries: payload
+        countries: payload,
+        activeCountries: payload
       });
 
     case 'SET_ACTIVE':
@@ -44632,7 +44561,7 @@ function CountriesContextProvider(props) {
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 104,
+      lineNumber: 105,
       columnNumber: 5
     }
   }, children);
@@ -44646,154 +44575,16 @@ CountriesContextProvider.defaultProps = {};
 
 /***/ }),
 
-/***/ "./resources/js/contexts/CountriesContext.jsx":
-/*!****************************************************!*\
-  !*** ./resources/js/contexts/CountriesContext.jsx ***!
-  \****************************************************/
-/*! exports provided: CountriesContext, CountriesProvider */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CountriesContext", function() { return CountriesContext; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CountriesProvider", function() { return CountriesProvider; });
-/* harmony import */ var _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-
-var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/contexts/CountriesContext.jsx";
-
-
-var CountriesContext = Object(react__WEBPACK_IMPORTED_MODULE_1__["createContext"])();
-function CountriesProvider(props) {
-  var children = props.children;
-
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
-      _useState2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
-      countries = _useState2[0],
-      setCountries = _useState2[1];
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(CountriesContext.Provider, {
-    value: [countries, setCountries],
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 11,
-      columnNumber: 5
-    }
-  }, children);
-}
-CountriesProvider.propTypes = {
-  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
-};
-CountriesProvider.defaultProps = {
-  children: null
-};
-
-/***/ }),
-
-/***/ "./resources/js/contexts/TestContext.jsx":
-/*!***********************************************!*\
-  !*** ./resources/js/contexts/TestContext.jsx ***!
-  \***********************************************/
-/*! exports provided: TestContextProvider, ExampleStore */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TestContextProvider", function() { return TestContextProvider; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ExampleStore", function() { return ExampleStore; });
-/* harmony import */ var _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
-
-
-var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/contexts/TestContext.jsx";
-
-
-
-function exampleReducer(state, action) {
-  var type = action.type,
-      payload = action.payload;
-
-  switch (type) {
-    case 'SET_COUNTRIES':
-      return Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_1__["default"])(Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state), {}, {
-        countries: payload
-      });
-
-    case 'SET_REGION':
-      return Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_1__["default"])(Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state), {}, {
-        region: payload
-      });
-
-    case 'SET_SEARCH':
-      return Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_1__["default"])(Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state), {}, {
-        search: payload
-      });
-
-    default:
-      return state;
-  }
-}
-
-var initialExampleState = {
-  countries: [],
-  activeCountries: [],
-  activeRegion: '',
-  search: ''
-};
-var ExampleStore = react__WEBPACK_IMPORTED_MODULE_2___default.a.createContext(initialExampleState);
-var Provider = ExampleStore.Provider;
-
-function TestContextProvider(props) {
-  var children = props.children;
-
-  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_2__["useReducer"])(exampleReducer, initialExampleState),
-      _useReducer2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useReducer, 2),
-      state = _useReducer2[0],
-      dispatch = _useReducer2[1];
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Provider, {
-    value: {
-      state: state,
-      dispatch: dispatch
-    },
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 45,
-      columnNumber: 10
-    }
-  }, children);
-}
-
-TestContextProvider.propTypes = {
-  children: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.node
-};
-TestContextProvider.defaultProps = {
-  children: null
-};
-
-
-/***/ }),
-
 /***/ "./resources/js/contexts/ThemeContext.jsx":
 /*!************************************************!*\
   !*** ./resources/js/contexts/ThemeContext.jsx ***!
   \************************************************/
-/*! exports provided: ThemeContext, ThemeProvider */
+/*! exports provided: ThemeContext, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ThemeContext", function() { return ThemeContext; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ThemeProvider", function() { return ThemeProvider; });
 /* harmony import */ var _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
@@ -44803,35 +44594,99 @@ __webpack_require__.r(__webpack_exports__);
 var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/contexts/ThemeContext.jsx";
 
 
-var ThemeContext = Object(react__WEBPACK_IMPORTED_MODULE_1__["createContext"])();
 var themes = {
-  THEME_DARK: 'THEME_DARK',
-  THEME_LIGHT: 'THEME_LIGHT'
+  THEME_LIGHT: 'THEME_LIGHT',
+  THEME_DARK: 'THEME_DARK'
 };
-function ThemeProvider(props) {
+var ThemeContext = Object(react__WEBPACK_IMPORTED_MODULE_1__["createContext"])();
+
+function init() {
+  return {
+    theme: themes.THEME_LIGHT
+  };
+}
+
+var initialState = {
+  theme: themes.THEME_LIGHT
+};
+
+function reducer(state, action) {
+  var type = action.type;
+
+  switch (type) {
+    case 'TOGGLE_THEME':
+      return state.theme === themes.THEME_DARK ? {
+        theme: themes.THEME_LIGHT
+      } : {
+        theme: themes.THEME_DARK
+      };
+
+    case 'INIT':
+      return init();
+
+    default:
+      return state;
+  }
+}
+
+function ThemeContextProvider(props) {
   var children = props.children;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(themes.THEME_LIGHT),
-      _useState2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
-      theme = _useState2[0],
-      setTheme = _useState2[1];
+  var _useReducer = Object(react__WEBPACK_IMPORTED_MODULE_1__["useReducer"])(reducer, initialState),
+      _useReducer2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useReducer, 2),
+      state = _useReducer2[0],
+      dispatch = _useReducer2[1];
 
+  var toggleTheme = Object(react__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(function () {
+    dispatch({
+      type: 'TOGGLE_THEME'
+    });
+  }, [dispatch]);
+  var theme = Object(react__WEBPACK_IMPORTED_MODULE_1__["useMemo"])(function () {
+    return state.theme;
+  }, [state]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(ThemeContext.Provider, {
-    value: [theme, setTheme],
+    value: {
+      theme: theme,
+      toggleTheme: toggleTheme
+    },
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16,
+      lineNumber: 49,
       columnNumber: 5
     }
   }, children);
 }
-ThemeProvider.propTypes = {
-  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
+
+ThemeContextProvider.propTypes = {
+  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node.isRequired
 };
-ThemeProvider.defaultProps = {
-  children: null
-};
+ThemeContextProvider.defaultProps = {};
+/* harmony default export */ __webpack_exports__["default"] = (ThemeContextProvider);
+
+/***/ }),
+
+/***/ "./resources/js/hooks/useTheme.jsx":
+/*!*****************************************!*\
+  !*** ./resources/js/hooks/useTheme.jsx ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @Contexts/ThemeContext */ "./resources/js/contexts/ThemeContext.jsx");
+
+
+
+function useTheme() {
+  return Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_Contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_1__["ThemeContext"]);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (useTheme);
 
 /***/ }),
 
@@ -44851,8 +44706,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App */ "./resources/js/App.jsx");
 /* harmony import */ var _sass_index_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../sass/index.scss */ "./resources/sass/index.scss");
 /* harmony import */ var _sass_index_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_sass_index_scss__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _contexts_AnotherCountriesContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./contexts/AnotherCountriesContext */ "./resources/js/contexts/AnotherCountriesContext.jsx");
+/* harmony import */ var _contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./contexts/CountriesContext */ "./resources/js/contexts/CountriesContext.jsx");
+/* harmony import */ var _contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./contexts/ThemeContext */ "./resources/js/contexts/ThemeContext.jsx");
 var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/index.jsx";
+
 
 
 
@@ -44862,24 +44719,31 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
   __self: undefined,
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 9,
+    lineNumber: 10,
     columnNumber: 3
   }
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_contexts_AnotherCountriesContext__WEBPACK_IMPORTED_MODULE_4__["default"], {
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_contexts_CountriesContext__WEBPACK_IMPORTED_MODULE_4__["default"], {
   __self: undefined,
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 10,
+    lineNumber: 11,
     columnNumber: 5
+  }
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  __self: undefined,
+  __source: {
+    fileName: _jsxFileName,
+    lineNumber: 12,
+    columnNumber: 7
   }
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_App__WEBPACK_IMPORTED_MODULE_2__["default"], {
   __self: undefined,
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 11,
-    columnNumber: 7
+    lineNumber: 13,
+    columnNumber: 9
   }
-}))), document.getElementById('root'));
+})))), document.getElementById('root'));
 
 /***/ }),
 
@@ -45015,15 +44879,13 @@ Header.defaultProps = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Header */ "./resources/js/molecules/Header.jsx");
-/* harmony import */ var _Body__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Body */ "./resources/js/molecules/Body.jsx");
-/* harmony import */ var _contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../contexts/ThemeContext */ "./resources/js/contexts/ThemeContext.jsx");
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Header */ "./resources/js/molecules/Header.jsx");
+/* harmony import */ var _Body__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Body */ "./resources/js/molecules/Body.jsx");
+/* harmony import */ var _Hooks_useTheme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Hooks/useTheme */ "./resources/js/hooks/useTheme.jsx");
 var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/molecules/Layout.jsx";
 
 
@@ -45034,37 +44896,36 @@ var _jsxFileName = "/home/lukas/Projects/rest-countries/resources/js/molecules/L
 function Layout(props) {
   var children = props.children;
 
-  var _useContext = Object(react__WEBPACK_IMPORTED_MODULE_1__["useContext"])(_contexts_ThemeContext__WEBPACK_IMPORTED_MODULE_5__["ThemeContext"]),
-      _useContext2 = Object(_home_lukas_Projects_rest_countries_node_modules_babel_preset_react_app_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useContext, 1),
-      theme = _useContext2[0];
+  var _useTheme = Object(_Hooks_useTheme__WEBPACK_IMPORTED_MODULE_4__["default"])(),
+      theme = _useTheme.theme;
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "Layout ".concat(theme === 'THEME_LIGHT' ? 'Layout--light' : 'Layout--dark'),
     __self: this,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 12,
+      lineNumber: 13,
       columnNumber: 5
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    __self: this,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 17,
-      columnNumber: 7
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Body__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_2__["default"], {
     __self: this,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 18,
       columnNumber: 7
     }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Body__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 19,
+      columnNumber: 7
+    }
   }, children));
 }
 
 Layout.propTypes = {
-  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.node
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node
 };
 Layout.defaultProps = {
   children: null

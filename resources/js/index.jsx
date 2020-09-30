@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import '../sass/index.scss';
 
-import AnotherCountriesContext from './contexts/AnotherCountriesContext';
+import CountriesContextProvider from './contexts/CountriesContext';
+import ThemeContextProvider from './contexts/ThemeContext';
 
 ReactDOM.render(
   <StrictMode>
-    <AnotherCountriesContext>
-      <App />
-    </AnotherCountriesContext>
+    <CountriesContextProvider>
+      <ThemeContextProvider>
+        <App />
+      </ThemeContextProvider>
+    </CountriesContextProvider>
   </StrictMode>,
   document.getElementById('root'),
 );

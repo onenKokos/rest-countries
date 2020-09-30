@@ -1,28 +1,61 @@
-import React, { useState, createContext } from 'react';
+import React, { createContext, useCallback, useMemo, useReducer } from 'react';
 import PropTypes from 'prop-types';
+
+const themes = {
+  THEME_LIGHT: 'THEME_LIGHT',
+  THEME_DARK: 'THEME_DARK',
+};
 
 export const ThemeContext = createContext();
 
-const themes = {
-  THEME_DARK: 'THEME_DARK',
-  THEME_LIGHT: 'THEME_LIGHT',
+function init() {
+  return {
+    theme: themes.THEME_LIGHT,
+  };
+}
+
+const initialState = {
+  theme: themes.THEME_LIGHT,
 };
 
-export function ThemeProvider(props) {
+function reducer(state, action) {
+  const { type } = action;
+
+  switch (type) {
+    case 'TOGGLE_THEME':
+      return state.theme === themes.THEME_DARK
+        ? { theme: themes.THEME_LIGHT }
+        : { theme: themes.THEME_DARK };
+    case 'INIT':
+      return init();
+    default:
+      return state;
+  }
+}
+
+function ThemeContextProvider(props) {
   const { children } = props;
-  const [theme, setTheme] = useState(themes.THEME_LIGHT);
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const toggleTheme = useCallback(() => {
+    dispatch({ type: 'TOGGLE_THEME' });
+  }, [dispatch]);
+
+  const theme = useMemo(() => {
+    return state.theme;
+  }, [state]);
 
   return (
-    <ThemeContext.Provider value={[theme, setTheme]}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
 }
 
-ThemeProvider.propTypes = {
-  children: PropTypes.node,
+ThemeContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
-ThemeProvider.defaultProps = {
-  children: null,
-};
+ThemeContextProvider.defaultProps = {};
+
+export default ThemeContextProvider;

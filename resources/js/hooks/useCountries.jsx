@@ -1,8 +1,7 @@
 import { useContext } from 'react';
-import { CountriesContext } from '@Contexts/AnotherCountriesContext';
+import { CountriesContext } from '@Contexts/CountriesContext';
 
 function useCountries() {
-  console.log('Logging in useCountries: ', useContext(CountriesContext));
   return useContext(CountriesContext);
 }
 
